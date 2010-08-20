@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+apt_options='-o Debug::NoLocking=true -s -qq'
+critical_rc=2
+ok_rc=0
+
+# Check that all packages are up-to-date
+packages=$(apt-get $apt_options dist-upgrade | awk '/^Inst / {print $2}' \
+    | grep -vE -- '-cyb$' || true)
+
+if [ -n "$packages" ]
+then
+    echo Packages: $packages
+    exit $critical_rc
+fi
+
+# Check that APT DB is up-to-date
+if [ $(find /var/lib/apt/lists -mtime 0 | wc -l) = 0 ]
+then
+    echo Packages database is obsolete, run apt-get update or install cron-apt
+    exit $critical_rc
+fi
+
+# Check that security repository is configured
+if ! grep -q '^deb http.*security' /etc/apt/sources.list
+then
+    echo 'No security repository found in /etc/apt/sources.list!'
+    exit $critical_rc
+fi
+
+echo OK
+exit $ok_rc

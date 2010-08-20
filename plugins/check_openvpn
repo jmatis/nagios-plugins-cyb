@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+errors=0
+fail=''
+ok=''
+
+for file in /etc/openvpn/client*.conf
+do
+    [ ! -f $file ] && continue
+
+    vpn=$(basename $file)
+    ip=$(awk '/^management / {print $2}' $file)
+    port=$(awk '/^management / {print $3}' $file)
+
+    if [ -z "$ip" -o -z "$port" ]
+    then
+	fail="${vpn%.conf}: no management directive $fail"
+	continue
+    fi
+
+    state=$(echo state | nc -q1 $ip $port 2>/dev/null | awk -F, '/,/ {print $2" "$3}')
+
+    [ -z "$state" ] && state='Failed to connect'
+
+    if [ "$state" = 'CONNECTED SUCCESS' ]
+    then
+	ok="${vpn%.conf}: OK $ok"
+    else
+	fail="${vpn%.conf}: $state $fail"
+	errors=$(($errors + 1))
+    fi
+
+done
+
+echo $fail$ok
+
+[ $errors -gt 0 ] && exit 1
+
+exit 0

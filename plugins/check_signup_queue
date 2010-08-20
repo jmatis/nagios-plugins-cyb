@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+. /etc/nagios-plugins/config/cyb-sql.conf
+
+warning=$1
+critical=$2
+
+if [ -z "$warning" -o -z "$critical" ]
+then
+    echo $0: Too few argument >&2
+    echo Usage: $0 WARNING_THRESHOLD CRITICAL_THRESHOLD >&2
+    exit 3
+fi
+
+SELECT="SELECT COUNT(*) FROM user WHERE etat IN (70,73)"
+queue=$(echo $SELECT | $MYSQL)
+
+SELECT="SELECT user FROM user WHERE etat IN (70,73)"
+users=$(echo $SELECT | $MYSQL | tr "\n" ' ')
+
+echo "$queue users in signup queue: $users"
+
+[ $queue -ge $critical ] && exit 2
+
+[ $queue -ge $warning ] && exit 1
+
+exit 0

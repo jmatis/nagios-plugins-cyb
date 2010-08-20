@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+dnsbls='
+    dnsbl.njabl.org
+    sbl.spamhaus.org
+    xbl.spamhaus.org
+    pbl.spamhaus.org
+    bl.spamcop.net
+    dul.dnsbl.sorbs.net
+    cbl.abuseat.org
+    b.barracudacentral.org
+    ips.backscatterer.org
+    opm.tornevall.org
+    '
+
+critical=0
+
+ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
+    grep -vE '^(127|10|192)\.' || true)
+
+for ip in $ip_list
+do
+    revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
+
+    for dnsbl in $dnsbls
+    do
+
+	if host $revip.$dnsbl > /dev/null 2>/dev/null
+	then
+	    echo -n "$ip blacklisted by $dnsbl "
+	    critical=1
+	fi
+    done
+done
+
+[ $critical = 1 ] && exit 2
+
+echo OK
+
+exit 0

@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+max_elapsed_time=600
+
+if [ ! -z "$1" ]
+then
+    max_elapsed_time=$1
+fi
+
+url=http://localhost/server-status
+rc=0
+
+w3m -dump $url \
+    | awk '/ W / {print $6" "$13" "$14}' \
+    | while read time_elapsed_for_request vhost uri
+do
+    if [ "$time_elapsed_for_request" -gt "$max_elapsed_time" ]
+    then
+	rc=2
+	echo -n "http://$vhost$uri is lasting for ${time_elapsed_for_request}s. "
+    fi
+done
+
+echo
+exit $rc

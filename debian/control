@@ -1,0 +1,28 @@
+Source: nagios-plugins-cyb
+Section: net
+Priority: optional
+Maintainer: Cyril Bouthors <cyril@bouthors.org>
+Uploaders: Cyril Bouthors <cyb@debian.org>
+Build-Depends: debhelper (>= 5), rsync
+Standards-Version: 3.7.3
+
+Package: nagios-plugins-cyb
+Architecture: all
+Depends: ${shlibs:Depends}, nagios-plugins-basic, debsums, smartmontools, sudo, liblockfile1, debianutils, ntpdate, timeout
+Suggests: dellomsa
+Description: Cyb's Nagios plugins
+ check_apt_simple
+ check_debsums
+ check_drbd
+ check_duplicate_route
+ check_exim_mailq
+ check_fs_rw
+ check_haproxy
+ check_jboss
+ check_memory
+ check_openvpn
+ check_rbl
+ check_registrar_queue
+ check_signup_queue
+ check_smartctl
+ check_time

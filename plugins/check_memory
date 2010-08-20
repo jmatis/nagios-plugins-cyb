@@ -1,0 +1,105 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# Functions stolen from /usr/share/munin/plugins/memory
+
+my $warning_percent = 60;
+my $critical_percent = 80;
+my %mems;
+
+if(defined($ARGV[0])) {
+    $warning_percent=$ARGV[0];
+}
+
+if(defined($ARGV[1])) {
+    $critical_percent=$ARGV[1];
+}
+
+&fetch_meminfo;
+
+sub fetch_meminfo
+{
+	open (IN, "/proc/meminfo") || die "Could not open /proc/meminfo for reading: $!";
+	while (<IN>)
+	{
+		if (/^(\w+):\s*(\d+)\s+kb/i)
+		{
+			$mems{"$1"} = $2 * 1024;
+		}
+	}
+	close (IN);
+	# Only 2.6 and above has slab reported in meminfo, so read slabinfo if it isn't in meminfo
+	if (!$mems{Slab})
+	{
+		&fetch_slabinfo;
+	}
+	# Support 2.4 Rmap VM based kernels
+	if (!$mems{'Inactive'} && $mems{'Inact_dirty'} && $mems{'Inact_laundry'} && $mems{'Inact_clean'})
+	{
+		$mems{'Inactive'} = $mems{'Inact_dirty'} + $mems{'Inact_laundry'} + $mems{'Inact_clean'}
+	}
+}
+
+sub fetch_slabinfo
+{
+	# In 2.0 there is no slabinfo file, so return if the file doesn't open
+	open (IN, "/proc/slabinfo") || return;
+	my @slabinfo;
+	my $tot_slab_pages = 0;
+	my $slab_version = <IN>;
+	if ($slab_version =~ /^slabinfo - version: 1.1/)
+	{
+		while (<IN>)
+		{
+			if (!/^slabinfo/)
+			{
+				@slabinfo = split;
+				$tot_slab_pages += $slabinfo[5];
+			}
+		}
+	}
+	close (IN);
+	if ($tot_slab_pages gt 0)
+	{
+		$mems{'Slab'} = $tot_slab_pages * 4096;
+	}
+}
+
+my $apps = $mems{'MemTotal'}
+	-$mems{'MemFree'}
+	-$mems{'Buffers'}
+	-$mems{'Cached'}
+	-$mems{'SwapCached'}
+	-$mems{'Slab'}
+	-$mems{'PageTables'}
+	-$mems{'VmallocUsed'}
+;
+
+$percent_mem_used_by_apps = int($apps / $mems{'MemTotal'} * 100);
+
+print "$percent_mem_used_by_apps\% used memory\n";
+
+if($percent_mem_used_by_apps >= $warning_percent) {
+    exit 1;
+}
+
+if($percent_mem_used_by_apps >= $critical_percent) {
+    exit 2;
+}
+
+exit 0;

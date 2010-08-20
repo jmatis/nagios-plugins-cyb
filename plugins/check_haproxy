@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+url=$1
+
+if [ -z "$url" ]
+then
+    echo $0: Too few arguments >&2
+    echo Usage: $0 HAPROX_CSV_URL >&2
+    echo Example: $0 http://web.isvtec.com/haproxy_stats\;csv >&2
+    exit 1
+fi
+
+error=0
+for host in $(wget -q -O- "$url" | awk -F, '$18~/DOWN/ {print $2}')
+do
+    error=1
+    echo -n "$host down. "
+done
+
+if [ $error = 1 ]
+then
+    echo
+    exit 2
+fi
+
+echo OK
+exit 0
