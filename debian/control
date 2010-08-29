@@ -9,7 +9,7 @@ Standards-Version: 3.7.3
 Package: nagios-plugins-cyb
 Architecture: all
 Depends: ${shlibs:Depends}, nagios-plugins-basic, debsums, smartmontools, sudo, liblockfile1, debianutils, ntpdate, timeout
-Suggests: dellomsa
+Suggests: dellomsa, libdevice-usb-pcsensor-hidtemper-perl
 Description: Cyb's Nagios plugins
  check_apt_simple
  check_debsums
@@ -26,3 +26,4 @@ Description: Cyb's Nagios plugins
  check_signup_queue
  check_smartctl
  check_time
+ check_hidtemper
