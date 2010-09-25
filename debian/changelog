@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-72) unstable; urgency=low
+
+  * Added support for reconnect-drbd-by-ssh Nagios event handler.
+
+ -- Cyril Bouthors <cyb@debian.org>  Sat, 25 Sep 2010 14:44:38 +0200
+
 nagios-plugins-cyb (1.0-71) unstable; urgency=low
 
   * Added new plugin check_hidtemper.
