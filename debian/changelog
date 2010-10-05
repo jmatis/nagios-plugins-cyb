@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-73) unstable; urgency=low
+
+  * Added /etc/init.d/jboss into /etc/sudoers for user nagios.
+
+ -- Cyril Bouthors <cyb@debian.org>  Tue, 05 Oct 2010 20:39:27 +0200
+
 nagios-plugins-cyb (1.0-72) unstable; urgency=low
 
   * Added support for reconnect-drbd-by-ssh Nagios event handler.
