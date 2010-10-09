@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-74) unstable; urgency=low
+
+  * Allow nagios to restart any service.
+
+ -- Cyril Bouthors <cyb@debian.org>  Sat, 09 Oct 2010 09:47:37 +0200
+
 nagios-plugins-cyb (1.0-73) unstable; urgency=low
 
   * Added /etc/init.d/jboss into /etc/sudoers for user nagios.
