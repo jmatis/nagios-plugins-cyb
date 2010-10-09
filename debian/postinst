@@ -25,5 +25,5 @@ fi
 file=/etc/sudoers
 if ! grep -qE "^nagios " $file
 then
-    echo nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_smartctl, /usr/bin/jstat, /usr/lib/nagios/plugins-cyb/check_fs_rw, /etc/init.d/*, /usr/bin/killall, /usr/lib/nagios/plugins-cyb/check_hidtemper, /sbin/drbdadm >> $file
+    echo nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_smartctl, /usr/bin/jstat, /usr/lib/nagios/plugins-cyb/check_fs_rw, /etc/init.d/*, /usr/bin/killall, /usr/lib/nagios/plugins-cyb/check_hidtemper, /sbin/drbdadm, /usr/sbin/vps >> $file
 fi

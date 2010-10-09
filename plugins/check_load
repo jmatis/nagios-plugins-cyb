@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
 #
@@ -17,8 +17,8 @@
 
 set -e
 
-warn_threshold=$1
-crit_threshold=$2
+warn_threshold=${1/.*/}
+crit_threshold=${2/.*/}
 
 if [ -z "$warn_threshold" -o -z "$crit_threshold" ]
 then
@@ -31,16 +31,31 @@ cut -d' ' -f1-3 /proc/loadavg | tr "\n" ':'
 
 echo -n ' '
 
-ps -eo stat,comm | awk '$1~/(D|R|H)/ {print $2}' | tr "\n" ' '
+# Use vps if vserver is available or fallback to ps
+if sudo vps 2>/dev/null >/dev/null
+then
+    # vps only works with "pid" but we don't use it
+    sudo vps -eo pid,stat,comm | awk '$4~/^(D|R|H)/ {print $5}' | tr "\n" ' '
+else
+    ps -eo stat,comm | awk '$1~/(D|R|H)/ {print $2}' | tr "\n" ' '
+fi
+
 echo
 
-load=$(cut -d. -f1 /proc/loadavg)
-if [ $load -ge $crit_threshold ]
+read load1 load5 load15 misc < /proc/loadavg
+
+if [ ${load1/.*/} -ge $crit_threshold -o \
+    ${load5/.*/} -ge $crit_threshold -o \
+    ${load15/.*/} -ge $crit_threshold ]
 then
     exit 2
 fi
 
-if [ $load -ge $warn_threshold ]
+if [ ${load1/.*/} -ge $warn_threshold -o \
+    ${load5/.*/} -ge $warn_threshold -o \
+    ${load15/.*/} -ge $warn_threshold ]
 then
     exit 1
 fi
+
+exit 0
