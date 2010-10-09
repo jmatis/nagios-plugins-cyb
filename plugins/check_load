@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+warn_threshold=$1
+crit_threshold=$2
+
+if [ -z "$warn_threshold" -o -z "$crit_threshold" ]
+then
+    echo $0 too few arguments >&2
+    echo Usage: $0 WARNING_THRESHOLD CRITICAL_THRESHOLD >&2
+    exit 1
+fi
+
+cut -d' ' -f1-3 /proc/loadavg | tr "\n" ':'
+
+echo -n ' '
+
+ps -eo stat,comm | awk '$1~/(D|R|H)/ {print $2}' | tr "\n" ' '
+echo
+
+load=$(cut -d. -f1 /proc/loadavg)
+if [ $load -ge $crit_threshold ]
+then
+    exit 2
+fi
+
+if [ $load -ge $warn_threshold ]
+then
+    exit 1
+fi

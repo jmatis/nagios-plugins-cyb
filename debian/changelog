@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-75) unstable; urgency=low
+
+  * check_memory: Added info about processes that eats all the memory.
+  * check_load: Added info about processes that are in the run queue.
+
+ -- Cyril Bouthors <cyb@debian.org>  Sat, 09 Oct 2010 11:03:28 +0200
+
 nagios-plugins-cyb (1.0-74) unstable; urgency=low
 
   * Allow nagios to restart any service.
