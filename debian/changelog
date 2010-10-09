@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-76) unstable; urgency=low
+
+  * Renamed load.cfg into cybload.cfg to avoid conflict with original
+    package.
+
+ -- Cyril Bouthors <cyb@debian.org>  Sat, 09 Oct 2010 11:09:11 +0200
+
 nagios-plugins-cyb (1.0-75) unstable; urgency=low
 
   * check_memory: Added info about processes that eats all the memory.
