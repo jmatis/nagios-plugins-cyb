@@ -92,7 +92,7 @@ my $apps = $mems{'MemTotal'}
 
 $percent_mem_used_by_apps = int($apps / $mems{'MemTotal'} * 100);
 
-print "$percent_mem_used_by_apps\% used memory: ";
+print "$percent_mem_used_by_apps\% used: ";
 
 print `ps -eo rss,comm| sort -nr | cut -d' ' -f2- | head | tr "\n" ' '` . "\n";
 
