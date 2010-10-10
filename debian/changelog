@@ -1,7 +1,14 @@
+nagios-plugins-cyb (1.0-78) unstable; urgency=low
+
+  * check_long_lasting_apache_queries: detect when ExtendedStatus is not
+    enabled, fixed return code.
+  * check_memory: simplified output.
+  
+ -- Cyril Bouthors <cyb@debian.org>  Sun, 10 Oct 2010 14:25:02 +0200
+
 nagios-plugins-cyb (1.0-77) unstable; urgency=low
 
-  * Added vserver support.
-  * Check load1, load5 and load15
+  * check_load: Added vserver support, Check load1, load5 and load15.
 
  -- Cyril Bouthors <cyb@debian.org>  Sat, 09 Oct 2010 14:33:25 +0200
 
