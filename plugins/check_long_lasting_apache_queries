@@ -25,18 +25,34 @@ then
 fi
 
 url=http://localhost/server-status
-rc=0
 
-w3m -dump $url \
-    | awk '/ W / {print $6" "$13" "$14}' \
+tempfile=$(tempfile)
+trap "rm -f $tempfile" 0 1 2 5 15
+
+# Check if server-status is available
+if ! w3m -cols 150 -dump $url > $tempfile 2>/dev/null
+then
+    echo "Error while accessing $url"
+    exit 2
+fi
+
+# Check if ExtendedStatus is enabled
+if grep -qF 'you need to use the ExtendedStatus On directive.' $tempfile
+then
+    echo "Unable to fetch Apache info, please enable ExtendedStatus"
+    exit 2
+fi
+
+# Parse server-status output
+awk '/ W / {print $6" "$13" "$14}' $tempfile \
     | while read time_elapsed_for_request vhost uri
 do
     if [ "$time_elapsed_for_request" -gt "$max_elapsed_time" ]
     then
-	rc=2
-	echo -n "http://$vhost$uri is lasting for ${time_elapsed_for_request}s. "
+	echo "http://$vhost$uri is lasting for ${time_elapsed_for_request}s. "
+	exit 2
     fi
 done
 
-echo
-exit $rc
+echo OK
+exit 0
