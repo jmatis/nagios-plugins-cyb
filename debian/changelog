@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-81) unstable; urgency=low
+
+  * check_mysql: check for long lasting queries, check that we are bellow
+    80% of the maximum number of connections.
+
+ -- Cyril Bouthors <cyb@debian.org>  Fri, 15 Oct 2010 21:27:37 +0200
+
 nagios-plugins-cyb (1.0-80) unstable; urgency=low
 
   * check_long_lasting_apache_queries: fixed issue with sub process
