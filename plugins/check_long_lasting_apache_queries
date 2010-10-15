@@ -27,10 +27,11 @@ fi
 url=http://localhost/server-status
 
 tempfile=$(tempfile)
-trap "rm -f $tempfile" 0 1 2 5 15
+tempfile2=$(tempfile)
+trap "rm -f $tempfile $tempfile2" 0 1 2 5 15
 
 # Check if server-status is available
-if ! w3m -cols 150 -dump $url > $tempfile 2>/dev/null
+if ! w3m -cols 1000 -dump $url > $tempfile 2>/dev/null
 then
     echo "Error while accessing $url"
     exit 2
@@ -44,15 +45,16 @@ then
 fi
 
 # Parse server-status output
-awk '/ W / {print $6" "$13" "$14}' $tempfile \
-    | while read time_elapsed_for_request vhost uri
+awk '/ W / {print $6" "$12" "$14}' $tempfile > $tempfile2
+
+while read time_elapsed_for_request vhost uri
 do
     if [ "$time_elapsed_for_request" -gt "$max_elapsed_time" ]
     then
 	echo "http://$vhost$uri is lasting for ${time_elapsed_for_request}s. "
 	exit 2
     fi
-done
+done < $tempfile2
 
 echo OK
 exit 0
