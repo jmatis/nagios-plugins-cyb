@@ -31,7 +31,7 @@ long_lasting_queries=$($mysql -e 'SHOW FULL PROCESSLIST \G' \
     | awk -F '[ :]' '/Time/ {time=$NF} ! /NULL$/ {if(time>=60 && sub(/^.*Info:/, "") == 1) print}')
 if [ ! -z "$long_lasting_queries" ]
 then
-    echo Long lasting SQL queries detected: $long_lasting_queries
+    echo "Long lasting SQL queries detected: $long_lasting_queries"
     exit 2
 fi
 
