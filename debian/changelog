@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-83) unstable; urgency=low
+
+  * check_mysql:
+  - Raised threshold to 5 minutes about long queries
+ - ignore mySQL backups
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 20 Oct 2010 00:36:19 +0200
+
 nagios-plugins-cyb (1.0-82) unstable; urgency=low
 
   * check_mysql: fixed SQL injection.
