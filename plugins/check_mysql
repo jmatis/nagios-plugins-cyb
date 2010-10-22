@@ -26,10 +26,11 @@ then
     exit 2
 fi
 
-# Check for long lasting queries
+# Check for long lasting queries. Ignore this check is a backup is running
 long_lasting_queries=$($mysql -e 'SHOW FULL PROCESSLIST \G' \
-    | awk -F '[ :]' '/Time/ {time=$NF} ! /NULL$/ && ! /SQL_NO_CACHE/ {if(time>=300 && sub(/^.*Info:/, "") == 1) print}')
-if [ ! -z "$long_lasting_queries" ]
+    | awk -F '[ :]' '/Time/ {time=$NF} ! /NULL$/ {if(time>=300 && sub(/^.*Info:/, "") == 1) print}')
+if [ ! -z "$long_lasting_queries" ] &&
+    ! echo $long_lasting_queries | grep -q SQL_NO_CACHE
 then
     echo "Long lasting SQL queries: $long_lasting_queries"
     exit 2
