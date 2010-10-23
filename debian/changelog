@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-85) unstable; urgency=low
+
+  * check_mysql: ignore repair and optimize.
+
+ -- Cyril Bouthors <cyb@debian.org>  Sat, 23 Oct 2010 10:37:45 +0200
+
 nagios-plugins-cyb (1.0-84) unstable; urgency=low
 
   * check_mysql: ignore long lasting queries if a backup is running.
