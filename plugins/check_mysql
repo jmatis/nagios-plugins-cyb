@@ -33,8 +33,9 @@ long_lasting_queries=$($mysql -e 'SHOW FULL PROCESSLIST \G' \
 if [ ! -z "$long_lasting_queries" ] &&
     ! echo $long_lasting_queries | grep -qE '(SQL_NO_CACHE|REPAIR|OPTIMIZE)'
 then
-    echo "Long lasting SQL queries: $long_lasting_queries"
-    exit 2
+    echo "Long lasting SQL queries: $long_lasting_queries" \
+	| mail -s long-query-$HOSTNAME cyril.bouthors@isvtec.com
+#    exit 2
 fi
 
 # Fetch connections information
