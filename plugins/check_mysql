@@ -26,17 +26,17 @@ then
     exit 2
 fi
 
-# Check for long lasting queries. Ignore this check if a backup. repair or
-# optimize is running
-long_lasting_queries=$($mysql -e 'SHOW FULL PROCESSLIST \G' \
-    | awk -F '[ :]' '/Time/ {time=$NF} ! /NULL$/ {if(time>=300 && sub(/^.*Info:/, "") == 1) print}')
-if [ ! -z "$long_lasting_queries" ] &&
-    ! echo $long_lasting_queries | grep -qE '(SQL_NO_CACHE|REPAIR|OPTIMIZE)'
-then
-    echo "Long lasting SQL queries: $long_lasting_queries" \
-	| mail -s long-query-$HOSTNAME cyril.bouthors@isvtec.com
-#    exit 2
-fi
+# # Check for long lasting queries. Ignore this check if a backup. repair or
+# # optimize is running
+# long_lasting_queries=$($mysql -e 'SHOW FULL PROCESSLIST \G' \
+#     | awk -F '[ :]' '/Time/ {time=$NF} ! /NULL$/ {if(time>=300 && sub(/^.*Info:/, "") == 1) print}')
+# if [ ! -z "$long_lasting_queries" ] &&
+#     ! echo $long_lasting_queries | grep -qE '(SQL_NO_CACHE|REPAIR|OPTIMIZE)'
+# then
+#     echo "Long lasting SQL queries: $long_lasting_queries" \
+# 	| mail -s long-query-$HOSTNAME cyril.bouthors@isvtec.com
+# #    exit 2
+# fi
 
 # Fetch connections information
 max_connections=$($mysql -e "SHOW VARIABLES LIKE 'max_connections'" \

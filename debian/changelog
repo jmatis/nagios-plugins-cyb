@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-87) unstable; urgency=low
+
+  * check_mysql: Ignore long lasting queries for a while because it's not
+    stable yet.
+
+ -- Cyril Bouthors <cyb@debian.org>  Mon, 29 Nov 2010 09:59:25 +0100
+
 nagios-plugins-cyb (1.0-86) unstable; urgency=low
 
   * check_mysql: send long lasting query report by email only.
