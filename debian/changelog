@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-88) unstable; urgency=low
+
+  * Moved smartmontools from Depends to Suggests
+
+ -- Cyril Bouthors <cyb@debian.org>  Fri, 17 Dec 2010 16:25:12 +0100
+
 nagios-plugins-cyb (1.0-87) unstable; urgency=low
 
   * check_mysql: Ignore long lasting queries for a while because it's not

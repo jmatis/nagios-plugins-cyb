@@ -8,8 +8,8 @@ Standards-Version: 3.7.3
 
 Package: nagios-plugins-cyb
 Architecture: all
-Depends: ${shlibs:Depends}, nagios-plugins-basic, debsums, smartmontools, sudo, liblockfile1, debianutils, ntpdate, timeout
-Suggests: dellomsa, libdevice-usb-pcsensor-hidtemper-perl
+Depends: ${shlibs:Depends}, nagios-plugins-basic, debsums, sudo, liblockfile1, debianutils, ntpdate, timeout
+Suggests: dellomsa, libdevice-usb-pcsensor-hidtemper-perl, smartmontools
 Description: Cyb's Nagios plugins
  check_apt_simple
  check_debsums
