@@ -42,18 +42,16 @@ fi
 
 echo
 
-read load1 load5 load15 misc < /proc/loadavg
+read load1 load5 misc < /proc/loadavg
 
 if [ ${load1/.*/} -ge $crit_threshold -o \
-    ${load5/.*/} -ge $crit_threshold -o \
-    ${load15/.*/} -ge $crit_threshold ]
+    ${load5/.*/} -ge $crit_threshold ]
 then
     exit 2
 fi
 
 if [ ${load1/.*/} -ge $warn_threshold -o \
-    ${load5/.*/} -ge $warn_threshold -o \
-    ${load15/.*/} -ge $warn_threshold ]
+    ${load5/.*/} -ge $warn_threshold ]
 then
     exit 1
 fi

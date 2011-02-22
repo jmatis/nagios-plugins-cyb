@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-89) unstable; urgency=low
+
+  * check_load: ignore load15 because it's often too late to react anyway.
+
+ -- Cyril Bouthors <cyb@debian.org>  Tue, 22 Feb 2011 10:35:38 +0100
+
 nagios-plugins-cyb (1.0-88) unstable; urgency=low
 
   * Moved smartmontools from Depends to Suggests
