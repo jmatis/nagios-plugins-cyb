@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-92) unstable; urgency=low
+
+  * cyb_check_http_pattern: add.
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Feb 2011 14:01:44 +0100
+
 nagios-plugins-cyb (1.0-91) unstable; urgency=low
 
   * check_ovh_prepaid_account: typo in path name.
