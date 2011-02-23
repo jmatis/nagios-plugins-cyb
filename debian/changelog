@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-90) unstable; urgency=low
+
+  * check_ovh_prepaid_account: add.
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Feb 2011 10:50:40 +0100
+
 nagios-plugins-cyb (1.0-89) unstable; urgency=low
 
   * check_load: ignore load15 because it's often too late to react anyway.

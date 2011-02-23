@@ -1,0 +1,59 @@
+#!/usr/bin/php
+<?php # -*- mode: php -*-
+//
+// Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
+//
+// This program is free software: you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program. If not, see <http://www.gnu.org/licenses/>.
+//
+
+$threshold=25;
+
+if(isset($argv[1]))
+	$threshold=$argv[1];
+
+// Ugly code to fetch configuration from file
+$config_file='/etc/nagios3/ovh.cfg';
+if(!file_exists($config_file)) {
+	echo "Unable to find $config_file\n";
+	exit(1);
+}
+
+foreach(file($config_file) as $line) {
+	list($const, $value) = explode(' ', $line);
+	define($const, trim($value));
+}
+
+try {
+	$soap = new SoapClient('https://www.ovh.com/soapi/soapi-re-1.16.wsdl');
+
+	$session = $soap->login(OVH_LOGIN, OVH_PASSWORD,'fr', false);
+
+	$result = $soap->accountSummary($session);
+
+	$soap->logout($session);
+
+} catch(SoapFault $fault) {
+	echo $fault;
+  }
+
+$result->balance/=100;
+
+echo "$result->balance EUR\n";
+
+if($result->balance < $threshold)
+	exit(1);
+
+exit(0);
+
+?>
