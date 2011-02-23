@@ -21,11 +21,11 @@ url=$1
 match=$2
 
 content=$(wget -q -T5 -t1 -O- "$url" 2>&1)
-echo "$content"
+echo "$content" | tr "\n" " "
 
 if echo "$content" | grep "$match"
 then
     exit 0
 fi
 
-exit 1
+exit 2
