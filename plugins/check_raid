@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -16,14 +16,21 @@
 #
 
 set -e
+set -o pipefail
+rc=0
 
-if [ "$1" != "configure" ]
-then
-    exit 0
-fi
+# Check software RAID
+for md in /dev/md*
+do
+    [ ! -e $md -o -d $md ] && continue
 
-file=/etc/sudoers
-if ! grep -qE "^nagios " $file
-then
-    echo nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_smartctl, /usr/bin/jstat, /usr/lib/nagios/plugins-cyb/check_fs_rw, /etc/init.d/*, /usr/bin/killall, /usr/lib/nagios/plugins-cyb/check_hidtemper, /sbin/drbdadm, /usr/sbin/vps, /usr/lib/nagios/plugins-cyb/check_raid >> $file
-fi
+    if ! mdadm --detail --test $md >/dev/null 2>/dev/null
+    then
+	mdadm --detail --test $md |grep faulty | sed -e s/.*faulty/faulty/g \
+	    | tr "\n" ' ' || true
+	rc=1
+    fi
+done
+
+echo
+exit $rc

@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-95) unstable; urgency=low
+
+  * check_raid: add.
+
+ -- Cyril Bouthors <cyb@debian.org>  Thu, 24 Feb 2011 10:35:32 +0100
+
 nagios-plugins-cyb (1.0-94) unstable; urgency=low
 
   * Fixed return value of check_http_content.
