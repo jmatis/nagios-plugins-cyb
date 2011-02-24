@@ -28,7 +28,7 @@ do
     then
 	mdadm --detail --test $md |grep faulty | sed -e s/.*faulty/faulty/g \
 	    | tr "\n" ' ' || true
-	rc=1
+	rc=2
     fi
 done
 
