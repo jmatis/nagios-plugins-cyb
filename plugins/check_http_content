@@ -20,7 +20,7 @@ set -e
 url=$1
 match=$2
 
-content=$(wget -q -T5 -t1 -O- "$url" 2>&1)
+content=$(wget -q -T5 -t1 -O- "$url" 2>&1 || true)
 echo "$content" | tr "\n" " "
 
 if echo "$content" | grep "$match"
