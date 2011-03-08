@@ -26,8 +26,10 @@ do
 
     if ! mdadm --detail --test $md >/dev/null 2>/dev/null
     then
+	echo -n "$md: "
 	mdadm --detail --test $md 2>&1 |grep faulty \
-	    | sed -e s/.*faulty/faulty/g | tr "\n" ' ' || true
+	    | sed -e s/.*faulty/faulty/g | tr -d "\n" || true
+	echo -n '. '
 	rc=2
     fi
 done
