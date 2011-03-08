@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-99) unstable; urgency=low
+
+  * Added dependency on "timeout | coreutils (>= 8.0-1)" in order to fix
+    squeeze support.
+
+ -- Cyril Bouthors <cyb@debian.org>  Tue, 08 Mar 2011 16:12:33 +0100
+
 nagios-plugins-cyb (1.0-98) unstable; urgency=low
 
   * check_http_content: better handling of wget exit status in case of
