@@ -64,5 +64,18 @@ then
     done
 fi
 
+# Check 3w_xxxx RAID
+if which tw_cli >/dev/null && grep -wFq 3w_xxxx /proc/modules
+then
+    for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')
+    do
+	echo -n "3w_xxxx status $status. "
+	if [ "$status" != 'OK' ]
+	then
+	    rc=2
+	fi
+    done
+fi
+
 echo
 exit $rc
