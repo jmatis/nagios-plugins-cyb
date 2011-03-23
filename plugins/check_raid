@@ -55,7 +55,7 @@ then
     for status in $(sas2ircu 0 STATUS | awk '/Volume state/ {print $4}')
     do
 	echo -n "IRCU status $status. "
-	if [ "$status" != 'OPTIMAL' ]
+	if [ "$status" != 'Optimal' ]
 	then
 	    rc=2
 	fi

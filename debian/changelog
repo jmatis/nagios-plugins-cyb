@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-102) unstable; urgency=low
+
+  * check_raid: fixed typo.
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Mar 2011 12:16:09 +0100
+
 nagios-plugins-cyb (1.0-101) unstable; urgency=low
 
   * check_raid: added support for mpt2sas.
