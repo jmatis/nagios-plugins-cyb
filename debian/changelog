@@ -1,6 +1,12 @@
+nagios-plugins-cyb (1.0-101) unstable; urgency=low
+
+  * check_raid: added support for mpt2sas.
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Mar 2011 12:03:25 +0100
+
 nagios-plugins-cyb (1.0-100) unstable; urgency=low
 
-  * check_raid: added support for MPT devices.
+  * check_raid: added support for MPT devices (mptsas driver).
 
  -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Mar 2011 11:39:46 +0100
 

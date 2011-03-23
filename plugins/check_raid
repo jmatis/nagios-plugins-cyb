@@ -36,12 +36,25 @@ do
     fi
 done
 
-# Check LSI RAID with mpt_status
-if which mpt-status >/dev/null && grep -wFq mptctl /proc/modules
+# Check mptsas RAID
+if which mpt-status >/dev/null && grep -wFq mptsas /proc/modules
 then 
     for status in $(mpt-status -s | awk '/^log_id / {print $3}')
     do
 	echo -n "MPT status $status. "
+	if [ "$status" != 'OPTIMAL' ]
+	then
+	    rc=2
+	fi
+    done
+fi
+
+# Check mpt2sas RAID
+if which sas2ircu >/dev/null && grep -wFq mpt2sas /proc/modules
+then
+    for status in $(sas2ircu 0 STATUS | awk '/Volume state/ {print $4}')
+    do
+	echo -n "IRCU status $status. "
 	if [ "$status" != 'OPTIMAL' ]
 	then
 	    rc=2
