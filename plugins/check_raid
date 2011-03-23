@@ -19,6 +19,8 @@ set -e
 set -o pipefail
 rc=0
 
+export PATH=$PATH:/sbin:/usr/sbin
+
 # Check software RAID
 for md in /dev/md*
 do
@@ -33,6 +35,19 @@ do
 	rc=2
     fi
 done
+
+# Check LSI RAID with mpt_status
+if which mpt-status >/dev/null && grep -wFq mptctl /proc/modules
+then 
+    for status in $(mpt-status -s | awk '/^log_id / {print $3}')
+    do
+	echo -n "MPT status $status. "
+	if [ "$status" != 'OPTIMAL' ]
+	then
+	    rc=2
+	fi
+    done
+fi
 
 echo
 exit $rc
