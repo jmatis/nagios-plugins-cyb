@@ -39,8 +39,13 @@ do
 done
 
 # Check mptsas RAID
-if which mpt-status >/dev/null && grep -wFq mptsas /proc/modules
-then 
+if grep -wFq mptsas /proc/modules
+then
+    if ! which mpt-status >/dev/null
+    then
+	echo "$0: unable to find mpt-status"
+	exit 2
+    fi
     for status in $(mpt-status -s | awk '/^log_id / {print $3}')
     do
 	echo -n "MPT status $status. "
@@ -52,8 +57,13 @@ then
 fi
 
 # Check mpt2sas RAID
-if which sas2ircu >/dev/null && grep -wFq mpt2sas /proc/modules
+if grep -wFq mpt2sas /proc/modules
 then
+    if ! which sas2ircu >/dev/null
+    then
+	echo "$0: unable to find sas2ircu"
+	exit 2
+    fi
     for status in $(sas2ircu 0 STATUS | awk '/Volume state/ {print $4}')
     do
 	echo -n "IRCU status $status. "
@@ -65,12 +75,53 @@ then
 fi
 
 # Check 3w_xxxx RAID
-if which tw_cli >/dev/null && grep -wFq 3w_xxxx /proc/modules
+if grep -wFq 3w_xxxx /proc/modules
 then
+    if ! which tw_cli >/dev/null
+    then
+	echo "$0: unable to find tw_cli"
+	exit 2
+    fi
     for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')
     do
 	echo -n "3w_xxxx status $status. "
 	if [ "$status" != 'OK' ]
+	then
+	    rc=2
+	fi
+    done
+fi
+
+# Check megaraid_sas RAID
+if grep -wFq megaraid_sas /proc/modules
+then
+    if ! which megasasctl >/dev/null
+    then
+	echo "$0: unable to find megasasctl"
+	exit 2
+    fi
+    for status in $(megasasctl | awk '/RAID/ {print $6}')
+    do
+	echo -n "megasasctl status $status. "
+	if [ "$status" != 'optimal' ]
+	then
+	    rc=2
+	fi
+    done
+fi
+
+# cciss support with array-info
+if grep -wFq cciss /proc/modules
+then
+    if ! which array-info >/dev/null
+    then
+	echo "$0: unable to find array-info"
+	exit 2
+    fi
+    for status in $(array-info -d /dev/cciss/c0d0 -a | awk '/Status/ {print $6}')
+    do
+	echo -n "cciss status $status. "
+	if [ "$status" != 'ok' ]
 	then
 	    rc=2
 	fi
