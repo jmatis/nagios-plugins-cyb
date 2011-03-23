@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
 #
@@ -77,9 +77,9 @@ fi
 # Check 3w_xxxx RAID
 if grep -wFq 3w_xxxx /proc/modules
 then
-    if ! which tw_cli >/dev/null
+    if ! which tw-cli >/dev/null
     then
-	echo "$0: unable to find tw_cli"
+	echo "$0: unable to find tw-cli"
 	exit 2
     fi
     for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')

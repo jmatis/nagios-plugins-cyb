@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-106) unstable; urgency=low
+
+  * check_raid: Typo in tw_cli.
+
+ -- Cyril Bouthors <cyb@debian.org>  Wed, 23 Mar 2011 15:28:37 +0100
+
 nagios-plugins-cyb (1.0-105) unstable; urgency=low
 
   * Added support for megaraid_sas / megactl and cciss / array-info.
