@@ -85,7 +85,7 @@ then
     for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')
     do
 	echo -n "3w_xxxx status $status. "
-	if [ "$status" != 'OK' ]
+	if [ "$status" != 'OK' -a "$status" != 'VERIFYING' ]
 	then
 	    rc=2
 	fi
