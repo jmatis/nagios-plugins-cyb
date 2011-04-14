@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-109) unstable; urgency=low
+
+  * check_registrar_queue: boolean exit code: ok or critical.
+
+ -- Cyril Bouthors <cyb@debian.org>  Thu, 14 Apr 2011 13:59:39 +0200
+
 nagios-plugins-cyb (1.0-108) unstable; urgency=low
 
   * Allow Nagios to mount partitions

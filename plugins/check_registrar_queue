@@ -20,26 +20,28 @@ set -e
 
 . /etc/nagios-plugins/config/cyb-sql.conf
 
-warning=$1
-critical=$2
+threshold=$1
 
-if [ -z "$warning" -o -z "$critical" ]
+if [ -z "$threshold" ]
 then
     echo $0: Too few argument >&2
-    echo Usage: $0 WARNING_THRESHOLD CRITICAL_THRESHOLD >&2
-    exit 3
+    echo Usage: $0 CRITICAL_THRESHOLD >&2
+    exit 1
 fi
 
-SELECT="SELECT COUNT(*) FROM domains, user WHERE domains.etat IN (6,9) AND user.etat IN (1,2,6) AND domains.user=user.user"
+SELECT="SELECT COUNT(*)
+FROM domains, user
+WHERE domains.etat IN (6,9) AND user.etat IN (1,2,6) AND domains.user=user.user"
 queue=$(echo $SELECT | $MYSQL)
 
-SELECT="SELECT domains.domain FROM domains, user WHERE domains.etat IN (6,9) AND user.etat IN (1,2,6) AND domains.user=user.user ORDER BY domains.domain"
+SELECT="SELECT domains.domain
+FROM domains, user
+WHERE domains.etat IN (6,9) AND user.etat IN (1,2,6) AND domains.user=user.user
+ORDER BY domains.domain"
 domains=$(echo $SELECT | $MYSQL | tr "\n" ' ')
 
 echo "$queue domains in registrar queue: $domains"
 
-[ $queue -ge $critical ] && exit 2
-
-[ $queue -ge $warning ] && exit 1
+[ $queue -ge $threshold ] && exit 2
 
 exit 0
