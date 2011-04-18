@@ -38,7 +38,7 @@ debuild:
 	$(RSYNC) -aC --del --exclude .svn . $(AUTOBUILD_DIR)/$(PKG)-$(VERSION)
 	tar -C $(AUTOBUILD_DIR) -czf $(AUTOBUILD_DIR)/$(PKG)-$(VERSION).tar.gz $(PKG)-$(VERSION)
 	cp $(AUTOBUILD_DIR)/$(PKG)-$(VERSION).tar.gz $(AUTOBUILD_DIR)/$(PKG)_$(VERSION).orig.tar.gz
-	cd $(AUTOBUILD_DIR)/$(PKG)-$(VERSION) && debuild -us -uc
+	cd $(AUTOBUILD_DIR)/$(PKG)-$(VERSION) && debuild
 
 autobuild: $(AUTOBUILD_DIR)/$(AUTOBUILD_PACKAGE)_$(AUTOBUILD_VERSION)-1_$(AUTOBUILD_ARCH).deb;
 
