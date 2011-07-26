@@ -39,7 +39,7 @@ do
 done
 
 # Check mptsas RAID
-if grep -wFq mptsas /proc/modules
+if [ -f /proc/modules ] && grep -wFq mptsas /proc/modules
 then
     if ! which mpt-status >/dev/null
     then
@@ -57,7 +57,7 @@ then
 fi
 
 # Check mpt2sas RAID
-if grep -wFq mpt2sas /proc/modules
+if [ -f /proc/modules ] && grep -wFq mpt2sas /proc/modules
 then
     if ! which sas2ircu >/dev/null
     then
@@ -75,7 +75,7 @@ then
 fi
 
 # Check 3w_xxxx RAID
-if grep -wFq 3w_xxxx /proc/modules
+if [ -f /proc/modules ] && grep -wFq 3w_xxxx /proc/modules
 then
     if ! which tw-cli >/dev/null
     then
@@ -93,7 +93,7 @@ then
 fi
 
 # Check megaraid_sas RAID
-if grep -wFq megaraid_sas /proc/modules
+if [ -f /proc/modules ] && grep -wFq megaraid_sas /proc/modules
 then
     if ! which megasasctl >/dev/null
     then
@@ -111,7 +111,7 @@ then
 fi
 
 # cciss support with array-info
-if grep -wFq cciss /proc/modules
+if [ -f /proc/modules ] && grep -wFq cciss /proc/modules
 then
     if ! which array-info >/dev/null
     then
