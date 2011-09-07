@@ -21,7 +21,7 @@ set -e
 export PATH=$PATH:/sbin:/usr/sbin
 
 max_offset=5
-ntpdate='timeout 10 ntpdate -q pool.ntp.org'
+ntpdate='timeout 10 ntpdate -p1 -q pool.ntp.org'
 
 [ ! -z "$1" ] && max_offset=$1
 

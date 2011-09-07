@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-113) unstable; urgency=low
+
+  * check_time: take only one NTP sample from each server instead of 4 to
+    avoid Nagios timeouts.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 07 Sep 2011 10:19:47 +0200
+
 nagios-plugins-cyb (1.0-112) unstable; urgency=low
 
   * check_debsums: added lock support.
