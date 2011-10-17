@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
 #
@@ -39,7 +39,7 @@ fi
 
 echo "$content" | tr "\n" " "
 
-if echo "$content" | grep "$match"
+if echo "$content" | grep -qE "$match"
 then
     exit 0
 fi
