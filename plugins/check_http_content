@@ -19,8 +19,23 @@ set -e
 
 url=$1
 match=$2
+post="$3"
 
-content=$(wget -q -T5 -t1 -O- "$url" 2>&1 || true)
+if [ -z "$url" -o -z "$match" ]
+then
+    echo "$0: Too few argument" >&2
+    echo "Usage: $0 URL MATCH [POST_DATA]" >&2
+    exit 1
+fi
+
+wget="wget -q -T5 -t1 -O- \"$url\""
+
+if [ ! -z "$post" ]
+then
+    wget="$wget --post-data=\"$post\""
+fi
+
+content=$($wget 2>&1 || true)
 echo "$content" | tr "\n" " "
 
 if echo "$content" | grep "$match"
