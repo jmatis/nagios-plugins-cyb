@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-116) unstable; urgency=low
+
+  * Fixed check_http_content argument quoting
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 21:07:18 +0200
+
 nagios-plugins-cyb (1.0-115) unstable; urgency=low
 
   * check_http_content: add post data support.

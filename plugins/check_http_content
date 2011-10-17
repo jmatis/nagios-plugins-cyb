@@ -28,14 +28,15 @@ then
     exit 1
 fi
 
-wget="wget -q -T5 -t1 -O- \"$url\""
+wget='wget -q -T5 -t1 -O-'
 
 if [ ! -z "$post" ]
 then
-    wget="$wget --post-data=\"$post\""
+    content=$($wget --post-data="$post" "$url" 2>&1 || true)
+else
+    content=$($wget "$url" 2>&1 || true)
 fi
 
-content=$($wget 2>&1 || true)
 echo "$content" | tr "\n" " "
 
 if echo "$content" | grep "$match"
