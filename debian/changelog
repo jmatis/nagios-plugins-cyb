@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-117) unstable; urgency=low
+
+  * Fixed argument quoting, again.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 21:14:05 +0200
+
 nagios-plugins-cyb (1.0-116) unstable; urgency=low
 
   * Fixed check_http_content argument quoting
