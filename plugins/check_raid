@@ -26,6 +26,8 @@ for md in /dev/md*
 do
     [ ! -e $md -o -d $md ] && continue
 
+    grep -q $(basename $md) /proc/mdstat || continue
+
     if mdadm --detail --test $md >/dev/null 2>/dev/null
     then
 	echo -n "$md: OK. "
