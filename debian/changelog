@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-120) unstable; urgency=low
+
+  * Allow check_signup_queue and check_registrar_queue via SSH.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 08 Dec 2011 08:40:11 +0100
+
 nagios-plugins-cyb (1.0-119) unstable; urgency=low
 
   * check_http_content: added --no-check-certificate option to wget
