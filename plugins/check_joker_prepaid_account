@@ -1,0 +1,110 @@
+#!/usr/bin/php
+<?php # -*- mode: php -*-
+  /*
+   * Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
+   * 
+   * This program is free software: you can redistribute it and/or modify it
+   * under the terms of the GNU General Public License as published by the
+   * Free Software Foundation, either version 3 of the License, or (at your
+   * option) any later version.
+   * 
+   * This program is distributed in the hope that it will be useful, but
+   * WITHOUT ANY WARRANTY; without even the implied warranty of
+   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+   * Public License for more details.
+   * 
+   * You should have received a copy of the GNU General Public License along
+   * with this program. If not, see <http://www.gnu.org/licenses/>.
+   * 
+   */
+
+error_reporting(E_ALL ^ E_NOTICE);
+
+global $joker;
+require('/home/cyb/jexiste/cf/domains/joker.cfg');
+
+function joker_execute($request, $params=array())
+{
+  global $joker;
+  global $joker_auth_sid;
+  // Prepare URL
+  $url="$joker[dmapi_url]/$request?";
+  if(isset($joker_auth_sid))
+    $params['auth-sid'] = $joker_auth_sid;
+
+  foreach($params AS $key => $value)
+    $url.="$key=$value&";
+
+  // Fetch URL
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  $output = curl_exec($ch);
+
+  // Check server return
+  if($output === false) {
+    //		echo curl_error($ch);
+    return false;
+  }
+
+  $info = curl_getinfo($ch);
+  if($info['http_code']!=200) {
+    echo $output;
+    return false;
+  }
+		
+  curl_close($ch);
+
+  $return=array();
+  foreach(explode("\n", $output) as $line) {
+    list($var, $val) = explode(': ', $line);
+    $return[$var]=trim($val);
+  }
+
+  return $return;
+}
+
+function joker_login()
+{
+  global $joker_auth_sid;
+  global $joker;
+  if(isset($joker['auth-sid']))
+    return true;
+
+  $return = joker_execute('login', array(
+              'username' => $joker['login'],
+              'password' => $joker['password']));
+	
+  if(isset($return['Auth-Sid'])) {
+    $joker_auth_sid=$return['Auth-Sid'];
+    return true;
+  }
+
+  return false;
+
+}
+
+function joker_balance()
+{
+  joker_login();
+  $return=joker_execute('query-profile');
+
+  if(isset($return['Account-Balance']))
+    return $return['Account-Balance'];
+
+  return -1;
+}
+
+if(!isset($argv[1])) {
+  fwrite(STDERR, "$argv[0]: too few argument\n");
+  fwrite(STDERR, "Usage: $argv[0] BALANCE_THRESHOLD\n");
+  fwrite(STDERR, "Balance is in USD\n");
+  exit(1);
+}
+
+$threshold = $argv[1];
+$balance = joker_balance();
+
+if($balance < $threshold)
+  exit(2);
+
+?>
