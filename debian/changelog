@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-123) unstable; urgency=low
+
+  * Add check_joker_prepaid_account_by_ssh and
+    check_ovh_prepaid_account_by_ssh
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 08:59:39 +0100
+
 nagios-plugins-cyb (1.0-122) unstable; urgency=low
 
   * Add check_joker_prepaid_account plugin.
