@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-124) unstable; urgency=low
+
+  * check_joker_prepaid_account: typo
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 09:10:55 +0100
+
 nagios-plugins-cyb (1.0-123) unstable; urgency=low
 
   * Add check_joker_prepaid_account_by_ssh and

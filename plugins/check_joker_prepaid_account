@@ -21,7 +21,7 @@
 error_reporting(E_ALL ^ E_NOTICE);
 
 global $joker;
-require('/home/cyb/jexiste/cf/domains/joker.cfg');
+require('/var/www/cf/domains/joker.cfg');
 
 function joker_execute($request, $params=array())
 {
