@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-126) unstable; urgency=low
+
+  * Add cyb_check_http_by_ssh
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 16 Dec 2011 12:17:43 +0100
+
 nagios-plugins-cyb (1.0-125) unstable; urgency=low
 
   * check_joker_prepaid_account: verbose output
