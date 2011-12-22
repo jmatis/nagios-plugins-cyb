@@ -15,7 +15,7 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-excluded_mountpoints="$1"
+excluded_mountpoints="$*"
 rc=0
 
 # Check every ext2, ext3 and ext4 filesystems. Ignore /dev/.static/dev
