@@ -40,7 +40,21 @@ then
 fi
 
 # Check that security repository is configured
-if ! grep -q '^deb http.*security' /etc/apt/sources.list
+rc=$critical_rc
+for file in /etc/apt/sources.list /etc/apt/sources.list.d
+do
+    if [ ! -e $file ]
+    then
+	continue
+    fi
+
+    if grep -qr '^deb http.*security' $file
+    then
+	rc=$ok_rc
+    fi
+done
+
+if [ "$rc" != "$ok_rc" ]
 then
     echo 'No security repository found in /etc/apt/sources.list!'
     exit $critical_rc

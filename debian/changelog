@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-127) unstable; urgency=low
+
+  * check_apt_simple: add support for /etc/apt/sources.list.d
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 11:51:47 +0100
+
 nagios-plugins-cyb (1.0-126) unstable; urgency=low
 
   * Add cyb_check_http_by_ssh
