@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-131) unstable; urgency=low
+
+  * check_apt_simple: check return code of apt-get because it can
+    sometimes fail when running as 'nagios'.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 14:43:02 +0100
+
 nagios-plugins-cyb (1.0-130) unstable; urgency=low
 
   * check_fs_rw: fixed argument parsing, again.

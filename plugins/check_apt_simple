@@ -23,8 +23,17 @@ critical_rc=2
 ok_rc=0
 
 # Check that all packages are up-to-date
-packages=$(apt-get $apt_options dist-upgrade | awk '/^Inst / {print $2}' \
-    | grep -vE -- '-cyb$' || true)
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+if ! apt-get $apt_options dist-upgrade > $tempfile 2>&1
+then
+    echo -n "apt-get failed: "
+    tr "\n" ' ' < $tempfile
+    echo
+    exit $critical_rc    
+fi
+
+packages=$(awk '/^Inst / {print $2}' $tempfile | grep -vE -- '-cyb$' || true)
 
 if [ -n "$packages" ]
 then
