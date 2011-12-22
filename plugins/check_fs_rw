@@ -15,11 +15,20 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+excluded_mountpoints="$1"
 rc=0
 
 # Check every ext2, ext3 and ext4 filesystems. Ignore /dev/.static/dev
 for dir in $(awk '$2!~/^\/dev\/.static\/dev$/ && /ext[234]/ {print $2}' /proc/mounts)
 do
+    for excluded_mountpoint in $excluded_mountpoints
+    do
+	if [ "$dir" = "$excluded_mountpoint" ]
+	then
+	    continue 2
+	fi
+    done
+
     if ! tempfile -d $dir | xargs rm
     then
 	rc=2
