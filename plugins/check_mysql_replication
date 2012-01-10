@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+if [ $BASH_VERSINFO -lt 4 ]
+then
+    echo "$0: this script needs at least BASH >= 4" >&2
+    exit 2
+fi
+
+mysql='timeout 10 mysql --defaults-file=/etc/mysql/debian.cnf -B'
+
+# Ping MySQL. We can't use "mysqladmin ping" because it always returns true!
+if ! $mysql -e 'SELECT 1' >/dev/null 2>/dev/null
+then
+    echo Unable to connect to MySQL
+    exit 2
+fi
+
+# Fetch replication information
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+$mysql -e "SHOW SLAVE STATUS\G" > $tempfile
+
+declare -A states
+states=(
+    [Slave_SQL_Running]='Yes'
+    [Slave_IO_State]='Waiting for master to send event'
+    [Slave_IO_Running]='Yes'
+    [Seconds_Behind_Master]='0'
+)
+
+rc=0
+for key in ${!states[*]}
+do
+    if ! grep -qF "$key: ${states[$key]}" $tempfile
+    then
+	msg="$msg $(grep -F $key $tempfile | tr "\n" ' ' | perl -pi -e 's/^ +//g; s/ +$//')."
+	rc=2
+    fi
+done
+
+if [ $rc != 0 ]
+then
+    echo "Replication error:$msg"
+    exit $rc
+fi
+
+echo OK
