@@ -19,7 +19,7 @@ set -e
 
 if [ $BASH_VERSINFO -lt 4 ]
 then
-    echo "$0: this script needs at least BASH >= 4" >&2
+    echo "$0: this script needs at least BASH >= 4"
     exit 2
 fi
 
