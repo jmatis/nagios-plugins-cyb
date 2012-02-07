@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-134) unstable; urgency=low
+
+  * check_mysql_replication: display last error when replication fails
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 07 Feb 2012 11:25:27 +0100
+
 nagios-plugins-cyb (1.0-133) unstable; urgency=low
 
   * check_mysql_replication: send errors to STDOUT because Nagios does no

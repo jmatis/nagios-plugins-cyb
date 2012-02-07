@@ -43,12 +43,13 @@ states=(
     [Slave_IO_State]='Waiting for master to send event'
     [Slave_IO_Running]='Yes'
     [Seconds_Behind_Master]='0'
+    [Last_Error]=''
 )
 
 rc=0
 for key in ${!states[*]}
 do
-    if ! grep -qF "$key: ${states[$key]}" $tempfile
+    if ! grep -qE "$key: ${states[$key]}$" $tempfile
     then
 	msg="$msg $(grep -F $key $tempfile | tr "\n" ' ' | perl -pi -e 's/^ +//g; s/ +$//')."
 	rc=2
