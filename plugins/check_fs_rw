@@ -18,8 +18,10 @@
 excluded_mountpoints="$*"
 rc=0
 
-# Check every ext2, ext3 and ext4 filesystems. Ignore /dev/.static/dev
-for dir in $(awk '$2!~/^\/dev\/.static\/dev$/ && /ext[234]/ {print $2}' /proc/mounts)
+# Check every ext2, ext3 and ext4 filesystems. Ignore /dev/.static/dev and read
+# only mounted devices
+partitions=$(awk '$2!~/^\/dev\/.static\/dev$/ && $4!~/ro/ && /ext[234]/ {print $2}' /proc/mounts)
+for dir in $partitions
 do
     for excluded_mountpoint in $excluded_mountpoints
     do

@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-135) unstable; urgency=low
+
+  * check_fs_rw: ignore read only mounted devices.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 15 Feb 2012 01:18:05 +0100
+
 nagios-plugins-cyb (1.0-134) unstable; urgency=low
 
   * check_mysql_replication: display last error when replication fails
