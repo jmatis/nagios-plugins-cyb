@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-136) unstable; urgency=low
+
+  * cyb_check_http: send header "Accept: text/html" to avoid getting
+    blocked by mod_security.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 15 Feb 2012 01:57:00 +0100
+
 nagios-plugins-cyb (1.0-135) unstable; urgency=low
 
   * check_fs_rw: ignore read only mounted devices.
