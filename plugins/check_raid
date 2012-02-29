@@ -102,7 +102,7 @@ then
 	echo "$0: unable to find megasasctl"
 	exit 2
     fi
-    for status in $(megasasctl | awk '/RAID/ {print $6}')
+    for status in $(megasasctl | awk '/ RAID / {print $6}')
     do
 	echo -n "megasasctl status $status. "
 	if [ "$status" != 'optimal' ]

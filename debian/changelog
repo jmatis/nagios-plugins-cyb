@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-137) unstable; urgency=low
+
+  * check_raid: fixed status detection on LSI MegaSAS 9260
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 29 Feb 2012 10:32:14 +0100
+
 nagios-plugins-cyb (1.0-136) unstable; urgency=low
 
   * cyb_check_http: send header "Accept: text/html" to avoid getting
