@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-138) unstable; urgency=low
+
+  * check_openvpn: return "critical" instead of "warning" when VPN fails.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 01 Mar 2012 13:25:16 +0100
+
 nagios-plugins-cyb (1.0-137) unstable; urgency=low
 
   * check_raid: fixed status detection on LSI MegaSAS 9260
