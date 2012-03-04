@@ -17,18 +17,33 @@
 
 set -e
 
+# Check that BASH is version >= 4 because we need declarative array
 if [ $BASH_VERSINFO -lt 4 ]
 then
     echo "$0: this script needs at least BASH >= 4"
     exit 2
 fi
 
+declare -A expected_states
+expected_states=(
+    [Slave_SQL_Running]='Yes'
+    [Slave_IO_State]='Waiting for master to send event'
+    [Slave_IO_Running]='Yes'
+    [Last_Error]=''
+)
+seconds_behind_master_threshold=60
 mysql='timeout 10 mysql --defaults-file=/etc/mysql/debian.cnf -B'
+
+# Take seconds_behind_master_threshold from argument if available
+if [ ! -z "$1" ]
+then
+    seconds_behind_master_threshold=$1
+fi
 
 # Ping MySQL. We can't use "mysqladmin ping" because it always returns true!
 if ! $mysql -e 'SELECT 1' >/dev/null 2>/dev/null
 then
-    echo Unable to connect to MySQL
+    echo "Unable to connect to MySQL"
     exit 2
 fi
 
@@ -37,24 +52,23 @@ tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 $mysql -e "SHOW SLAVE STATUS\G" > $tempfile
 
-declare -A states
-states=(
-    [Slave_SQL_Running]='Yes'
-    [Slave_IO_State]='Waiting for master to send event'
-    [Slave_IO_Running]='Yes'
-    [Seconds_Behind_Master]='0'
-    [Last_Error]=''
-)
-
 rc=0
-for key in ${!states[*]}
+for key in ${!expected_states[*]}
 do
-    if ! grep -qE "$key: ${states[$key]}$" $tempfile
+    if ! grep -qE "$key: ${expected_states[$key]}$" $tempfile
     then
 	msg="$msg $(grep -F $key $tempfile | tr "\n" ' ' | perl -pi -e 's/^ +//g; s/ +$//')."
 	rc=2
     fi
 done
+
+# Check Seconds_Behind_Master
+seconds_behind_master=$(awk '/Seconds_Behind_Master/ {print $2}' < $tempfile)
+if [ "$seconds_behind_master" -gt "$seconds_behind_master_threshold" ]
+then
+    msg="$msg Seconds_Behind_Master: $seconds_behind_master."
+    rc=2
+fi
 
 if [ $rc != 0 ]
 then
