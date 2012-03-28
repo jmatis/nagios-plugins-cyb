@@ -31,7 +31,7 @@ spool_dir=/var/spool/exim4/input
 
 if [ ! -x $spool_dir ]
 then
-    echo "Unable to access $spool_dir, run 'adduser nagios Debian-exim' as root.e"
+    echo "Unable to access $spool_dir, run 'adduser nagios Debian-exim' as root."
     exit 3
 fi
 
