@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-143) unstable; urgency=low
+
+  * Fixed Memcache configuration.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 29 Mar 2012 16:51:06 +0200
+
 nagios-plugins-cyb (1.0-142) unstable; urgency=low
 
   * check_memcache: fixed timeout issues, special case for Debian/lenny.
