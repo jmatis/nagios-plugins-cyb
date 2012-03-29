@@ -1,0 +1,98 @@
+#!/bin/bash
+#
+# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -u
+
+help() {
+    echo "Usage: $0 --hostname=localhost --port=11211" >&2
+}
+
+# ":" means required
+# "::" means optional
+TEMP=$(getopt -o h: --long hostname::,port:: -n "$0" -- "$@")
+
+# Check for non-GNU getopt
+if [ $? != 0 ]
+then
+    help
+    exit 1
+fi
+
+# Default values
+hostname='localhost'
+port=11211
+
+# Parse options with getopt
+eval set -- "$TEMP"
+while true
+do
+    case "$1" in
+	--hostname)
+	    hostname="$2"
+	    shift 2
+	    ;;
+
+	--port)
+	    port="$2"
+	    shift 2
+	    ;;
+
+	--)
+	    shift
+	    break
+	    ;;
+
+	*)
+	    echo "$0: getopt error!" >&2
+	    exit 1
+	    ;;
+    esac
+done
+
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+
+perfdata=''
+
+echo -e "stats\nquit" \
+    | nc -q1 $hostname $port \
+    | tr -d "\r" > $tempfile
+
+while read command variable value
+do
+    if [ "$command" != 'STAT' ]
+    then
+	continue
+    fi
+
+    # Fetch performance data for Nagios
+    if [ "$perfdata" = '' ]
+    then
+	perfdata="$variable=$value"
+    else
+	perfdata="$perfdata, $variable=$value"
+    fi
+done < $tempfile
+
+if [ ! -z "$perfdata" ]
+then
+    echo "OK | $perfdata"
+    exit 0
+fi
+
+echo 'Failed to connect Memcache'
+exit 2
