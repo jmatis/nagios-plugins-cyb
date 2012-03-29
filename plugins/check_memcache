@@ -18,12 +18,12 @@
 set -u
 
 help() {
-    echo "Usage: $0 --hostname=localhost --port=11211" >&2
+    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
 }
 
 # ":" means required
 # "::" means optional
-TEMP=$(getopt -o h: --long hostname::,port:: -n "$0" -- "$@")
+TEMP=$(getopt -o h: --long hostname::,port::,timeout:: -n "$0" -- "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -35,6 +35,7 @@ fi
 # Default values
 hostname='localhost'
 port=11211
+timeout=5
 
 # Parse options with getopt
 eval set -- "$TEMP"
@@ -48,6 +49,11 @@ do
 
 	--port)
 	    port="$2"
+	    shift 2
+	    ;;
+
+	--timeout)
+	    timeout="$2"
 	    shift 2
 	    ;;
 
@@ -69,7 +75,7 @@ trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 perfdata=''
 
 echo -e "stats\nquit" \
-    | timeout 5 nc $hostname $port \
+    | timeout $timeout nc -q -1 $hostname $port \
     | tr -d "\r" > $tempfile
 
 while read command variable value
