@@ -69,7 +69,7 @@ trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 perfdata=''
 
 echo -e "stats\nquit" \
-    | nc -q1 $hostname $port \
+    | timeout 5 nc $hostname $port \
     | tr -d "\r" > $tempfile
 
 while read command variable value
