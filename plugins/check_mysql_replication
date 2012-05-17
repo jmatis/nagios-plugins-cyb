@@ -64,7 +64,8 @@ done
 
 # Check Seconds_Behind_Master
 seconds_behind_master=$(awk '/Seconds_Behind_Master/ {print $2}' < $tempfile)
-if [ "$seconds_behind_master" -gt "$seconds_behind_master_threshold" ]
+if [ "$seconds_behind_master" = 'NULL' ] || \
+    [ "$seconds_behind_master" -gt "$seconds_behind_master_threshold" ]
 then
     msg="$msg Seconds_Behind_Master: $seconds_behind_master."
     rc=2
