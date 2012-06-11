@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-147) unstable; urgency=low
+
+  * Rename check_rbl and check_haproxy by check_cybrbl and
+    check_cybhaproxy to avoid conflicts with recent Nagios packages.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:23:00 +0200
+
 nagios-plugins-cyb (1.0-146) unstable; urgency=low
 
   * Rename haproxy.cfg into cyb_haproxy.cfg in order to avoid conflicts
