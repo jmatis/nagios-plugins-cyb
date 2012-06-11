@@ -1,6 +1,13 @@
+nagios-plugins-cyb (1.0-146) unstable; urgency=low
+
+  * Rename haproxy.cfg into cyb_haproxy.cfg in order to avoid conflicts
+    with recent nagios-plugin-contrib packages.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:17:19 +0200
+
 nagios-plugins-cyb (1.0-145) unstable; urgency=low
 
-  * rename rbl.cfg into cyb_rbl.cfg in order to avoid conflicts with
+  * Rename rbl.cfg into cyb_rbl.cfg in order to avoid conflicts with
     recent nagios-plugin-contrib packages.
 
  -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:15:54 +0200
