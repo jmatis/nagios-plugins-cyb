@@ -37,14 +37,14 @@ packages=$(awk '/^Inst / {print $2}' $tempfile | grep -vE -- '-cyb$' || true)
 
 if [ -n "$packages" ]
 then
-    echo Packages: $packages
+    echo "Packages: $packages"
     exit $critical_rc
 fi
 
 # Check that APT DB is up-to-date
 if [ $(find /var/lib/apt/lists -mtime 0 | wc -l) = 0 ]
 then
-    echo Packages database is obsolete, run apt-get update or install cron-apt
+    echo "Packages database is obsolete, run apt-get update or install cron-apt"
     exit $critical_rc
 fi
 
@@ -63,11 +63,21 @@ do
     fi
 done
 
+# Check that APT is not stuck in 'apt-get -f install'. We can't use $apt_options
+# because it always returns true with '-s'
+if ! apt-get -f -o Debug::NoLocking=true -qq install > $tempfile 2>&1
+then
+    echo -n "apt-get stuck in -f install: "
+    tr "\n" ' ' < $tempfile
+    echo
+    exit $critical_rc    
+fi
+
 if [ "$rc" != "$ok_rc" ]
 then
     echo 'No security repository found in /etc/apt/sources.list!'
     exit $critical_rc
 fi
 
-echo OK
+echo "OK"
 exit $ok_rc

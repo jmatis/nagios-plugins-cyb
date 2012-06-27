@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-149) unstable; urgency=low
+
+  * check_apt_simple: check if apt-get is stuck in '-f install'
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 27 Jun 2012 17:35:51 +0200
+
 nagios-plugins-cyb (1.0-148) unstable; urgency=low
 
   * Renamed check_rbl_by_ssh into check_cyb_rbl_by_ssh.
