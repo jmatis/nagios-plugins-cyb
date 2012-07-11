@@ -2,7 +2,7 @@ nagios-plugins-cyb (1.0-152) unstable; urgency=low
 
   * config/fs_rw.cfg: avoid duplicate 'exec' call.
 
- -- Cyril Bouthors <cyril.bouthors@isvtec.com>  Wed, 11 Jul 2012 14:13:26 +0200
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Jul 2012 14:13:26 +0200
 
 nagios-plugins-cyb (1.0-151) unstable; urgency=low
 
