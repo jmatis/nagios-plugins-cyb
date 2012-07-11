@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-151) unstable; urgency=low
+
+  * config/cybload.cfg: use 'exec' to avoid running a useless 'sh'
+    process.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Jul 2012 14:06:17 +0200
+
 nagios-plugins-cyb (1.0-150) unstable; urgency=low
 
   * config/*.cfg: use 'exec' to avoid running a useless 'sh' process.
