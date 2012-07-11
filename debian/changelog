@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-150) unstable; urgency=low
+
+  * config/*.cfg: use 'exec' to avoid running a useless 'sh' process.
+
+ -- Cyril Bouthors <cyril.bouthors@isvtec.com>  Wed, 11 Jul 2012 13:57:38 +0200
+
 nagios-plugins-cyb (1.0-149) unstable; urgency=low
 
   * check_apt_simple: check if apt-get is stuck in '-f install'
