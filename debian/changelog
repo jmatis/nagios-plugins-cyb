@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-153) unstable; urgency=low
+
+  * check_df: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 23 Jul 2012 11:06:34 +0200
+
 nagios-plugins-cyb (1.0-152) unstable; urgency=low
 
   * config/fs_rw.cfg: avoid duplicate 'exec' call.
