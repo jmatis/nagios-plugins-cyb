@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-154) unstable; urgency=low
+
+  * check_df: add a new argument to exclude some paths.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 23 Jul 2012 11:16:45 +0200
+
 nagios-plugins-cyb (1.0-153) unstable; urgency=low
 
   * check_df: add
