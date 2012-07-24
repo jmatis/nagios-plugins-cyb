@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-155) unstable; urgency=low
+
+  * plugins/check_raid: check if /proc/mdstat exists before using it
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 24 Jul 2012 17:18:16 +0200
+
 nagios-plugins-cyb (1.0-154) unstable; urgency=low
 
   * check_df: add a new argument to exclude some paths.

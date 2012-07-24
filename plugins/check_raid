@@ -22,23 +22,26 @@ rc=0
 export PATH=$PATH:/sbin:/usr/sbin
 
 # Check software RAID
-for md in /dev/md*
-do
-    [ ! -e $md -o -d $md ] && continue
+if [ -f /proc/mdstat ]
+then
+    for md in /dev/md*
+    do
+	[ ! -e $md -o -d $md ] && continue
 
-    grep -q $(basename $md) /proc/mdstat || continue
+	grep -q $(basename $md) /proc/mdstat || continue
 
-    if mdadm --detail --test $md >/dev/null 2>/dev/null
-    then
-	echo -n "$md: OK. "
-    else
-	echo -n "$md: "
-	mdadm --detail --test $md 2>&1 |grep faulty \
-	    | sed -e s/.*faulty/faulty/g | tr -d "\n" || true
-	echo -n '. '
-	rc=2
-    fi
-done
+	if mdadm --detail --test $md >/dev/null 2>/dev/null
+	then
+	    echo -n "$md: OK. "
+	else
+	    echo -n "$md: "
+	    mdadm --detail --test $md 2>&1 |grep faulty \
+		| sed -e s/.*faulty/faulty/g | tr -d "\n" || true
+	    echo -n '. '
+	    rc=2
+	fi
+    done
+fi
 
 # Check mptsas RAID
 if [ -f /proc/modules ] && grep -wFq mptsas /proc/modules
