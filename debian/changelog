@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-156) unstable; urgency=low
+
+  * plugins/check_rbl: add zen.spamhaus.org + clean output.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 25 Jul 2012 09:38:31 +0200
+
 nagios-plugins-cyb (1.0-155) unstable; urgency=low
 
   * plugins/check_raid: check if /proc/mdstat exists before using it

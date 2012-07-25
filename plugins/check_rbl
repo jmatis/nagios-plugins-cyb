@@ -23,6 +23,7 @@ dnsbls='
     sbl.spamhaus.org
     xbl.spamhaus.org
     pbl.spamhaus.org
+    zen.spamhaus.org
     bl.spamcop.net
     dul.dnsbl.sorbs.net
     cbl.abuseat.org
@@ -51,8 +52,11 @@ do
     done
 done
 
-[ $critical = 1 ] && exit 2
+if [ $critical = 1 ]
+then
+   echo
+   exit 2
+fi
 
-echo OK
-
+echo "OK"
 exit 0
