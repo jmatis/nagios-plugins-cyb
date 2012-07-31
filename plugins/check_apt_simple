@@ -33,7 +33,7 @@ then
     exit $critical_rc    
 fi
 
-packages=$(awk '/^Inst / {print $2}' $tempfile | grep -vE -- '-cyb$' || true)
+packages=$(awk '/^Inst / {print $2}' $tempfile | tr "\n" ' ')
 
 if [ -n "$packages" ]
 then

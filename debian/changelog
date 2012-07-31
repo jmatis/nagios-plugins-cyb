@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-158) unstable; urgency=low
+
+  * check_apt_simple: report the list of packages in one line only to
+    comply with the Nagios standard
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 31 Jul 2012 16:26:23 +0200
+
 nagios-plugins-cyb (1.0-157) unstable; urgency=low
 
   * config/cyb_df.cfg: fixed argument quoting for funky regex support
