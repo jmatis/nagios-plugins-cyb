@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-160) unstable; urgency=low
+
+  * check_puppet: allow argument
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 14:47:36 +0200
+
 nagios-plugins-cyb (1.0-159) unstable; urgency=low
 
   * check_puppet: add
