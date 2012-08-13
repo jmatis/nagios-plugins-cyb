@@ -29,7 +29,7 @@ file=/var/lib/puppet/state/last_run_summary.yaml
 if [ ! -f $file ]
 then
     echo "$0: $file no such file or directory"
-    exit 1
+    exit 2
 fi
 
 last_run=$(awk '/last_run/ {print $2}' $file)
@@ -37,7 +37,7 @@ last_run=$(awk '/last_run/ {print $2}' $file)
 if [ -z "$last_run" ]
 then
     echo "$0: unable to fetch info from $file"
-    exit
+    exit 2
 fi
 
 now=$(date +%s)
