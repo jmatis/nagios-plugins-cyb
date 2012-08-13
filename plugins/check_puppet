@@ -43,10 +43,9 @@ fi
 now=$(date +%s)
 time_elapsed=$(($now - $last_run))
 
+echo "Puppet was last synced $time_elapsed seconds ago"
+
 if [ $time_elapsed -gt $maximum_delay ]
 then
-    echo "Puppet was last synced $time_elapsed seconds ago"
     exit 2
 fi
-
-echo "OK"
