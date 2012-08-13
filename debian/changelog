@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-159) unstable; urgency=low
+
+  * check_puppet: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 14:44:38 +0200
+
 nagios-plugins-cyb (1.0-158) unstable; urgency=low
 
   * check_apt_simple: report the list of packages in one line only to

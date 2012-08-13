@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -15,15 +15,38 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-set -e
+maximum_delay=$1
 
-if [ "$1" != "configure" ]
+set -e -o pipefail -o nounset
+
+if [ -z "$maximum_delay" ]
 then
-    exit 0
+    maximum_delay=3600
 fi
 
-file=/etc/sudoers
-if ! grep -qE "^nagios " $file
+file=/var/lib/puppet/state/last_run_summary.yaml
+
+if [ ! -f $file ]
 then
-    echo "nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_smartctl, /usr/bin/jstat, /usr/lib/nagios/plugins-cyb/check_fs_rw, /etc/init.d/*, /usr/bin/killall, /usr/lib/nagios/plugins-cyb/check_hidtemper, /sbin/drbdadm, /usr/sbin/vps, /usr/lib/nagios/plugins-cyb/check_raid, /bin/mount, /usr/lib/nagios/plugins-cyb/check_puppet" >> $file
+    echo "$0: $file no such file or directory"
+    exit 1
 fi
+
+last_run=$(awk '/last_run/ {print $2}' $file)
+
+if [ -z "$last_run" ]
+then
+    echo "$0: unable to fetch info from $file"
+    exit
+fi
+
+now=$(date +%s)
+time_elapsed=$(($now - $last_run))
+
+if [ $time_elapsed -gt $maximum_delay ]
+then
+    echo "Puppet was last synced $time_elapsed seconds ago"
+    exit 2
+fi
+
+echo "OK"
