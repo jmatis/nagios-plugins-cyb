@@ -19,6 +19,7 @@
 set -e
 
 apt_options='-o Debug::NoLocking=true -s -qq'
+apt_dir='/var/lib/apt/lists'
 critical_rc=2
 ok_rc=0
 
@@ -42,13 +43,13 @@ then
 fi
 
 # Check that APT DB is up-to-date
-if [ $(find /var/lib/apt/lists -mtime 0 | wc -l) = 0 ]
+if [ $(find $apt_dir -mtime 0 | wc -l) = 0 ]
 then
     echo "Packages database is obsolete, run apt-get update or install cron-apt"
     exit $critical_rc
 fi
 
-# Check that security repository is configured
+# Check that security repository is configured and up-to-date
 rc=$critical_rc
 for file in /etc/apt/sources.list /etc/apt/sources.list.d
 do
@@ -57,7 +58,8 @@ do
 	continue
     fi
 
-    if grep -qr '^deb http.*security' $file
+    if grep -qr '^deb http.*security' $file &&
+	[ $(find $apt_dir -mtime 0 -name 'security*_Packages' | wc -l) -gt 0 ]
     then
 	rc=$ok_rc
     fi

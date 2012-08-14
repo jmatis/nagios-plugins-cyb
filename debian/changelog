@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-164) unstable; urgency=low
+
+  * check_apt_simple: make sure that a the security repository is
+    reachable and up-to-date, not only configured in sources.list
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 14 Aug 2012 16:46:27 +0200
+
 nagios-plugins-cyb (1.0-163) unstable; urgency=low
 
   * check_fs_rw: fixed detection of option 'ro' and avoid a confusion with
