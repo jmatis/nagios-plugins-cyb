@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2010-2012 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -16,26 +16,50 @@
 #
 
 excluded_mountpoints="$*"
-rc=0
 
-# Check every ext2, ext3 and ext4 filesystems. Ignore /dev/.static/dev and read
-# only mounted devices
-partitions=$(awk '$2!~/^\/dev\/.static\/dev$/ && $4!~/ro/ && /ext[234]/ {print $2}' /proc/mounts)
-for dir in $partitions
+set -e -o pipefail -o nounset
+
+rc=0
+error_msg=''
+ok_msg=''
+
+# Check every ext2/3/4 filesystems. Ignore /dev/.static/dev and read only
+# mounted devices
+mountpoints=$(awk '$2!~/^\/dev\/.static\/dev$/ && \
+$4!~/^ro,/ && \
+/ext[234]/ {print $2}' /proc/mounts)
+
+for mountpoint in $mountpoints
 do
+    # Process $excluded_mountpoints filter
     for excluded_mountpoint in $excluded_mountpoints
     do
-	if [ "$dir" = "$excluded_mountpoint" ]
+	if [ "$mountpoint" = "$excluded_mountpoint" ]
 	then
 	    continue 2
 	fi
     done
 
-    if ! tempfile -d $dir | xargs rm
+    # Check if filesystem is writeable
+    checkdir="$mountpoint"
+    if [ -d ${mountpoint%/}/tmp ]
+    then
+    	checkdir="${mountpoint%/}/tmp"
+    fi
+
+    if ! tempfile -d $checkdir 2>/dev/null | xargs -r rm
     then
 	rc=2
-	echo -n "$dir not mounted rw! "
+	error_msg="$mountpoint not mounted rw! $error"
+    else
+	ok_msg="$mountpoint OK. $ok_msg"
     fi
 done
 
-exit $rc
+if [ $rc != 0 ]
+then
+    echo $error_msg
+    exit $rc
+fi
+
+echo $ok_msg

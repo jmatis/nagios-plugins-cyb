@@ -1,3 +1,14 @@
+nagios-plugins-cyb (1.0-163) unstable; urgency=low
+
+  * check_fs_rw: fixed detection of option 'ro' and avoid a confusion with
+    'errors=remount-ro'
+  * check_fs_rw: create temporary files in $mountpoint/tmp instead of
+    $mountpoint
+  * check_fs_rw: report directory checked to ease debugging
+  * check_fs_rw: clean
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 14 Aug 2012 10:38:15 +0200
+
 nagios-plugins-cyb (1.0-162) unstable; urgency=low
 
   * check_puppet: show lag in any case.
