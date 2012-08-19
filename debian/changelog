@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-167) unstable; urgency=low
+
+  * check_raid: detect RAID controller ID on 3ware cards and stop
+    hardcoding ID "c0".
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 19 Aug 2012 14:59:32 +0200
+
 nagios-plugins-cyb (1.0-166) unstable; urgency=low
 
   * check_raid: return critical and display an error message if we were

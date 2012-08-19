@@ -92,7 +92,8 @@ then
 	echo "$0: unable to find tw-cli"
 	exit 2
     fi
-    for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')
+    tw_controller_id=$(tw-cli show | grep -vE '^$' | tail -1 | cut -f1 -d' ')
+    for status in $(tw-cli /$tw_controller_id show | awk '/^u/ {print $3}')
     do
 	raid_detected=1
 	echo -n "3w_xxxx status $status. "
