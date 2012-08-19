@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2011 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2011-2012 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,6 +18,7 @@
 set -e
 set -o pipefail
 rc=0
+raid_detected=0
 
 export PATH=$PATH:/sbin:/usr/sbin
 
@@ -30,6 +31,7 @@ then
 
 	grep -q $(basename $md) /proc/mdstat || continue
 
+	raid_detected=1
 	if mdadm --detail --test $md >/dev/null 2>/dev/null
 	then
 	    echo -n "$md: OK. "
@@ -51,8 +53,10 @@ then
 	echo "$0: unable to find mpt-status"
 	exit 2
     fi
+
     for status in $(mpt-status -s | awk '/^log_id / {print $3}')
     do
+	raid_detected=1
 	echo -n "MPT status $status. "
 	if [ "$status" != 'OPTIMAL' ]
 	then
@@ -71,6 +75,7 @@ then
     fi
     for status in $(sas2ircu 0 STATUS | awk '/Volume state/ {print $4}')
     do
+	raid_detected=1
 	echo -n "IRCU status $status. "
 	if [ "$status" != 'Optimal' ]
 	then
@@ -89,6 +94,7 @@ then
     fi
     for status in $(tw-cli /c0 show | awk '/^u/ {print $3}')
     do
+	raid_detected=1
 	echo -n "3w_xxxx status $status. "
 	if [ "$status" != 'OK' -a "$status" != 'VERIFYING' ]
 	then
@@ -107,6 +113,7 @@ then
     fi
     for status in $(megasasctl | awk '/ RAID / {print $6}')
     do
+	raid_detected=1
 	echo -n "megasasctl status $status. "
 	if [ "$status" != 'optimal' ]
 	then
@@ -123,14 +130,22 @@ then
 	echo "$0: unable to find array-info"
 	exit 2
     fi
-    for status in $(array-info -d /dev/cciss/c0d0 -a | awk '/Status/ {print $6}')
+
+    for status in $(array-info -d /dev/cciss/c0d0 -a | awk '/Status/{print $6}')
     do
+	raid_detected=1
 	echo -n "cciss status $status. "
 	if [ "$status" != 'ok' ]
 	then
 	    rc=2
 	fi
     done
+fi
+
+if [ "$raid_detected" != 1 ]
+then
+    rc=2
+    echo -n "Unable to detect RAID"
 fi
 
 echo
