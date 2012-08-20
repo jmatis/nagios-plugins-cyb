@@ -143,6 +143,27 @@ then
     done
 fi
 
+# hpsa support with hpacucli
+if [ -f /proc/modules ] && grep -wFq hpsa /proc/modules
+then
+    if ! which hpacucli >/dev/null
+    then
+	echo "$0: unable to find hpacucli"
+	exit 2
+    fi
+
+    for status in $(hpacucli ctrl all show status \
+	| awk '/Controller Status:/ {print $3}')
+    do
+	raid_detected=1
+	echo -n "hpacucli status $status. "
+	if [ "$status" != 'OK' ]
+	then
+	    rc=2
+	fi
+    done
+fi
+
 if [ "$raid_detected" != 1 ]
 then
     rc=2
