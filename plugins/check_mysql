@@ -22,7 +22,7 @@ mysql='timeout 10 mysql --defaults-file=/etc/mysql/debian.cnf -B'
 # Ping MySQL. We can't use "mysqladmin ping" because it always returns true!
 if ! $mysql -e 'SELECT 1' >/dev/null 2>/dev/null
 then
-    echo Unable to connect to MySQL
+    echo 'Unable to connect to MySQL'
     exit 2
 fi
 
@@ -46,8 +46,15 @@ current_threads=$($mysql -e '\s' | awk '/^Threads: / {print $2}')
 
 if [ -z "$max_connections" -o -z "$current_threads" ]
 then
-    echo Unable to fetch connection information
+    echo 'Unable to fetch connection information'
     exit 2
+fi
+
+# Check that InnoDB is available
+if ! $mysql -e 'SHOW ENGINES' | grep -qF 'InnoDB'
+then
+    echo 'InnoDB engine is not available'
+    exit 1
 fi
 
 # Calculate percentage of used connections

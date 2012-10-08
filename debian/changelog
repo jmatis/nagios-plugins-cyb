@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-170) unstable; urgency=low
+
+  * check_mysql: check that MySQL engine InnoDB is available.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Oct 2012 09:57:57 +0200
+
 nagios-plugins-cyb (1.0-169) unstable; urgency=low
 
   * check_raid: check which devices exists when both 'cciss' and 'hpsa'
