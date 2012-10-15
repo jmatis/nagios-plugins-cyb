@@ -59,7 +59,7 @@ do
     fi
 
     if grep -qr '^deb http.*security' $file &&
-	[ $(find $apt_dir -mtime -5 -name 'security*_Packages' | wc -l) -gt 0 ]
+	[ $(find $apt_dir -mtime -10 -name 'security*_Packages' | wc -l) -gt 0 ]
     then
 	rc=$ok_rc
     fi

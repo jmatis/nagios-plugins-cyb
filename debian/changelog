@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-171) unstable; urgency=low
+
+  * check_apt_simple : change accepted age for apt security files to 10
+    days
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 15 Oct 2012 16:00:43 +0200
+
 nagios-plugins-cyb (1.0-170) unstable; urgency=low
 
   * check_mysql: check that MySQL engine InnoDB is available.
