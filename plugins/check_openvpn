@@ -50,8 +50,11 @@ do
 
 done
 
-echo $fail$ok
+if [ $errors -gt 0 ]
+then
+    echo $fail
+    exit 2
+fi
 
-[ $errors -gt 0 ] && exit 2
-
+echo $ok
 exit 0

@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-172) unstable; urgency=low
+
+  * plugins/check_openvpn: display errors only to avoid misleading
+    messages. Display everything when everything is OK to make sure VPNs
+    are tested.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 20 Oct 2012 14:25:38 +0200
+
 nagios-plugins-cyb (1.0-171) unstable; urgency=low
 
   * check_apt_simple : change accepted age for apt security files to 10
