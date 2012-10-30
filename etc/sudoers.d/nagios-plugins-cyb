@@ -1,0 +1,12 @@
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_smartctl
+nagios ALL=NOPASSWD: /usr/bin/jstat
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_fs_rw
+nagios ALL=NOPASSWD: /etc/init.d/*
+nagios ALL=NOPASSWD: /usr/bin/killall
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_hidtemper
+nagios ALL=NOPASSWD: /sbin/drbdadm
+nagios ALL=NOPASSWD: /usr/sbin/vps
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_raid
+nagios ALL=NOPASSWD: /bin/mount
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_puppet
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_log

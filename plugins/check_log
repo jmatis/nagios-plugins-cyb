@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -15,23 +15,19 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-set -e
+set -e -o pipefail -o nounset
 
-if [ "$1" != "configure" ]
+offset_dir=/var/lib/nagios-plugins-cyb
+
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+
+if logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
+    | grep -F -f /etc/nagios-plugins/config/cyb_check_log.conf > $tempfile
 then
-    exit 0
+    tr "\n" . < $tempfile
+    exit 2
 fi
 
-# Tell sudo to handle /etc/sudoers.d if needed
-file=/etc/sudoers
-append='#includedir /etc/sudoers.d'
-if ! grep -qE "^$append$" $file
-then
-    echo $append >> $file
-fi
-
-# Ensure sudo configuration file permissions are correct
-chmod 440 /etc/sudoers.d/nagios-plugins-cyb
-
-# Suppress previous 'nagios' entry from /etc/sudoers
-sed -i -e '/^nagios ALL=NOPASSWD: .*nagios.*$/ d' /etc/sudoers
+echo 'OK'
+exit 0

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2009-2012 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ clean:;
 install:
 	mkdir -p $(DESTDIR)/usr/lib/nagios/plugins-cyb
 	cp plugins/* $(DESTDIR)/usr/lib/nagios/plugins-cyb/
-	mkdir -p $(DESTDIR)/etc/nagios-plugins/config
-	cp config/*.cfg config/*.conf $(DESTDIR)/etc/nagios-plugins/config/
+	rsync -a etc $(DESTDIR)
+	mkdir -p $(DESTDIR)/var/lib/nagios-plugins
 
 test:
 	for plugin in $(wildcard plugins/*); do ./$$plugin; done

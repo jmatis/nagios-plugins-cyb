@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-173) unstable; urgency=low
+
+  * Add check_logs support
+  * Clean 'sudo' support'
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 30 Oct 2012 11:31:28 +0100
+
 nagios-plugins-cyb (1.0-172) unstable; urgency=low
 
   * plugins/check_openvpn: display errors only to avoid misleading
