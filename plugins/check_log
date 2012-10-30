@@ -26,8 +26,10 @@ if logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
     | grep -F -f /etc/nagios-plugins/config/cyb_check_log.conf > $tempfile
 then
     tr "\n" . < $tempfile
+    rm $tempfile
     exit 2
 fi
 
+rm $tempfile
 echo 'OK'
 exit 0
