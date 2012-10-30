@@ -11,7 +11,7 @@ Architecture: all
 Depends: ${shlibs:Depends},
   nagios-plugins-basic,
   debsums,
-  sudo,
+  sudo (>= 1.7),
   liblockfile1,
   debianutils,
   ntpdate,
