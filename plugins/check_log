@@ -18,18 +18,22 @@
 set -e -o pipefail -o nounset
 
 offset_dir=/var/lib/nagios-plugins-cyb
+error_file=/var/log/nagios-plugins-cyb/check_log-error.log
 
-tempfile=$(tempfile)
-trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+mkdir -p $(dirname $error_file)
 
-if logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
-    | grep -F -f /etc/nagios-plugins/config/cyb_check_log.conf > $tempfile
+# Check new errors from logs
+logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
+    | grep -F -f /etc/nagios-plugins/config/cyb_check_log.conf >> $error_file \
+    || true
+
+# Show errors if needed
+if [ -s $error_file ]
 then
-    tr "\n" . < $tempfile
-    rm $tempfile
+    echo -n "Check $error_file: "
+    tr "\n" . < $error_file
     exit 2
 fi
 
-rm $tempfile
 echo 'OK'
 exit 0
