@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-182) unstable; urgency=low
+
+  * plugins/check_sockets: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 27 Nov 2012 22:33:52 +0100
+
 nagios-plugins-cyb (1.0-181) unstable; urgency=low
 
   * plugins/check_log: fixed rule parsing
