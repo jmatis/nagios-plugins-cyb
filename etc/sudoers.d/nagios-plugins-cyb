@@ -10,4 +10,4 @@ nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_raid
 nagios ALL=NOPASSWD: /bin/mount
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_puppet
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_log
-nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_sockets
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rootkit
