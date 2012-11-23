@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-176) unstable; urgency=low
+
+  * plugins/check_log: create directory /var/lib/nagios-plugins-cyb if
+    needed
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 11:35:46 +0100
+
 nagios-plugins-cyb (1.0-175) unstable; urgency=low
 
   * plugins/check_log: errors are now persistently logged into a file.

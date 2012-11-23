@@ -20,7 +20,7 @@ set -e -o pipefail -o nounset
 offset_dir=/var/lib/nagios-plugins-cyb
 error_file=/var/log/nagios-plugins-cyb/check_log-error.log
 
-mkdir -p $(dirname $error_file)
+mkdir -p $(dirname $error_file) $offset_dir
 
 # Check new errors from logs
 logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
