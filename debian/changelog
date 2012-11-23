@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-177) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check for EXT3 an EXT4
+    errors.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 11:52:04 +0100
+
 nagios-plugins-cyb (1.0-176) unstable; urgency=low
 
   * plugins/check_log: create directory /var/lib/nagios-plugins-cyb if
