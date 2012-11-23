@@ -17,15 +17,19 @@
 
 set -e -o pipefail -o nounset
 
-offset_dir=/var/lib/nagios-plugins-cyb
-error_file=/var/log/nagios-plugins-cyb/check_log-error.log
+offset_dir='/var/lib/nagios-plugins-cyb'
+error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
+logfiles='/var/log/kern.log /var/log/mysql/error.log'
+rule_file='/etc/nagios-plugins/config/cyb_check_log.conf'
 
 mkdir -p $(dirname $error_file) $offset_dir
 
 # Check new errors from logs
-logtail2 -f /var/log/kern.log -o $offset_dir/kern.log.offset \
-    | grep -F -f /etc/nagios-plugins/config/cyb_check_log.conf >> $error_file \
-    || true
+for logfile in $logfiles
+do
+    logtail2 -f $logfile -o $offset_dir/$(basename $logfile).offset \
+	| grep -F -f $rule_file >> $error_file || true
+done
 
 # Show errors if needed
 if [ -s $error_file ]
