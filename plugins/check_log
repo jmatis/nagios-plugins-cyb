@@ -27,6 +27,8 @@ mkdir -p $(dirname $error_file) $offset_dir
 # Check new errors from logs
 for logfile in $logfiles
 do
+    [ ! -f $logfile ] && continue
+
     logtail2 -f $logfile -o $offset_dir/$(basename $logfile).offset \
 	| grep -F -f $rule_file >> $error_file || true
 done
