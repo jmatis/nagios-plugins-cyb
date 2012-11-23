@@ -29,8 +29,14 @@ for logfile in $logfiles
 do
     [ ! -f $logfile ] && continue
 
+    tempfile=$(tempfile)
+    trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+    grep -vE '^#|^$' $rule_file > $tempfile
+
     logtail2 -f $logfile -o $offset_dir/$(basename $logfile).offset \
-	| grep -F -f $rule_file >> $error_file || true
+	| grep -F -f $tempfile >> $error_file || true
+
+    rm -f $tempfile
 done
 
 # Show errors if needed

@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-181) unstable; urgency=low
+
+  * plugins/check_log: fixed rule parsing
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 27 Nov 2012 21:16:20 +0100
+
 nagios-plugins-cyb (1.0-180) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check SATA errors
