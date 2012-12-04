@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-185) unstable; urgency=low
+
+  * munin_rrd.cfg : drop the use of -i argument
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 04 Dec 2012 12:25:30 +0100
+
 nagios-plugins-cyb (1.0-184) unstable; urgency=low
 
   * add check_munin_rrd
