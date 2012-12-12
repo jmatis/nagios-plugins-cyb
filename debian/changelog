@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-186) unstable; urgency=low
+
+  * cyb_check_log: check for hung tasks reported by the kernel
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 06 Dec 2012 11:57:38 +0100
+
 nagios-plugins-cyb (1.0-185) unstable; urgency=low
 
   * munin_rrd.cfg : drop the use of -i argument
