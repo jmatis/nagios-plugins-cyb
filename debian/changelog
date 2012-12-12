@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-188) unstable; urgency=low
+
+  * fix typo
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 12 Dec 2012 13:02:38 +0100
+
 nagios-plugins-cyb (1.0-187) unstable; urgency=low
 
   * add new probe and command to check postfix mailq
