@@ -11,3 +11,4 @@ nagios ALL=NOPASSWD: /bin/mount
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_puppet
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_log
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rootkit
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_postfix_mailq
