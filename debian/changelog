@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-191) unstable; urgency=low
+
+  * check_log: limit output to 1kB instead of 10kB to ease readbility
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 18 Dec 2012 15:43:10 +0100
+
 nagios-plugins-cyb (1.0-190) unstable; urgency=low
 
   * check_log: limit output to 10kB because Nagios completely fails with
