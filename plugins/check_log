@@ -43,7 +43,7 @@ done
 if [ -s $error_file ]
 then
     echo -n "Check $error_file: "
-    tr "\n" . < $error_file
+     head -c 10K $error_file | tr "\n" .
     exit 2
 fi
 
