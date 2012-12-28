@@ -17,7 +17,11 @@ Depends: ${shlibs:Depends},
   ntpdate,
   timeout | coreutils (>= 8.0-1),
   logtail
-Suggests: dellomsa, libdevice-usb-pcsensor-hidtemper-perl, smartmontools, mdadm
+Suggests: dellomsa,
+  libdevice-usb-pcsensor-hidtemper-perl,
+  smartmontools,
+  mdadm,
+  nagios-nrpe-server
 Description: Cyb's Nagios plugins
  check_apt_simple
  check_debsums

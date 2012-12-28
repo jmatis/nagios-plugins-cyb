@@ -17,6 +17,11 @@
 
 set -e
 
+if [ -x /etc/init.d/nagios-nrpe-server ]
+then
+    /etc/init.d/nagios-nrpe-server reload
+fi
+
 if [ "$1" != "configure" ]
 then
     exit 0

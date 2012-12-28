@@ -1,3 +1,15 @@
+nagios-plugins-cyb (1.0-192) unstable; urgency=low
+
+  * Add NRPE support:
+    - etc/nagios/nrpe.d/*.cfg: add
+    - plugins/check_df: use a list of paths for exclusion instead of a
+      regex because NRPE forbids chars like pipes, etc.
+    - debian/control: suggests nagios-nrpe-server
+    - debian/postinst: reload the NRPE daemon to use the new configuration
+      when upgrading the package
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 14:26:47 +0100
+
 nagios-plugins-cyb (1.0-191) unstable; urgency=low
 
   * check_log: limit output to 1kB instead of 10kB to ease readbility

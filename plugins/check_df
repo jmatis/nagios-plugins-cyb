@@ -18,14 +18,15 @@
 
 warning_threshold=$1
 critical_threshold=$2
-exclude_path_regex=$3
+shift 2
+excluded_paths=$*
 
 set -e -o pipefail -u
 
 if [ -z "$warning_threshold" -o -z "$critical_threshold" ]
 then
     echo "$0: too few argument" >&2
-    echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [EXCLUDE_PATH_REGEX]" >&2
+    echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
     echo "Example: $0 80 90" >&2
     echo "Example: $0 80 90 /var/lib/lxc" >&2
     exit 1
@@ -61,13 +62,13 @@ do
     fi
 
     # Check if we are in the an excluded path
-    if [ ! -z "$exclude_path_regex" ]
-    then
-	if echo $mount_point | grep -qE "$exclude_path_regex"
+    for excluded_path in $excluded_paths
+    do
+	if echo $mount_point | grep -qE "^$excluded_path"
 	then
-	    continue
+	    continue 2
 	fi
-    fi
+    done
 
     #  Check if disk usage has triggered critical threshold
     percentage=${percentage%\%}
