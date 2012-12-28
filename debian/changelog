@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-196) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/rootkit.cfg: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 23:13:31 +0100
+
 nagios-plugins-cyb (1.0-195) unstable; urgency=low
 
   * add new HTTP check base on response time
