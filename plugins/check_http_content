@@ -20,6 +20,7 @@ set -e
 url=$1
 match=$2
 post="$3"
+header="$4"
 
 if [ -z "$url" -o -z "$match" ]
 then
@@ -32,7 +33,12 @@ wget='wget -q -T5 -t1 -O- --no-check-certificate'
 
 if [ ! -z "$post" ]
 then
-    content=$($wget --post-data="$post" "$url" 2>&1 || true)
+    if [ ! -z "$header" ]
+    then
+    	content=$($wget --header="$header" --post-data="$post" "$url" 2>&1 || true)
+    else
+        content=$($wget --post-data="$post" "$url" 2>&1 || true)
+    fi
 else
     content=$($wget "$url" 2>&1 || true)
 fi
