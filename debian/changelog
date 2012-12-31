@@ -2,7 +2,7 @@ nagios-plugins-cyb (1.0-200) unstable; urgency=low
 
   * plugins/check_http_content: add a new parameter HTTP header
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Dec 2012 09:20:17 +0100
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 31 Dec 2012 15:10:17 +0100
 
 nagios-plugins-cyb (1.0-199) unstable; urgency=low
 
