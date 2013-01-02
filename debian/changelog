@@ -1,5 +1,12 @@
 nagios-plugins-cyb (1.0-201) unstable; urgency=low
 
+  * etc/nagios-plugins/config/cyb_http.cfg : fix a typo on
+    cyb_check_http_pattern
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 31 Dec 2012 15:10:17 +0100
+
+nagios-plugins-cyb (1.0-201) unstable; urgency=low
+
   * etc/nagios-plugins/config/cyb_http.cfg : add a new command to check
     HTTPS certificate validity
 
