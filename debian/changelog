@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-203) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/pgsql.cfg: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 15 Jan 2013 10:22:33 +0100
+
 nagios-plugins-cyb (1.0-202) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_http.cfg : fix a typo on
