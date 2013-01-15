@@ -21,7 +21,8 @@ Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,
   mdadm,
-  nagios-nrpe-server
+  nagios-nrpe-server,
+  check-postgres
 Description: Cyb's Nagios plugins
  check_apt_simple
  check_debsums

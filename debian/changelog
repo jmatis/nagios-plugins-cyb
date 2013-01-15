@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-204) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/check_postgres.cfg: add
+  * debian/control: add suggest on 'check-postgres' package
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 15 Jan 2013 12:21:41 +0100
+
 nagios-plugins-cyb (1.0-203) unstable; urgency=low
 
   * etc/nagios/nrpe.d/pgsql.cfg: add
