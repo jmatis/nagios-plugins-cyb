@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-206) unstable; urgency=low
+
+  * check_postgresql_replication: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 23 Jan 2013 21:48:48 +0100
+
 nagios-plugins-cyb (1.0-205) unstable; urgency=low
 
   * etc/nagios/nrpe.d/check_postgres.cfg: take dbname as argument

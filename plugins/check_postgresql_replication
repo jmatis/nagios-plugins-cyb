@@ -1,0 +1,73 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+# Example when working (from primary):
+
+# postgres=# select * from pg_stat_replication;
+# -[ RECORD 1 ]----+------------------------------
+# pid              | 30303
+# usesysid         | 21102
+# usename          | repl-pg2
+# application_name | walreceiver
+# client_addr      | 5.39.90.13
+# client_hostname  | 
+# client_port      | 34438
+# backend_start    | 2013-01-16 15:25:52.154829+01
+# state            | streaming
+# sent_location    | 2/264C2628
+# write_location   | 2/264C2628
+# flush_location   | 2/264C2628
+# replay_location  | 2/264C2628
+# sync_priority    | 0
+# sync_state       | async
+
+# Example when not working:
+
+# postgres=# select * from pg_stat_replication;
+# (No rows)
+
+location_diff_threshold=$1
+
+set -e -o pipefail -o nounset
+
+psql='psql -A -t postgres'
+query="SELECT usename, client_addr, pg_xlog_location_diff(pg_current_xlog_location(), replay_location) FROM pg_stat_replication WHERE state='streaming'"
+
+# Check arguments
+if [ -z "$location_diff_threshold" ]
+then
+    echo "$0: missing argument"
+    echo "Usage: $0 LOCATION_DIFF_THRESHOLD"
+    exit 2
+fi
+
+read user ip location_diff <<< $($psql -F " " -c "$query")
+
+if [ -z "$user" -o -z "$ip" -o -z "$location_diff" ]
+then
+    echo 'Replication is not working'
+    exit 2
+fi
+
+if [ "$location_diff" -gt $location_diff_threshold ]
+then
+    echo "Replication lags by $location_diff xlog location diffs"
+    exit 2
+fi
+
+echo "xlog location diffs: $location_diff"
