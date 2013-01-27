@@ -13,61 +13,49 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
+# CREATE DATABASE replication_check;
+# CREATE TABLE replication_check (field1 timestamptz);
+# INSERT INTO replication_check (field1) VALUES (NOW());
 
-# Example when working (from primary):
-
-# postgres=# select * from pg_stat_replication;
-# -[ RECORD 1 ]----+------------------------------
-# pid              | 30303
-# usesysid         | 21102
-# usename          | repl-pg2
-# application_name | walreceiver
-# client_addr      | 5.39.90.13
-# client_hostname  | 
-# client_port      | 34438
-# backend_start    | 2013-01-16 15:25:52.154829+01
-# state            | streaming
-# sent_location    | 2/264C2628
-# write_location   | 2/264C2628
-# flush_location   | 2/264C2628
-# replay_location  | 2/264C2628
-# sync_priority    | 0
-# sync_state       | async
-
-# Example when not working:
-
-# postgres=# select * from pg_stat_replication;
-# (No rows)
-
-location_diff_threshold=$1
+lag_threshold=$1
+database=$2
+table=$3
+field=$4
+standby_server=$5
 
 set -e -o pipefail -o nounset
 
-psql='psql -A -t postgres'
-query="SELECT usename, client_addr, pg_xlog_location_diff(pg_current_xlog_location(), replay_location) FROM pg_stat_replication WHERE state='streaming'"
-
 # Check arguments
-if [ -z "$location_diff_threshold" ]
+if [ -z "$lag_threshold" -o -z "$database" -o -z "$table" -o -z "$field" -o -z \
+	"$standby_server" ]
 then
-    echo "$0: missing argument"
-    echo "Usage: $0 LOCATION_DIFF_THRESHOLD"
+    echo "$0: Missing argument"
+    echo "$0 LAG_THRESHOLD DATABASE TABLE FIELD STANDBY_SERVER"
     exit 2
 fi
 
-read user ip location_diff <<< $($psql -F " " -c "$query")
+psql="psql -A -q -t $database"
+query="SELECT COUNT(*) FROM pg_stat_replication WHERE state='streaming'"
 
-if [ -z "$user" -o -z "$ip" -o -z "$location_diff" ]
+read count <<< $($psql -c "$query")
+
+if [ -z "$count" ] || [ "$count" = 0 ]
 then
     echo 'Replication is not working'
     exit 2
 fi
 
-if [ "$location_diff" -gt $location_diff_threshold ]
+# Update timestamp
+$psql -c "UPDATE $table SET $field = NOW();"
+
+# Read the timestamp from the standby
+read lag <<< $($psql -h $standby_server -c \
+    "SELECT ROUND(EXTRACT(EPOCH FROM NOW() - $field)) FROM $table")
+
+echo "$lag seconds lag"
+
+if [ -z "$lag" ] || [ "$lag" -gt "$lag_threshold" ]
 then
-    echo "Replication lags by $location_diff xlog location diffs"
     exit 2
 fi
-
-echo "xlog location diffs: $location_diff"

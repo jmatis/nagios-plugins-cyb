@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-208) unstable; urgency=low
+
+  * plugins/check_postgresql_replication: rewrote plugin to use a query
+    instead of xfer logs
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 27 Jan 2013 01:26:50 +0100
+
 nagios-plugins-cyb (1.0-207) unstable; urgency=low
 
   * check_postgres_pgbouncer*: allow to specify port as an argument
