@@ -1,3 +1,12 @@
+nagios-plugins-cyb (1.0-209) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: removed ATA 'failed
+    command' checks because they often only mean that a 'hard resetting
+    link' is necessary. Real errors are detected by 'media error', 'I/O
+    error', etc.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 03 Feb 2013 14:09:15 +0100
+
 nagios-plugins-cyb (1.0-208) unstable; urgency=low
 
   * plugins/check_postgresql_replication: rewrote plugin to use a query
