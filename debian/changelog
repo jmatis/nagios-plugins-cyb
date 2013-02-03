@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-210) unstable; urgency=low
+
+  * cyb_check_host_alive_nrpe: raised NRPE timeout from 10s to 30s
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 03 Feb 2013 20:29:56 +0100
+
 nagios-plugins-cyb (1.0-209) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: removed ATA 'failed
