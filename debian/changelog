@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-211) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check messages from
+    software RAID
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 10 Feb 2013 16:40:53 +0100
+
 nagios-plugins-cyb (1.0-210) unstable; urgency=low
 
   * cyb_check_host_alive_nrpe: raised NRPE timeout from 10s to 30s
