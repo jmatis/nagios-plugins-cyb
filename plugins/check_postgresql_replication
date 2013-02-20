@@ -53,9 +53,15 @@ $psql -c "UPDATE $table SET $field = NOW();"
 read lag <<< $($psql -h $standby_server -c \
     "SELECT ROUND(EXTRACT(EPOCH FROM NOW() - $field)) FROM $table")
 
+if [ -z "$lag" ]
+then
+   echo "Unable to fetch lag from PostgreSQL"
+   exit 2
+fi
+
 echo "$lag seconds lag"
 
-if [ -z "$lag" ] || [ "$lag" -gt "$lag_threshold" ]
+if [ "$lag" -gt "$lag_threshold" ]
 then
     exit 2
 fi
