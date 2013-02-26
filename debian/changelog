@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-213) unstable; urgency=low
+
+  * plugins/check_safe-browsing: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 26 Feb 2013 16:45:57 +0100
+
 nagios-plugins-cyb (1.0-212) unstable; urgency=low
 
   * plugins/check_postgresql_replication: properly check psql output to
