@@ -19,7 +19,7 @@ url=$1
 
 set -e -o pipefail -o nounset
 
-# Load API key from configuration file
+# Load API parameters from configuration file
 . /etc/nagios-plugins/config/safe-browsing.conf
 
 if [ -z "$url" -o -z "$api_key" -o -z "$api_url" ]
@@ -32,7 +32,7 @@ type=$(wget -q -O- "$api_url&url=$url")
 
 if [ "$type" != '' ]
 then
-    echo "$url is flagged as $type on Google Safe Browsing"
+    echo "$url is flagged as $type"
     exit 2
 fi
 

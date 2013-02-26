@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-214) unstable; urgency=low
+
+  * Add NRPE support for Google Safe Browsing.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 26 Feb 2013 17:23:28 +0100
+
 nagios-plugins-cyb (1.0-213) unstable; urgency=low
 
   * plugins/check_safe-browsing: add
