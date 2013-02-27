@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-215) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/cyb_cert_mail.cfg : add 3 commands to check validity of
+    SSL certificate used by POP/IMAP/SMTP servers 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 27 Feb 2013 17:51:52 +0100
+
 nagios-plugins-cyb (1.0-214) unstable; urgency=low
 
   * Add NRPE support for Google Safe Browsing.
