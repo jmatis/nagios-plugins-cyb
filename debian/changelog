@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-216) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/cyb_cert_mail.cfg: typos in commands names
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 27 Feb 2013 18:12:39 +0100
+
 nagios-plugins-cyb (1.0-215) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_cert_mail.cfg : add 3 commands to check validity of
