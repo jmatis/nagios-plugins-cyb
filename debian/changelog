@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-217) unstable; urgency=low
+
+  * plugins/check_http_content: raise timeout from 5s to 30s
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 05 Mar 2013 15:53:57 +0100
+
 nagios-plugins-cyb (1.0-216) unstable; urgency=low
 
   *  etc/nagios/nrpe.d/cyb_cert_mail.cfg: typos in commands names
