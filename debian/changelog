@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-218) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/cyb_http.cfg : add a command to check HTTP service on
+     an alternative port 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 08 Mar 2013 10:36:20 +0100
+
 nagios-plugins-cyb (1.0-217) unstable; urgency=low
 
   * plugins/check_http_content: raise timeout from 5s to 30s
