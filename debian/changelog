@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-218) unstable; urgency=low
+
+  * plugins/check_memcache: check if we use 80%+ of Memcache memory.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 09 Mar 2013 20:04:32 +0100
+
 nagios-plugins-cyb (1.0-217) unstable; urgency=low
 
   * plugins/check_http_content: raise timeout from 5s to 30s

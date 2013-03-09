@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2012-2013 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -69,6 +69,12 @@ do
     esac
 done
 
+
+echo -e "stats\nquit" \
+    | timeout $timeout nc -q -1 $hostname $port \
+    | tr -d "\r" > $tempfile
+
+
 tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
@@ -78,11 +84,23 @@ echo -e "stats\nquit" \
     | timeout $timeout nc -q -1 $hostname $port \
     | tr -d "\r" > $tempfile
 
+limit_maxbytes=0
+bytes=0
 while read command variable value
 do
     if [ "$command" != 'STAT' ]
     then
 	continue
+    fi
+
+    if [ "$variable" = 'bytes' ]
+    then
+	bytes=$value
+    fi
+
+    if [ "$variable" = 'limit_maxbytes' ]
+    then
+	limit_maxbytes=$value
     fi
 
     # Fetch performance data for Nagios
@@ -93,6 +111,21 @@ do
 	perfdata="$perfdata, $variable=$value"
     fi
 done < $tempfile
+
+# Check if we use more than 80% of memory
+percent_memory_used=$(($bytes * 100 / $limit_maxbytes))
+if [ "$percent_memory_used" -ge 80 ]
+then
+    echo "${percent_memory_used}% used, please raise -m option of memcached"
+    exit 1
+fi
+
+# Check if we use more than 90% of memory
+if [ "$percent_memory_used" -ge 90 ]
+then
+    echo "${percent_memory_used}% used, please raise -m option of memcached"
+    exit 2
+fi
 
 if [ ! -z "$perfdata" ]
 then
