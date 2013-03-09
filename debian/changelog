@@ -1,8 +1,16 @@
-nagios-plugins-cyb (1.0-218) unstable; urgency=low
+nagios-plugins-cyb (1.0-219) unstable; urgency=low
 
   * plugins/check_memcache: check if we use 80%+ of Memcache memory.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 09 Mar 2013 20:04:32 +0100
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 09 Mar 2013 20:05:22 +0100
+
+nagios-plugins-cyb (1.0-218) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/cyb_http.cfg : add a command to check HTTP service on
+     an alternative port 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 08 Mar 2013 10:36:20 +0100
 
 nagios-plugins-cyb (1.0-217) unstable; urgency=low
 
