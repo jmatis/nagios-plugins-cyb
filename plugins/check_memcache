@@ -69,12 +69,6 @@ do
     esac
 done
 
-
-echo -e "stats\nquit" \
-    | timeout $timeout nc -q -1 $hostname $port \
-    | tr -d "\r" > $tempfile
-
-
 tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
