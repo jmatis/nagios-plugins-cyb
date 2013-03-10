@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-221) unstable; urgency=low
+
+  * plugins/check_raid: scan all SCSI IDs on MPT driver.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 10 Mar 2013 20:03:16 +0100
+
 nagios-plugins-cyb (1.0-220) unstable; urgency=low
 
   * plugins/check_memcache: stupid typo (© Maredsous)

@@ -54,14 +54,17 @@ then
 	exit 2
     fi
 
-    for status in $(mpt-status -s | awk '/^log_id / {print $3}')
+    for status_id in $(mpt-status -p | awk -F ' |,|=' '/^Found / {print $4}')
     do
 	raid_detected=1
-	echo -n "MPT status $status. "
-	if [ "$status" != 'OPTIMAL' ]
-	then
-	    rc=2
-	fi
+	for status in $(mpt-status -s -i $status_id | awk '/^log_id / {print $3}')
+	do
+	    echo -n "MPT status $status. "
+	    if [ "$status" != 'OPTIMAL' ]
+	    then
+		rc=2
+	    fi
+	done
     done
 fi
 
