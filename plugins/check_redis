@@ -1,0 +1,79 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -u
+
+help() {
+    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
+}
+
+# ":" means required
+# "::" means optional
+TEMP=$(getopt -o h: --long hostname::,port::,timeout:: -n "$0" -- "$@")
+
+# Check for non-GNU getopt
+if [ $? != 0 ]
+then
+    help
+    exit 1
+fi
+
+# Default values
+hostname='localhost'
+port=6379
+timeout=5
+
+# Parse options with getopt
+eval set -- "$TEMP"
+while true
+do
+    case "$1" in
+	--hostname)
+	    hostname="$2"
+	    shift 2
+	    ;;
+
+	--port)
+	    port="$2"
+	    shift 2
+	    ;;
+
+	--timeout)
+	    timeout="$2"
+	    shift 2
+	    ;;
+
+	--)
+	    shift
+	    break
+	    ;;
+
+	*)
+	    echo "$0: getopt error!" >&2
+	    exit 1
+	    ;;
+    esac
+done
+
+if ! timeout $timeout redis-cli -h $hostname -p $port ping | grep -qE '^PONG$'
+then
+    echo 'Failed to connect Redis'
+    exit 2
+fi
+
+echo "OK"
+exit 0

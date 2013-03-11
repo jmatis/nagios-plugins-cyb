@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-223) unstable; urgency=low
+
+  * plugins/check_redis: add.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Mar 2013 09:25:13 +0100
+
 nagios-plugins-cyb (1.0-222) unstable; urgency=low
 
   * plugins/check_memcache: display memory percentage in any case.
