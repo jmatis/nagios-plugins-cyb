@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-222) unstable; urgency=low
+
+  * plugins/check_memcache: display memory percentage in any case.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Mar 2013 02:50:20 +0100
+
 nagios-plugins-cyb (1.0-221) unstable; urgency=low
 
   * plugins/check_raid: scan all SCSI IDs on MPT driver.
