@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-225) unstable; urgency=low
+
+  * plugins/check_log: check /var/log/daemon.log
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Mar 2013 09:30:42 +0100
+
 nagios-plugins-cyb (1.0-224) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add Bind zone errors
