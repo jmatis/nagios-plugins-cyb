@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-224) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: add Bind zone errors
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Mar 2013 09:28:38 +0100
+
 nagios-plugins-cyb (1.0-223) unstable; urgency=low
 
   * plugins/check_redis: add.
