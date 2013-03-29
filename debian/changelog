@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-226) unstable; urgency=low
+
+  * plugins/check_ncq: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 29 Mar 2013 17:41:00 +0100
+
 nagios-plugins-cyb (1.0-225) unstable; urgency=low
 
   * plugins/check_log: check /var/log/daemon.log
