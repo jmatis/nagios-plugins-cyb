@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@boutho.rs>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e -o pipefail -o nounset
+
+# Load API parameters from configuration file
+. /etc/nagios-plugins/config/safe-browsing.conf
+
+# Define variables
+lockfile='/var/lock/nagios-plugins-cyb-check_safe_browsing_bulk'
+outfile='/var/lib/nagios-plugins-cyb/check_safe_browsing_bulk.out'
+error_msg=''
+ok_msg=''
+rc=0
+
+# Lock
+dotlockfile -r 0 -p $lockfile || exit
+
+if ! which cybweb-vhostlist-minimal >/dev/null 2>/dev/null
+then
+    echo '2 Unable to find cybweb-vhostlist-minimal' > $outfile
+    exit
+fi
+
+for url in $(cybweb-vhostlist-minimal)
+do
+    type=$(wget -q -O- "$api_url&url=$url")
+
+    if [ "$type" != '' ]
+    then
+	error_msg="$error_msg$url is flagged as $type. "
+	rc=2
+    else
+	ok_msg="$ok_msg$url is OK. "
+    fi
+done
+
+echo "$rc $error_msg$ok_msg" > $outfile.tmp
+mv $outfile.tmp $outfile
+
+# Unlock
+dotlockfile -u $lockfile

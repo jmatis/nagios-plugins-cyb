@@ -29,10 +29,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-
-	# Add here commands to clean up after the build process.
 	$(MAKE) clean
-
 	dh_clean
 
 install: build
@@ -63,7 +60,7 @@ binary-arch: build install
 #	dh_installmime
 #	dh_python
 #	dh_installinit
-#	dh_installcron
+	dh_installcron
 #	dh_installinfo
 	dh_installman
 	dh_link

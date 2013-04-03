@@ -30,6 +30,8 @@ install:
 	cp plugins/* $(DESTDIR)/usr/lib/nagios/plugins-cyb/
 	rsync -a etc $(DESTDIR)
 	mkdir -p $(DESTDIR)/var/lib/nagios-plugins
+	mkdir -p $(DESTDIR)/usr/bin
+	cp bin/* $(DESTDIR)/usr/bin
 
 test:
 	for plugin in $(wildcard plugins/*); do ./$$plugin; done
