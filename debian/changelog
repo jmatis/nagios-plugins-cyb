@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-230) unstable; urgency=low
+
+  * bin/check_safe_browsing_bulk: check if cybweb-vhostlist-minimal was
+    able to fetch URLs
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 03 Apr 2013 16:08:39 +0200
+
 nagios-plugins-cyb (1.0-229) unstable; urgency=low
 
   * bin/check_safe_browsing_bulk: trap wget failures

@@ -49,6 +49,12 @@ do
     fi
 done
 
+if [ -z "$ok_msg" -a -z "$error_msg" ]
+then
+    error_msg='No URL found in Apache configuration'
+    rc=2
+fi
+
 echo "$rc $error_msg$ok_msg" > $outfile.tmp
 mv $outfile.tmp $outfile
 
