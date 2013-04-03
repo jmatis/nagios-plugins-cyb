@@ -38,7 +38,7 @@ fi
 
 for url in $(cybweb-vhostlist-minimal)
 do
-    type=$(wget -q -O- "$api_url&url=$url")
+    type=$(wget -q -O- "$api_url&url=$url" || true)
 
     if [ "$type" != '' ]
     then
