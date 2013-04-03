@@ -40,3 +40,9 @@ chmod 440 /etc/sudoers.d/nagios-plugins-cyb
 
 # Suppress previous 'nagios' entry from /etc/sudoers
 sed -i -e '/^nagios ALL=NOPASSWD: .*nagios.*$/ d' /etc/sudoers
+
+# Call check_safe-browsing-bulk if needed
+if [ ! -f /var/lib/nagios-plugins-cyb/check_safe_browsing_bulk.out ]
+then
+    check_safe_browsing_bulk >/dev/null 2>/dev/null &
+fi
