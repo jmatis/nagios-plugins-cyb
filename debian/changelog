@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-231) unstable; urgency=low
+
+  * Add Net::Google::SafeBrowsing2 support thanks to our recent Debian
+    packages.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Apr 2013 18:45:33 +0200
+
 nagios-plugins-cyb (1.0-230) unstable; urgency=low
 
   * bin/check_safe_browsing_bulk: check if cybweb-vhostlist-minimal was

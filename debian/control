@@ -15,7 +15,10 @@ Depends: ${shlibs:Depends},
   liblockfile1,
   ntpdate,
   timeout | coreutils (>= 8.0-1),
-  logtail
+  logtail,
+  libnet-google-safebrowsing2-perl,
+  libconfig-simple-perl,
+  libdbd-sqlite3-perl
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,
