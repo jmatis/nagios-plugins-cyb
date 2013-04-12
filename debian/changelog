@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-232) unstable; urgency=low
+
+  * Add Google Safe Browsing configuration.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 12 Apr 2013 17:06:22 +0200
+
 nagios-plugins-cyb (1.0-231) unstable; urgency=low
 
   * Add Net::Google::SafeBrowsing2 support thanks to our recent Debian
