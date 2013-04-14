@@ -28,7 +28,6 @@ use Config::Simple;
 use Net::Google::SafeBrowsing2;
 use Net::Google::SafeBrowsing2::Sqlite;
 use Fcntl ':flock';
-use File::Copy qw(copy);
 
 # Lock
 my $lock_file = '/var/lock/nagios-plugins-cyb-update-gsb-db';
@@ -41,20 +40,13 @@ flock($fh, LOCK_EX|LOCK_NB)
 
 # Make a copy of the database
 my $db_file = '/var/lib/nagios-plugins-cyb/google-safe-browsing.sqlite';
-my $tmp_file = $db_file . '.tmp';
-
-if (-f $db_file)
-{
-    copy($db_file, $tmp_file)
-	or die $!;
-}
 
 # Load configuration file
 my $cfg = new Config::Simple('/etc/nagios-plugins/config/safe-browsing.conf')
     or die();
 
 # Define database storage
-my $storage = Net::Google::SafeBrowsing2::Sqlite->new(file => $tmp_file);
+my $storage = Net::Google::SafeBrowsing2::Sqlite->new(file => $db_file);
 
 # Define Google Safe Browsing API
 my $gsb = Net::Google::SafeBrowsing2->new(
@@ -67,9 +59,6 @@ $gsb->update();
 
 # Close storage
 $storage->close();
-
-rename($tmp_file, $db_file)
-    or die $!;
 
 # Unlock
 close($fh)
