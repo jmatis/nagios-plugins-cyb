@@ -40,10 +40,26 @@ $sth->execute();
 my $row = $sth->fetch;
 if($row->[0] < 1000)
 {
-    print "SQLite database $db_file seems empty";
+    print "SQLite database $db_file seems empty\n";
     exit(2);
 }
 
+# Check that the database is recent
+$sth = $dbh->prepare('SELECT last
+FROM updates
+WHERE errors = 0
+ORDER BY last DESC
+LIMIT 1');
+$sth->execute();
+$row = $sth->fetch;
+my $time_elapsed_since_last_update = time() - $row->[0];
+if($time_elapsed_since_last_update > 3600)
+{
+    print "SQLite database is obsolete: last updated $time_elapsed_since_last_update seconds ago.\n";
+    exit(2);
+}
+
+# Close SQLite database
 $dbh->disconnect();
 
 # Load configuration file

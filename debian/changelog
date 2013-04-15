@@ -2,8 +2,9 @@ nagios-plugins-cyb (1.0-235) unstable; urgency=low
 
   * plugins/check_google_safe_browsing: check that the database is not
     empty
+  * plugins/check_google_safe_browsing: check that the database is recent
 
- --
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 15 Apr 2013 09:54:11 +0200
 
 nagios-plugins-cyb (1.0-234) unstable; urgency=low
 
