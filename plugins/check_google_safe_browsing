@@ -27,10 +27,24 @@ use sort     qw(stable _quicksort _mergesort);
 use Config::Simple;
 use Net::Google::SafeBrowsing2;
 use Net::Google::SafeBrowsing2::Sqlite;
+use DBI qw(:sql_types);
 
 my $db_file = '/var/lib/nagios-plugins-cyb/google-safe-browsing.sqlite';
 my $error_msg = '';
 my $ok_msg = '';
+
+# Check that the database is not empty
+my $dbh = DBI->connect("dbi:SQLite:dbname=$db_file");
+my $sth = $dbh->prepare('SELECT COUNT(*) FROM a_chunks');
+$sth->execute();
+my $row = $sth->fetch;
+if($row->[0] < 1000)
+{
+    print "SQLite database $db_file seems empty";
+    exit(2);
+}
+
+$dbh->disconnect();
 
 # Load configuration file
 my $cfg = new Config::Simple('/etc/nagios-plugins/config/safe-browsing.conf')

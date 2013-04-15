@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-235) unstable; urgency=low
+
+  * plugins/check_google_safe_browsing: check that the database is not
+    empty
+
+ --
+
 nagios-plugins-cyb (1.0-234) unstable; urgency=low
 
   * bin/nagios-plugins-cyb-update-gsb-db: avoid copying the DB because
