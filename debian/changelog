@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-238) unstable; urgency=low
+
+  * Add Redis replication checks
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 25 Apr 2013 17:12:12 +0200
+
 nagios-plugins-cyb (1.0-237) unstable; urgency=low
 
   * etc/nagios/nrpe.d/drbd.cfg : add check of DRBD resources without

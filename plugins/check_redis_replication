@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@boutho.rs>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# no replication
+
+# 14:46 root@gala6:~# redis-cli info | grep -E '^role|master'
+# role:master
+
+# replication in progress:
+
+# 14:47 root@gala6:~# redis-cli info | grep -E '^role|master'
+# role:slave
+# master_host:91.204.119.42
+# master_port:6379
+# master_link_status:down
+# master_last_io_seconds_ago:-1
+# master_sync_in_progress:1
+# master_sync_left_bytes:0
+# master_sync_last_io_seconds_ago:8
+# master_link_down_since_seconds:57
+
+
+# replication OK:
+
+# 14:47 root@gala6:~# redis-cli info | grep -E '^role|master'
+# role:slave
+# master_host:91.204.119.42
+# master_port:6379
+# master_link_status:up
+# master_last_io_seconds_ago:0
+# master_sync_in_progress:0
+
+set -e -o pipefail -o nounset
+
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+
+timeout 10 redis-cli info | tr ':' '=' | tr -d "\r" > $tempfile
+
+. $tempfile
+rm $tempfile
+
+if [ "$role" != 'slave' ]
+then
+    echo "Invalid role '$role'. Expected 'slave'"
+    exit 2
+fi
+
+if [ "$master_link_status" != 'up' ]
+then
+    echo "Invalid master_link_status '$master_link_status'. Expected 'up'"
+    exit 2
+fi
+
+if [ "$master_sync_in_progress" != '0' ]
+then
+    echo "Invalid master_sync_in_progress '$master_sync_in_progress'. Expected '0'"
+    exit 2
+fi
+
+if [ "$master_last_io_seconds_ago" -gt 30 ]
+then
+    echo "Replication in progress: ${master_last_io_seconds_ago}s lag"
+    exit 2
+fi
+
+echo "Replication OK"
