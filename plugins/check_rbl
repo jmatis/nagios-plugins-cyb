@@ -19,7 +19,6 @@
 set -e
 
 dnsbls='
-    dnsbl.njabl.org
     sbl.spamhaus.org
     xbl.spamhaus.org
     pbl.spamhaus.org

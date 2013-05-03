@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-239) unstable; urgency=low
+
+  *  plugins/check_rbl : dropped njabl.org (end of service)
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 03 May 2013 10:49:46 +0200
+
 nagios-plugins-cyb (1.0-238) unstable; urgency=low
 
   * Add Redis replication checks
