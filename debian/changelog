@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-240) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/memcache.cfg : add a check for alternative port
+    conf
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 13 May 2013 14:26:59 +0200
+
 nagios-plugins-cyb (1.0-239) unstable; urgency=low
 
   *  plugins/check_rbl : dropped njabl.org (end of service)
