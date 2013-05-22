@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-241) unstable; urgency=low
+
+  *  plugins/check_rbl : set a very short timeout for DNS request
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 22 May 2013 18:01:22 +0200
+
 nagios-plugins-cyb (1.0-240) unstable; urgency=low
 
   *  etc/nagios/nrpe.d/memcache.cfg : add a check for alternative port
