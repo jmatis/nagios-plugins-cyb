@@ -33,11 +33,11 @@ then
 fi
 
 # Fetch the total number of sent and received packets via the eth* interfaces
-before=$(awk -F':| +' '/eth/ {total += $3 + $11} END {print total}' $file)
+before=$(sed 's/:/ /' $file | awk '/eth/ {total += $3 + $11} END {print total}')
 
 sleep $delay
 
-after=$(awk -F':| +' '/eth/ {total += $3 + $11} END {print total}' $file)
+after=$(sed 's/:/ /' $file | awk '/eth/ {total += $3 + $11} END {print total}')
 
 pps=$(( ($after - $before) / $delay))
 
