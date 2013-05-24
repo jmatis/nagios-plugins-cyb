@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-245) unstable; urgency=low
+
+  * plugins/check_packets: yet another fix for Linux 2.6. I loooove
+    abandonware.
+  
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 12:09:34 +0200
+
 nagios-plugins-cyb (1.0-244) unstable; urgency=low
 
   * plugins/check_packets: fixed 2.6 support, again.
