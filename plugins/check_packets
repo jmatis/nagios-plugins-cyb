@@ -18,6 +18,7 @@
 # Packet Per Second -- https://en.wikipedia.org/wiki/Packets_per_second
 pps_threshold=$1
 delay=$2
+file='/proc/net/dev'
 
 set -e -o pipefail -o nounset
 
@@ -32,11 +33,11 @@ then
 fi
 
 # Fetch the total number of sent and received packets via the eth* interfaces
-before=$(awk '/eth/ {total += $3 + $11} END {print total}' /proc/net/dev)
+before=$(awk -F':| +' '/eth/ {total += $3 + $11} END {print total}' $file)
 
 sleep $delay
 
-after=$(awk '/eth/ {total += $3 + $11} END {print total}' /proc/net/dev)
+after=$(awk -F':| +' '/eth/ {total += $3 + $11} END {print total}' $file)
 
 pps=$(( ($after - $before) / $delay))
 

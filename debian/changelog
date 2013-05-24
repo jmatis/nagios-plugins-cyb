@@ -2,8 +2,9 @@ nagios-plugins-cyb (1.0-243) unstable; urgency=low
 
   * plugins/check_packets: check that we were able to detect the number of
     network packets
+  * plugins/check_packets: add Linux 2.6 support
 
- --
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 11:35:27 +0200
 
 nagios-plugins-cyb (1.0-242) unstable; urgency=low
 
