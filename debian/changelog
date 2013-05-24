@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-242) unstable; urgency=low
+
+  * Add cyb_check_packets
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 23 May 2013 11:40:52 +0200
+
 nagios-plugins-cyb (1.0-241) unstable; urgency=low
 
   *  plugins/check_rbl : set a very short timeout for DNS request
