@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-246) unstable; urgency=low
+
+  * plugins/check_packets: use float instead of integer to accept values >
+    32 bits
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 13:50:37 +0200
+
 nagios-plugins-cyb (1.0-245) unstable; urgency=low
 
   * plugins/check_packets: yet another fix for Linux 2.6. I loooove
