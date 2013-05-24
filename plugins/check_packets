@@ -46,3 +46,8 @@ if [ $pps -gt $pps_threshold ]
 then
     exit 2
 fi
+
+if [ $pps -le 0 ]
+then
+    exit 2
+fi
