@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-248) unstable; urgency=low
+
+  * plugins/check_log: typo
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:21:17 +0200
+
 nagios-plugins-cyb (1.0-247) unstable; urgency=low
 
   * plugins/check_log: use temporary offset file to prevent deadlock on high load

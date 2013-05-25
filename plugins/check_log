@@ -36,7 +36,7 @@ do
     offset_file="$offset_dir/$(basename $logfile).offset"
     timeout 30 logtail2 -f $logfile -o $offset_file.tmp | grep -F -f $tempfile \
 	>> $error_file || true
-    mv $offset_file.tmp $offset_file.tmp
+    mv $offset_file.tmp $offset_file
 
     rm -f $tempfile
 done
