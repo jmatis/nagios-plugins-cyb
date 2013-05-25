@@ -33,10 +33,8 @@ do
     trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
     grep -vE '^#|^$' $rule_file > $tempfile
 
-    offset_file="$offset_dir/$(basename $logfile).offset"
-    timeout 30 logtail2 -f $logfile -o $offset_file.tmp | grep -F -f $tempfile \
-	>> $error_file || true
-    mv $offset_file.tmp $offset_file
+    timeout 30 logtail2 -f $logfile -o $offset_dir/$(basename $logfile).offset \
+	| grep -F -f $tempfile >> $error_file || true
 
     rm -f $tempfile
 done
