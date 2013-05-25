@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-247) unstable; urgency=low
+
+  * plugins/check_log: use temporary offset file to prevent deadlock on high load
+  * plugins/check_log: kill 'logtail2' after 30 seconds if it didn't
+    return because it might be deadlocked
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:12:19 +0200
+
 nagios-plugins-cyb (1.0-246) unstable; urgency=low
 
   * plugins/check_packets: use float instead of integer to accept values >

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2012-2013 Cyril Bouthors <cyril@boutho.rs>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -33,8 +33,10 @@ do
     trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
     grep -vE '^#|^$' $rule_file > $tempfile
 
-    logtail2 -f $logfile -o $offset_dir/$(basename $logfile).offset \
-	| grep -F -f $tempfile >> $error_file || true
+    offset_file="$offset_dir/$(basename $logfile).offset"
+    timeout 30 logtail2 -f $logfile -o $offset_file.tmp | grep -F -f $tempfile \
+	>> $error_file || true
+    mv $offset_file.tmp $offset_file.tmp
 
     rm -f $tempfile
 done
