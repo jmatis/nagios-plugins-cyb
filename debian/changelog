@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-251) unstable; urgency=low
+
+  * check_log: check common errors in Apache logs
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 17:05:42 +0200
+
 nagios-plugins-cyb (1.0-250) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check segmentation
