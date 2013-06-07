@@ -20,7 +20,7 @@ set -e -o pipefail -o nounset
 offset_dir='/var/lib/nagios-plugins-cyb'
 error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 logfiles='/var/log/kern.log /var/log/mysql/error.log /var/log/daemon.log
-/var/log/apache2/error.log'
+/var/log/apache2/error.log /var/log/syslog'
 rule_file='/etc/nagios-plugins/config/cyb_check_log.conf'
 
 mkdir -p $(dirname $error_file) $offset_dir
