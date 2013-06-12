@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-242) unstable; urgency=low
+
+  * etc/nagios-plugins/config/pingdom.cfg : config for check_pingdom command
+  * plugins/check_pingdom : new plugin that checks Pingdom probes status
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 12 Jun 2013 15:57:21 +0200
+
 nagios-plugins-cyb (1.0-241) unstable; urgency=low
 
   *  plugins/check_rbl : set a very short timeout for DNS request

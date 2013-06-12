@@ -1,0 +1,70 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*- 
+
+# Copyright (C) 2013 ISVTEC <contact@isvtec.com>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.       
+#                                                                
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# This script needs a credentials file to get user, pass and API key.
+# Here is an example :
+#   [MyAccountName]
+#   id=ilovespam@mydomain.tld
+#   pass=thisizseriousbizness
+#   apikey=pDMY1xI1uhh4CBD5pEWFe5tmnsenSXVV
+
+import traceback
+import pingdom
+import sys
+import os.path
+import ConfigParser
+
+
+def main():
+  if len(sys.argv) != 3:
+    print "Usage : check_pingdom <credentials file> <account>"
+  else:
+    if not os.path.isfile(sys.argv[1]):
+      print "Problem : credentials file doesn't exist"
+    else:
+
+      #Read the credentials file
+      configHandle = ConfigParser.RawConfigParser()
+      configHandle.read(sys.argv[1])
+      userId=configHandle.get(sys.argv[2],'id')
+      userPass=configHandle.get(sys.argv[2],'pass')
+      apiKey=configHandle.get(sys.argv[2],'apikey')
+
+      #Try to connect to Pingdom API
+      connection=pingdom.PingdomConnection(userId,userPass,apiKey)
+      try:
+        #Fetch all the checks data
+        checklist=connection.get_all_checks()
+      except pingdom.exception.PingdomError:
+        print "UNKNOWN : Unable to establish connection to Pingdom API"
+        sys.exit(3)
+
+      #Finally, pop all the checks and print a brief status
+      while True:
+        try:
+          check=checklist.pop()
+          if check.status == "down":
+            print "CRITICAL : " + check.hostname + " is down"
+            sys.exit(2)
+        except IndexError:
+          break
+
+      print "OK : All sites seem OK"
+
+if __name__ == '__main__':
+    main()
