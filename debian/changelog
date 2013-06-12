@@ -1,9 +1,90 @@
-nagios-plugins-cyb (1.0-242) unstable; urgency=low
+nagios-plugins-cyb (1.0-254) unstable; urgency=low
 
   * etc/nagios-plugins/config/pingdom.cfg : config for check_pingdom command
   * plugins/check_pingdom : new plugin that checks Pingdom probes status
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 12 Jun 2013 15:57:21 +0200
+
+nagios-plugins-cyb (1.0-253) unstable; urgency=low
+
+  * plugins/check_log: check /var/log/syslog
+  * etc/nagios-plugins/config/cyb_check_log.conf: check suhosin blacklist
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 07 Jun 2013 11:09:38 +0200
+
+nagios-plugins-cyb (1.0-252) unstable; urgency=low
+
+  * check_log: fixed offset file
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 17:16:37 +0200
+
+nagios-plugins-cyb (1.0-251) unstable; urgency=low
+
+  * check_log: check common errors in Apache logs
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 17:05:42 +0200
+
+nagios-plugins-cyb (1.0-250) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check segmentation
+    faults in kernel logs.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 08:59:26 +0200
+
+nagios-plugins-cyb (1.0-249) unstable; urgency=low
+
+  * plugins/check_log: fixed logtail2 call
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:29:24 +0200
+
+nagios-plugins-cyb (1.0-248) unstable; urgency=low
+
+  * plugins/check_log: typo
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:21:17 +0200
+
+nagios-plugins-cyb (1.0-247) unstable; urgency=low
+
+  * plugins/check_log: use temporary offset file to prevent deadlock on high load
+  * plugins/check_log: kill 'logtail2' after 30 seconds if it didn't
+    return because it might be deadlocked
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:12:19 +0200
+
+nagios-plugins-cyb (1.0-246) unstable; urgency=low
+
+  * plugins/check_packets: use float instead of integer to accept values >
+    32 bits
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 13:50:37 +0200
+
+nagios-plugins-cyb (1.0-245) unstable; urgency=low
+
+  * plugins/check_packets: yet another fix for Linux 2.6. I loooove
+    abandonware.
+  
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 12:09:34 +0200
+
+nagios-plugins-cyb (1.0-244) unstable; urgency=low
+
+  * plugins/check_packets: fixed 2.6 support, again.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 11:47:14 +0200
+
+nagios-plugins-cyb (1.0-243) unstable; urgency=low
+
+  * plugins/check_packets: check that we were able to detect the number of
+    network packets
+  * plugins/check_packets: add Linux 2.6 support
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 11:35:27 +0200
+
+nagios-plugins-cyb (1.0-242) unstable; urgency=low
+
+  * Add cyb_check_packets
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 23 May 2013 11:40:52 +0200
+>>>>>>> a2449a9f56df5da30c8bb72189385726e882aed5
 
 nagios-plugins-cyb (1.0-241) unstable; urgency=low
 

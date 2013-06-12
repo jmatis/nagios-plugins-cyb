@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@boutho.rs>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# Packet Per Second -- https://en.wikipedia.org/wiki/Packets_per_second
+pps_threshold=$1
+delay=$2
+file='/proc/net/dev'
+
+set -e -o pipefail -o nounset
+
+if [ -z "$pps_threshold" ]
+then
+    pps_threshold=1000
+fi
+
+if [ -z "$delay" ]
+then
+    delay=5
+fi
+
+# Fetch the total number of sent and received packets via the eth* interfaces
+before=$(awk '/:/ {gsub(":", " "); total += $3 + $11} END {printf("%.0f", total)}' $file)
+
+sleep $delay
+
+after=$(awk '/:/ {gsub(":", " "); total += $3 + $11} END {printf("%.0f", total)}' $file)
+
+pps=$(( ($after - $before) / $delay))
+
+echo "$pps packets per second (threshold $pps_threshold)"
+
+if [ $pps -gt $pps_threshold ]
+then
+    exit 2
+fi
+
+if [ $pps -le 0 ]
+then
+    exit 2
+fi
