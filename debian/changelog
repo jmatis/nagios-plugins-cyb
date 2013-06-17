@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-255) unstable; urgency=low
+
+  *  etc/nagios-plugins/config/cyb_check_log.conf : add a pattern for
+    Courier slots saturation
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 17 Jun 2013 17:33:09 +0200
+
 nagios-plugins-cyb (1.0-254) unstable; urgency=low
 
   * etc/nagios-plugins/config/pingdom.cfg : config for check_pingdom command
