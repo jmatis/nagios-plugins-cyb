@@ -32,7 +32,7 @@ cut -d' ' -f1-3 /proc/loadavg | tr "\n" ':'
 echo -n ' '
 
 # Use vps if vserver is available or fallback to ps
-if sudo vps 2>/dev/null >/dev/null
+if [ `which vps` ]
 then
     # vps only works with "pid" but we don't use it
     sudo vps -eo pid,stat,comm | awk '$4~/^(D|R|H)/ {print $5}' | tr "\n" ' '
