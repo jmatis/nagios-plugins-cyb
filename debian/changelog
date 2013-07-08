@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-259) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check Bind error
+    'unexpected rcode'.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Jul 2013 15:34:09 +0200
+
 nagios-plugins-cyb (1.0-258) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add ECC errors checks
