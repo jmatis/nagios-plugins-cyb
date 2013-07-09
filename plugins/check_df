@@ -45,6 +45,15 @@ trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
     df -PlThi
 ) > $tempfile
 
+for pipestatus in ${PIPESTATUS[@]}
+do
+    if [ "$pipestatus" -ne 0 ]
+    then
+	echo 'Unable to create a temporary file, the disk is probably full'
+	exit 2
+    fi
+done
+
 rc=0
 units='B'
 while read fs type size used available percentage mount_point

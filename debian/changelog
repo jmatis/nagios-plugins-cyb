@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-260) unstable; urgency=low
+
+  * check_df: check the return code of 'df' in case the disk is completely
+    full and we are unable to create a temporary file.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 09 Jul 2013 11:15:28 +0200
+
 nagios-plugins-cyb (1.0-259) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check Bind error
