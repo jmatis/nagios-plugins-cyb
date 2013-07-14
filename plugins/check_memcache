@@ -15,7 +15,7 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-set -u
+set -u -o pipefail
 
 help() {
     echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
@@ -36,6 +36,15 @@ fi
 hostname='localhost'
 port=11211
 timeout=5
+max_connections=1024
+
+# Parse configuration file to fetch max_connection. This is ugly but Memcache
+# does not provide any other way to fetch this information.
+file='/etc/memcached.conf'
+if [ -r "$file" ] && grep -qE '^-c ' $file
+then
+    max_connections=$(awk '/^-c / {print $2; exit}' $file)
+fi
 
 # Parse options with getopt
 eval set -- "$TEMP"
@@ -78,6 +87,16 @@ echo -e "stats\nquit" \
     | timeout $timeout nc -q -1 $hostname $port \
     | tr -d "\r" > $tempfile
 
+# Check the return code
+for rc in ${PIPESTATUS[@]}
+do
+    if [ "$rc" != 0 ]
+    then
+        echo "Unable to connect to Memcache on $hostname:$port"
+	exit 2
+    fi
+done
+
 limit_maxbytes=0
 bytes=0
 while read command variable value
@@ -87,14 +106,22 @@ do
 	continue
     fi
 
+    # Fetch 'bytes' variable
     if [ "$variable" = 'bytes' ]
     then
 	bytes=$value
     fi
 
+    # Fetch limit_maxbytes variable
     if [ "$variable" = 'limit_maxbytes' ]
     then
 	limit_maxbytes=$value
+    fi
+
+    # Fetch curr_connections variable
+    if [ "$variable" = 'curr_connections' ]
+    then
+	curr_connections=$value
     fi
 
     # Fetch performance data for Nagios
@@ -106,24 +133,41 @@ do
     fi
 done < $tempfile
 
-# Check if we use more than 80% of memory
+# Check if we use more than 90% of memory
 percent_memory_used=$(($bytes * 100 / $limit_maxbytes))
+if [ "$percent_memory_used" -ge 90 ]
+then
+    echo "${percent_memory_used}% used, please raise -m option of Memcache"
+    exit 2
+fi
+
+# Check if we use more than 80% of memory
 if [ "$percent_memory_used" -ge 80 ]
 then
-    echo "${percent_memory_used}% used, please raise -m option of memcached"
+    echo "${percent_memory_used}% used, please raise -m option of Memcache"
     exit 1
 fi
 
 # Check if we use more than 90% of memory
-if [ "$percent_memory_used" -ge 90 ]
+percent_connections_used=$(($curr_connections * 100 / $max_connections))
+if [ "$percent_connections_used" -ge 90 ]
 then
-    echo "${percent_memory_used}% used, please raise -m option of memcached"
+    echo "${percent_connections_used}% used, please raise -c option of Memcache"
     exit 2
 fi
 
+# Check if we use more than 80% of max_connections
+if [ "$percent_connections_used" -ge 80 ]
+then
+    echo "${percent_connections_used}% used, please raise -c option of Memcache"
+    exit 1
+fi
+
+
 if [ ! -z "$perfdata" ]
 then
-    echo "OK ${percent_memory_used}% used | $perfdata"
+    echo -n "OK ${percent_memory_used}% memory used."
+    echo " ${percent_connections_used}% connections used | $perfdata"
     exit 0
 fi
 

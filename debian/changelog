@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-261) unstable; urgency=low
+
+  * check_memcache: make sure that less than 80% of the maximum allowed
+    Memcache connections are used
+  * check_memcache: clean
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 14 Jul 2013 17:30:47 +0200
+
 nagios-plugins-cyb (1.0-260) unstable; urgency=low
 
   * check_df: check the return code of 'df' in case the disk is completely
