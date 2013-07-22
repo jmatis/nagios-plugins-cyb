@@ -25,7 +25,8 @@ Suggests: dellomsa,
   mdadm,
   nagios-nrpe-server,
   check-postgres,
-  php5-cli
+  php5-cli,
+  python-pingdom
 Description: Cyb's Nagios plugins
  check_apt_simple
  check_debsums
