@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-263) unstable; urgency=low
+
+  * Fixed check_cyb_dummy
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 27 Jul 2013 10:18:33 +0200
+
 nagios-plugins-cyb (1.0-262) unstable; urgency=low
 
   * Add check_cyb_dummy
