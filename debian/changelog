@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-265) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check for XFS errors.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 02 Aug 2013 00:18:44 +0200
+
 nagios-plugins-cyb (1.0-264) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add temperature error
