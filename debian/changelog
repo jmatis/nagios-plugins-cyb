@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-267) unstable; urgency=low
+
+  * plugins/check_memcache: more accurate error messages
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 19 Aug 2013 22:30:45 +0200
+
 nagios-plugins-cyb (1.0-266) unstable; urgency=low
 
   * plugins/check_postgresql_replication: add more information to ease

@@ -137,14 +137,14 @@ done < $tempfile
 percent_memory_used=$(($bytes * 100 / $limit_maxbytes))
 if [ "$percent_memory_used" -ge 90 ]
 then
-    echo "${percent_memory_used}% used, please raise -m option of Memcache"
+    echo "${percent_memory_used}% memory used, please raise -m option of Memcache"
     exit 2
 fi
 
 # Check if we use more than 80% of memory
 if [ "$percent_memory_used" -ge 80 ]
 then
-    echo "${percent_memory_used}% used, please raise -m option of Memcache"
+    echo "${percent_memory_used}% memory used, please raise -m option of Memcache"
     exit 1
 fi
 
@@ -152,14 +152,14 @@ fi
 percent_connections_used=$(($curr_connections * 100 / $max_connections))
 if [ "$percent_connections_used" -ge 90 ]
 then
-    echo "${percent_connections_used}% used, please raise -c option of Memcache"
+    echo "${percent_connections_used}% connections used, please raise -c option of Memcache"
     exit 2
 fi
 
 # Check if we use more than 80% of max_connections
 if [ "$percent_connections_used" -ge 80 ]
 then
-    echo "${percent_connections_used}% used, please raise -c option of Memcache"
+    echo "${percent_connections_used}% connections used, please raise -c option of Memcache"
     exit 1
 fi
 
