@@ -42,7 +42,8 @@ read count <<< $($psql -c "$query")
 
 if [ -z "$count" ] || [ "$count" = 0 ]
 then
-    echo 'Replication is not working'
+    echo -n 'Replication is not working: '
+    $psql -c "SELECT * FROM pg_stat_replication" | tr "\n" ' '
     exit 2
 fi
 
