@@ -1,70 +1,95 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*- 
 
-# Copyright (C) 2013 ISVTEC <contact@isvtec.com>
-#
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.       
-#                                                                
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with
-# this program. If not, see <http://www.gnu.org/licenses/>.
-#
-
-# This script needs a credentials file to get user, pass and API key.
-# Here is an example :
-#   [MyAccountName]
-#   id=ilovespam@mydomain.tld
-#   pass=thisizseriousbizness
-#   apikey=pDMY1xI1uhh4CBD5pEWFe5tmnsenSXVV
-
-import traceback
-import pingdom
+import os
+import re
 import sys
-import os.path
+sys.path.append('/usr/local/lib/python2.7/site-packages')
+import pingdom
 import ConfigParser
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
+# Default Pingdom credentials
+PINGDOM_USERNAME = 'username'
+PINGDOM_PASSWORD = 'password'
+PINGDOM_APPKEY = 'appkey'
+PINGDOM_CONTACTID = 323645
 
-def main():
-  if len(sys.argv) != 3:
-    print "Usage : check_pingdom <credentials file> <account>"
-  else:
-    if not os.path.isfile(sys.argv[1]):
-      print "Problem : credentials file doesn't exist"
+def auth():
+    global PINGDOM_USERNAME
+    global PINGDOM_PASSWORD
+    global PINGDOM_APPKEY
+    global PINGDOM_CONTACTID
+
+    if len(sys.argv) != 3:
+        print "Usage : check_pingdom <credentials file> <account>"
+        sys.exit(1)
     else:
+        if not os.path.isfile(sys.argv[1]):
+            print "Problem : credentials file doesn't exist"
+            sys.exit(1)
+        else:
+            #Read the credentials file
+            configHandle = ConfigParser.RawConfigParser()
+            configHandle.read(sys.argv[1])
+            PINGDOM_USERNAME=configHandle.get(sys.argv[2],'id')
+            PINGDOM_PASSWORD=configHandle.get(sys.argv[2],'pass')
+            PINGDOM_APPKEY=configHandle.get(sys.argv[2],'apikey')
+            PINGDOM_CONTACTID=configHandle.get(sys.argv[2],'contactid')
+            try:
+                return pingdom.Pingdom(username=PINGDOM_USERNAME, password=PINGDOM_PASSWORD, appkey=PINGDOM_APPKEY)
+            except Exception, err:
+                sys.stderr.write(str(err)+"\n")
+                sys.exit(1)
 
-      #Read the credentials file
-      configHandle = ConfigParser.RawConfigParser()
-      configHandle.read(sys.argv[1])
-      userId=configHandle.get(sys.argv[2],'id')
-      userPass=configHandle.get(sys.argv[2],'pass')
-      apiKey=configHandle.get(sys.argv[2],'apikey')
+def validate_id(ident):
+    ident = str(ident)
+    matchObj = re.match(r"^\d+$", ident)
 
-      #Try to connect to Pingdom API
-      connection=pingdom.PingdomConnection(userId,userPass,apiKey)
-      try:
-        #Fetch all the checks data
-        checklist=connection.get_all_checks()
-      except pingdom.exception.PingdomError:
-        print "UNKNOWN : Unable to establish connection to Pingdom API"
-        sys.exit(3)
+    if matchObj:
+        return True
+    else:
+        print "Invalid id: %s" % ident
+        return False
 
-      #Finally, pop all the checks and print a brief status
-      while True:
+
+def pingdom_api_call(command, method, params=None):
+    if params != None and not(isinstance(params, dict)):
         try:
-          check=checklist.pop()
-          if check.status == "down":
-            print "CRITICAL : " + check.hostname + " is down"
-            sys.exit(2)
-        except IndexError:
-          break
+            params = json.loads(str(params))
+        except ValueError, err:
+            err_msg = str(err) + ": %s\n" % params
+            sys.stderr.write(err_msg)
+            sys.exit(1)
+        
+    try:
+        res = pingdom_connection.method(command, method, params)
+        return res
+    except Exception, err:
+        sys.stderr.write(str(err)+"\n")
+        print err.read()
+        sys.exit(1)
 
-      print "OK : All sites seem OK"
 
-if __name__ == '__main__':
-    main()
+pingdom_connection = auth()
+checks = pingdom_api_call("checks", "GET")
+for check in checks['checks']:
+    if validate_id(check['id']):
+        if check['status'] != "up":
+            res = pingdom_api_call("checks/" + str(check['id']), "GET")
+            display=0
+            name=res['check']['name']
+            hostname=res['check']['hostname']
+            try:
+                contactids=res['check']['contactids']
+                if contactids.count(PINGDOM_CONTACTID) > 0:
+                    display=1
+            except:
+                pass
+            if display:
+                print "CRITICAL : " + hostname + " (" + name + ")  is down"
+                sys.exit(2)
+
+print "OK : All sites seem OK"

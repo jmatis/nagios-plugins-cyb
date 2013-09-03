@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-269) unstable; urgency=low
+
+  *  * added contacts support in check_pingdom
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 03 Sep 2013 15:56:26 +0200
+
 nagios-plugins-cyb (1.0-268) unstable; urgency=low
 
   * cyb_check_log: check haproxy errors log
