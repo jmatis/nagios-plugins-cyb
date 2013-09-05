@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Copyright (C) 2013 Cyril Bouthors <cyril@boutho.rs>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e -o pipefail -o nounset
+
+export PATH=$PATH:/sbin:/usr/sbin
+
+file='/etc/iptables/rules.v4'
+if [ ! -f $file ]
+then
+    echo "$0: no such file or directory $file"
+    exit 2
+fi
+
+number_of_rules=$(iptables -S | wc -l)
+
+if [ "$number_of_rules" -le 3 ]
+then
+    echo "No iptables rule has been detected"
+    exit 2
+fi
+
+echo "OK: $number_of_rules iptables rules have been detected"
+exit 0

@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-271) unstable; urgency=low
+
+  * Add check_iptables_persistent
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:29:52 +0200
+
 nagios-plugins-cyb (1.0-270) unstable; urgency=low
 
   * Removed 'Apache MaxClients' check because Apache does NOT respect
