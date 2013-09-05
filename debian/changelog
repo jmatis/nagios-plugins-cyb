@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-270) unstable; urgency=low
+
+  * Removed 'Apache MaxClients' check because Apache does NOT respect
+    MaxSpareServers and can fork MUCH more than the limit.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 12:52:25 +0200
+
 nagios-plugins-cyb (1.0-269) unstable; urgency=low
 
   *  * added contacts support in check_pingdom
