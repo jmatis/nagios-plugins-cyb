@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-273) unstable; urgency=low
+
+  * check_iptables_persistent: check iptables rules even if we are not
+    using iptables-persistent
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:50:51 +0200
+
 nagios-plugins-cyb (1.0-272) unstable; urgency=low
 
   * Run check_iptables_persistent with sudo in any case

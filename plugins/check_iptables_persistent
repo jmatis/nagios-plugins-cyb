@@ -19,20 +19,13 @@ set -e -o pipefail -o nounset
 
 export PATH=$PATH:/sbin:/usr/sbin
 
-file='/etc/iptables/rules.v4'
-if [ ! -f $file ]
-then
-    echo "$0: no such file or directory $file"
-    exit 2
-fi
-
 number_of_rules=$(iptables -S | wc -l)
 
-if [ "$number_of_rules" -le 3 ]
+if [ "$number_of_rules" -gt 3 ]
 then
-    echo "No iptables rule has been detected"
-    exit 2
+    echo "OK: $number_of_rules iptables rules have been detected"
+    exit 0
 fi
 
-echo "OK: $number_of_rules iptables rules have been detected"
-exit 0
+echo "No iptables rule has been detected"
+exit 2
