@@ -24,25 +24,25 @@ def auth():
     global PINGDOM_CONTACTID
 
     if len(sys.argv) != 3:
-        print "Usage : check_pingdom <credentials file> <account>"
+        print "Usage: check_pingdom <credentials file> <account>"
         sys.exit(1)
-    else:
-        if not os.path.isfile(sys.argv[1]):
-            print "Problem : credentials file doesn't exist"
-            sys.exit(1)
-        else:
-            #Read the credentials file
-            configHandle = ConfigParser.RawConfigParser()
-            configHandle.read(sys.argv[1])
-            PINGDOM_USERNAME=configHandle.get(sys.argv[2],'id')
-            PINGDOM_PASSWORD=configHandle.get(sys.argv[2],'pass')
-            PINGDOM_APPKEY=configHandle.get(sys.argv[2],'apikey')
-            PINGDOM_CONTACTID=configHandle.get(sys.argv[2],'contactid')
-            try:
-                return pingdom.Pingdom(username=PINGDOM_USERNAME, password=PINGDOM_PASSWORD, appkey=PINGDOM_APPKEY)
-            except Exception, err:
-                sys.stderr.write(str(err)+"\n")
-                sys.exit(1)
+
+    if not os.path.isfile(sys.argv[1]):
+        print "Problem: credentials file doesn't exist"
+        sys.exit(1)
+
+    #Read the credentials file
+    configHandle = ConfigParser.RawConfigParser()
+    configHandle.read(sys.argv[1])
+    PINGDOM_USERNAME=configHandle.get(sys.argv[2],'id')
+    PINGDOM_PASSWORD=configHandle.get(sys.argv[2],'pass')
+    PINGDOM_APPKEY=configHandle.get(sys.argv[2],'apikey')
+    PINGDOM_CONTACTID=configHandle.get(sys.argv[2],'contactid')
+    try:
+        return pingdom.Pingdom(username=PINGDOM_USERNAME, password=PINGDOM_PASSWORD, appkey=PINGDOM_APPKEY)
+    except Exception, err:
+        sys.stderr.write(str(err)+"\n")
+        sys.exit(1)
 
 def validate_id(ident):
     ident = str(ident)
@@ -89,7 +89,7 @@ for check in checks['checks']:
             except:
                 pass
             if display:
-                print "CRITICAL : " + hostname + " (" + name + ")  is down"
+                print "CRITICAL: " + hostname + " (" + name + ")  is down"
                 sys.exit(2)
 
-print "OK : All sites seem OK"
+print "OK: All sites seem OK"
