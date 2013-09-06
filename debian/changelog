@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-274) unstable; urgency=low
+
+  * Removed useless and buggy check_packets plugins
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 06 Sep 2013 14:58:19 +0200
+
 nagios-plugins-cyb (1.0-273) unstable; urgency=low
 
   * check_iptables_persistent: check iptables rules even if we are not
