@@ -2,6 +2,8 @@ nagios-plugins-cyb (1.0-276) unstable; urgency=low
 
   * plugins/check_log: search for matching strings only in one specific
     log file and not all log files.
+  * plugins/check_apt_simple: more accurate description when no security
+    repository has been found.
 
  -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 14:13:50 +0200
 
