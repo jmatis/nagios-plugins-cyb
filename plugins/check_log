@@ -19,15 +19,15 @@ set -e -o pipefail -o nounset
 
 offset_dir='/var/lib/nagios-plugins-cyb'
 error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
-logfiles='/var/log/kern.log /var/log/mysql/error.log /var/log/daemon.log
-/var/log/apache2/error.log /var/log/syslog'
-rule_file='/etc/nagios-plugins/config/cyb_check_log.conf'
+rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
 
 mkdir -p $(dirname $error_file) $offset_dir
 
 # Check new errors from logs
-for logfile in $logfiles
+cd $rule_dir
+for rule_file in *
 do
+    logfile=/${rule_file//_/\/}
     [ ! -f $logfile ] && continue
 
     tempfile=$(tempfile)
@@ -35,7 +35,7 @@ do
     grep -vE '^#|^$' $rule_file > $tempfile
 
     timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
-	| grep -F -f $tempfile >> $error_file || true
+	| grep -E -f $tempfile >> $error_file || true
 
     rm -f $tempfile
 done

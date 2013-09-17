@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-276) unstable; urgency=low
+
+  * plugins/check_log: search for matching strings only in one specific
+    log file and not all log files.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 14:13:50 +0200
+
 nagios-plugins-cyb (1.0-275) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check 503 errors from

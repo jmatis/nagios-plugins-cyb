@@ -1,0 +1,6 @@
+# Suhosin blacklist (syslog)
+function within eval blacklist called
+
+# haproxy
+ is DOWN, reason: 
+ haproxy.* 503 
