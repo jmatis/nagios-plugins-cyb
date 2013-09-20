@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-278) unstable; urgency=low
+
+  * Add cyb_check_host_alive_nrpe_and_icmp
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 20 Sep 2013 16:09:43 +0200
+
 nagios-plugins-cyb (1.0-277) unstable; urgency=low
 
   * plugins/check_log: show log file name on error to ease debugging.
