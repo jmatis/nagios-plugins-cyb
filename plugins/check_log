@@ -35,7 +35,7 @@ do
     grep -vE '^#|^$' $rule_file > $tempfile
 
     timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
-	| grep -E -f $tempfile \
+	| grep -P -f $tempfile \
 	| sed -e "s,^,$logfile: ," >> $error_file || true
 
     rm -f $tempfile

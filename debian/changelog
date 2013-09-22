@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-279) unstable; urgency=low
+
+  * plugins/check_log: use Perl regexp instead of extended regexp.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 22 Sep 2013 15:59:19 +0200
+
 nagios-plugins-cyb (1.0-278) unstable; urgency=low
 
   * Add cyb_check_host_alive_nrpe_and_icmp
