@@ -41,7 +41,7 @@ def auth():
             try:
                 return pingdom.Pingdom(username=PINGDOM_USERNAME, password=PINGDOM_PASSWORD, appkey=PINGDOM_APPKEY)
             except Exception, err:
-                sys.stderr.write(str(err)+"\n")
+                print(str(err)+"\n")
                 sys.exit(1)
 
 def validate_id(ident):
@@ -61,14 +61,14 @@ def pingdom_api_call(command, method, params=None):
             params = json.loads(str(params))
         except ValueError, err:
             err_msg = str(err) + ": %s\n" % params
-            sys.stderr.write(err_msg)
+            print(err_msg)
             sys.exit(1)
         
     try:
         res = pingdom_connection.method(command, method, params)
         return res
     except Exception, err:
-        sys.stderr.write(str(err)+"\n")
+        print(str(err)+"\n")
         print err.read()
         sys.exit(1)
 
