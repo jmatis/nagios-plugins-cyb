@@ -77,7 +77,7 @@ fi
 
 if [ "$rc" != "$ok_rc" ]
 then
-    echo 'No security repository found in /etc/apt/sources.list!'
+    echo 'No security repository in /etc/apt/sources.list! You are probably running an old OS release.'
     exit $critical_rc
 fi
 

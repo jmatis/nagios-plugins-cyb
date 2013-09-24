@@ -1,9 +1,76 @@
-nagios-plugins-cyb (1.0-270) unstable; urgency=low
+nagios-plugins-cyb (1.0-280) unstable; urgency=low
 
   *  plugins/check_pingdom : replace STDERR use by simple print on
     STDOUT
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 24 Sep 2013 17:03:57 +0200
+
+nagios-plugins-cyb (1.0-279) unstable; urgency=low
+
+  * plugins/check_log: use Perl regexp instead of extended regexp.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sun, 22 Sep 2013 15:59:19 +0200
+
+nagios-plugins-cyb (1.0-278) unstable; urgency=low
+
+  * Add cyb_check_host_alive_nrpe_and_icmp
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 20 Sep 2013 16:09:43 +0200
+
+nagios-plugins-cyb (1.0-277) unstable; urgency=low
+
+  * plugins/check_log: show log file name on error to ease debugging.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 16:27:29 +0200
+
+nagios-plugins-cyb (1.0-276) unstable; urgency=low
+
+  * plugins/check_log: search for matching strings only in one specific
+    log file and not all log files.
+  * plugins/check_apt_simple: more accurate description when no security
+    repository has been found.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 14:13:50 +0200
+
+nagios-plugins-cyb (1.0-275) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.conf: check 503 errors from
+    haproxy
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Sep 2013 16:50:31 +0200
+
+nagios-plugins-cyb (1.0-274) unstable; urgency=low
+
+  * Removed useless and buggy check_packets plugins
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 06 Sep 2013 14:58:19 +0200
+
+nagios-plugins-cyb (1.0-273) unstable; urgency=low
+
+  * check_iptables_persistent: check iptables rules even if we are not
+    using iptables-persistent
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:50:51 +0200
+
+nagios-plugins-cyb (1.0-272) unstable; urgency=low
+
+  * Run check_iptables_persistent with sudo in any case
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:36:31 +0200
+
+nagios-plugins-cyb (1.0-271) unstable; urgency=low
+
+  * Add check_iptables_persistent
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:29:52 +0200
+
+nagios-plugins-cyb (1.0-270) unstable; urgency=low
+
+  * Removed 'Apache MaxClients' check because Apache does NOT respect
+    MaxSpareServers and can fork MUCH more than the limit.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 12:52:25 +0200
+>>>>>>> ac87c4f76f1c85000725fe86f3e099a57f3a01f9
 
 nagios-plugins-cyb (1.0-269) unstable; urgency=low
 

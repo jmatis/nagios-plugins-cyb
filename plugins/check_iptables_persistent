@@ -15,40 +15,17 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# Packet Per Second -- https://en.wikipedia.org/wiki/Packets_per_second
-pps_threshold=$1
-delay=$2
-file='/proc/net/dev'
-
 set -e -o pipefail -o nounset
 
-if [ -z "$pps_threshold" ]
+export PATH=$PATH:/sbin:/usr/sbin
+
+number_of_rules=$(iptables -S | wc -l)
+
+if [ "$number_of_rules" -gt 3 ]
 then
-    pps_threshold=1000
+    echo "OK: $number_of_rules iptables rules have been detected"
+    exit 0
 fi
 
-if [ -z "$delay" ]
-then
-    delay=5
-fi
-
-# Fetch the total number of sent and received packets via the eth* interfaces
-before=$(awk '/:/ {gsub(":", " "); total += $3 + $11} END {printf("%.0f", total)}' $file)
-
-sleep $delay
-
-after=$(awk '/:/ {gsub(":", " "); total += $3 + $11} END {printf("%.0f", total)}' $file)
-
-pps=$(( ($after - $before) / $delay))
-
-echo "$pps packets per second (threshold $pps_threshold)"
-
-if [ $pps -gt $pps_threshold ]
-then
-    exit 2
-fi
-
-if [ $pps -le 0 ]
-then
-    exit 2
-fi
+echo "No iptables rule has been detected"
+exit 2

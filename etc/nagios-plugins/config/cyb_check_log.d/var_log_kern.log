@@ -1,0 +1,32 @@
+# e1000e
+Detected Hardware Unit Hang
+
+# OOM killer
+invoked oom-killer
+Out of memory
+Killed process
+
+# EXT-FS
+EXT4-fs error
+EXT-fs error
+
+# ATA
+I/O error
+read error
+Medium Error
+media error
+
+# Software RAID
+Disk failure on
+
+# Segmentation faults
+segfault at
+
+# ECC error on Error detection and correction (EDAC) controllers
+New Corrected error
+
+# Thermal
+Core temperature above threshold, cpu clock throttled
+
+# XFS
+XFS: Internal error
