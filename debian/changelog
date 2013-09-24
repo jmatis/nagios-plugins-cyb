@@ -70,7 +70,6 @@ nagios-plugins-cyb (1.0-270) unstable; urgency=low
     MaxSpareServers and can fork MUCH more than the limit.
 
  -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 12:52:25 +0200
->>>>>>> ac87c4f76f1c85000725fe86f3e099a57f3a01f9
 
 nagios-plugins-cyb (1.0-269) unstable; urgency=low
 
