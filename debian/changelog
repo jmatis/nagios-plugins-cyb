@@ -3,8 +3,9 @@ nagios-plugins-cyb (1.0-281) unstable; urgency=low
   * plugins/check_log: revert the use of Perl regexp because grep is not
     able to read a list of regexps from a file and fail with "grep: the -P
     option only supports a single pattern".
+  * plugins/check_log: add whitelist support
 
- --
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 27 Sep 2013 11:15:18 +0200
 
 nagios-plugins-cyb (1.0-280) unstable; urgency=low
 

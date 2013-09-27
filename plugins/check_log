@@ -20,6 +20,7 @@ set -e -o pipefail -o nounset
 offset_dir='/var/lib/nagios-plugins-cyb'
 error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
+whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 
 mkdir -p $(dirname $error_file) $offset_dir
 
@@ -36,6 +37,7 @@ do
 
     timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
 	| grep -E -f $tempfile \
+	| grep -v -E -f $whitelist_file \
 	| sed -e "s,^,$logfile: ," >> $error_file || true
 
     rm -f $tempfile
