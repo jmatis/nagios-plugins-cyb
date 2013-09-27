@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-282) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: add more
+    e1000e ethernet checks
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 27 Sep 2013 15:26:24 +0200
+
 nagios-plugins-cyb (1.0-281) unstable; urgency=low
 
   * plugins/check_log: revert the use of Perl regexp because grep is not

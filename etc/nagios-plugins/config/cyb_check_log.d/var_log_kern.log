@@ -1,5 +1,7 @@
-# e1000e
+# e1000e hardware issues
 Detected Hardware Unit Hang
+Reset adapter
+NETDEV WATCHDOG
 
 # OOM killer
 invoked oom-killer
