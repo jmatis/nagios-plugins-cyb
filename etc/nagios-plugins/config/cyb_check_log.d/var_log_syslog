@@ -2,5 +2,6 @@
 function within eval blacklist called
 
 # haproxy
- is DOWN, reason: 
+ haproxy.* is DOWN, reason: 
+ haproxy.* has no server available!
  haproxy.* 503 
