@@ -3,8 +3,11 @@ nagios-plugins-cyb (1.0-283) unstable; urgency=low
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_haproxy.log,
     etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog: better
     checking of haproxy down servers
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog: disable 503
+    error checking because we have fixed the primary issue and only have
+    false positives now
 
- --
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 30 Sep 2013 17:43:37 +0200
 
 nagios-plugins-cyb (1.0-282) unstable; urgency=low
 
