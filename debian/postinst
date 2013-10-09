@@ -40,6 +40,3 @@ chmod 440 /etc/sudoers.d/nagios-plugins-cyb
 
 # Suppress previous 'nagios' entry from /etc/sudoers
 sed -i -e '/^nagios ALL=NOPASSWD: .*nagios.*$/ d' /etc/sudoers
-
-# Remove previous file from Google Safe Browing
-rm -f /var/lib/nagios-plugins-cyb/check_safe_browsing_bulk.out 
