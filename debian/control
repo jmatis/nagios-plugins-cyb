@@ -16,7 +16,6 @@ Depends: ${shlibs:Depends},
   ntpdate,
   timeout | coreutils (>= 8.0-1),
   logtail,
-  libnet-google-safebrowsing2-perl,
   libconfig-simple-perl,
   libdbd-sqlite3-perl
 Suggests: dellomsa,
