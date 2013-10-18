@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-287) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_php5-fpm.log: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 18 Oct 2013 22:11:16 +0200
+
 nagios-plugins-cyb (1.0-286) unstable; urgency=low
 
   * debian/control: removed dep on libnet-google-safebrowsing2-perl
