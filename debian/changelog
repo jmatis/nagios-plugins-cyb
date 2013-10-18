@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-288) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_mysql_error.log:
+    check if MySQL hit max-connections
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 18 Oct 2013 22:30:40 +0200
+
 nagios-plugins-cyb (1.0-287) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_php5-fpm.log: add
