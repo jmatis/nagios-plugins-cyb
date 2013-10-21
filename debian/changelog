@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-289) unstable; urgency=low
+
+  * check for 'error writing file' string in MySQL error files
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 21 Oct 2013 11:17:45 +0200
+
 nagios-plugins-cyb (1.0-288) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_mysql_error.log:
