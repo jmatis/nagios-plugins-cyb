@@ -32,3 +32,6 @@ Core temperature above threshold, cpu clock throttled
 
 # XFS
 XFS: Internal error
+
+# CPU hang / kvm when elevator!=deadline
+BUG: soft lockup - CPU.* stuck for
