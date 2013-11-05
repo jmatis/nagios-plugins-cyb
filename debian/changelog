@@ -31,7 +31,6 @@ nagios-plugins-cyb (1.0-293) unstable; urgency=low
   * Add support for HTTPS check via NRPE.
 
  -- Cyril Bouthors <cyril@bouthors.org>  Thu, 24 Oct 2013 12:01:47 +0200
->>>>>>> 0a75d8943fb9910241673296d94f80c1932a5b37
 
 nagios-plugins-cyb (1.0-292) unstable; urgency=low
 
