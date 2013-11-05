@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-296) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_mysql_error.log:
+    check for the following error message: "Warning: Enabling keys got
+    errno".
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 05 Nov 2013 09:06:29 +0100
+
 nagios-plugins-cyb (1.0-295) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: check if
