@@ -73,22 +73,27 @@ def pingdom_api_call(command, method, params=None):
         sys.exit(1)
 
 
+# First, we authenticate
 pingdom_connection = auth()
+# Then we fetch all check results, all probes should be there but not all needed infos
 checks = pingdom_api_call("checks", "GET")
 for check in checks['checks']:
     if not validate_id(check['id']):
         continue
 
+    # If this probe is OK, go to next probe
     if check['status'] == "up":
         continue
 
+    # Else we get more infos of this probe
     res = pingdom_api_call("checks/" + str(check['id']), "GET")
     display=0
     name=res['check']['name']
     hostname=res['check']['hostname']
+    # Check if defined contact ID is linked to this probe
     try:
         contactids=res['check']['contactids']
-        if contactids.count(PINGDOM_CONTACTID) > 0:
+        if contactids.count(int(PINGDOM_CONTACTID)) > 0:
             display=1
     except:
         pass
