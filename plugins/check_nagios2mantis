@@ -23,22 +23,25 @@ ok_rc=0
 
 nagios2mantis_spool='/var/lib/nagios2mantis/spool.sqlite'
 
-if [ ! -f $nagios2mantis_spool ] ; then
+if [ ! -f $nagios2mantis_spool ]
+then
     echo "File $nagios2mantis_spool does not exist"
     exit $critical_rc
 fi
 
 request_table='.tables nagios2mantis'
 nagios2mantis_table=$(sqlite3 $nagios2mantis_spool "$request_table")
-if [ -z "$nagios2mantis_table" ] ; then
+if [ -z "$nagios2mantis_table" ]
+then
 # The table does not exist, so, there is no message in the spool
     echo "OK (no table)"
     exit $ok_rc
 fi
 
-request_count='select count(*) from nagios2mantis;'
+request_count='SELECT COUNT(*) FROM nagios2mantis;'
 nagios2mantis_count=$(sqlite3 $nagios2mantis_spool "$request_count")
-if [ $nagios2mantis_count -eq 0 ] ; then
+if [ $nagios2mantis_count -eq 0 ]
+then
     echo "OK (empty table)"
     exit $ok_rc
 fi
