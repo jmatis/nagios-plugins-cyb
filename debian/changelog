@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-298) unstable; urgency=low
+
+  * Add check_nagios2mantis plugin and configuration.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 12 Nov 2013 16:05:16 +0100
+
 nagios-plugins-cyb (1.0-297) unstable; urgency=low
 
   * plugins/check_pingdom: fix a bug on contact id type
