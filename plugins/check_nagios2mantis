@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Copyright (C) 2013 Arthur Vuillard <arthur@hashbang.fr>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+critical_rc=2
+ok_rc=0
+
+nagios2mantis_spool='/var/lib/nagios2mantis/spool.sqlite'
+
+if [ ! -f $nagios2mantis_spool ] ; then
+    echo "File $nagios2mantis_spool does not exist"
+    exit $critical_rc
+fi
+
+request_table='.tables nagios2mantis'
+nagios2mantis_table=$(sqlite3 $nagios2mantis_spool "$request_table")
+if [ -z "$nagios2mantis_table" ] ; then
+# The table does not exist, so, there is no message in the spool
+    echo "OK (no table)"
+    exit $ok_rc
+fi
+
+request_count='select count(*) from nagios2mantis;'
+nagios2mantis_count=$(sqlite3 $nagios2mantis_spool "$request_count")
+if [ $nagios2mantis_count -eq 0 ] ; then
+    echo "OK (empty table)"
+    exit $ok_rc
+fi
+
+echo "$nagios2mantis_count messages in the spool"
+exit $critical_rc
