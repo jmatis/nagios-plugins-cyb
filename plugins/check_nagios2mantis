@@ -20,8 +20,13 @@ set -e
 
 critical_rc=2
 ok_rc=0
-
 nagios2mantis_spool='/var/lib/nagios2mantis/spool.sqlite'
+
+if !which sqlite3 >/dev/null 2>&1
+then
+    echo "Unable to find sqlite3"
+    exit $critical_rc
+fi
 
 if [ ! -f $nagios2mantis_spool ]
 then

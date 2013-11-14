@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-299) unstable; urgency=low
+
+  * plugins/check_nagios2mantis: check if 'sqlite3' is available before
+    using it
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 14 Nov 2013 12:28:18 +0100
+
 nagios-plugins-cyb (1.0-298) unstable; urgency=low
 
   * Add check_nagios2mantis plugin and configuration.
