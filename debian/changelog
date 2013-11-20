@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-300) unstable; urgency=low
+
+  * plugins/check_exim_mailq: more accurate description.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Nov 2013 23:40:45 +0100
+
 nagios-plugins-cyb (1.0-299) unstable; urgency=low
 
   * plugins/check_nagios2mantis: check if 'sqlite3' is available before
