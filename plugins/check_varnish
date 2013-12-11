@@ -36,7 +36,7 @@ then
 fi
 
 # Ping Varnish
-if varnishadm ping 2>&1
+if varnishadm -S $secret_file -T $host:$port ping 2>&1
 then
     exit 0
 fi

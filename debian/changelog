@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-304) unstable; urgency=low
+
+  * plugins/check_varnish: fixed argument handling.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 18:13:25 +0100
+
 nagios-plugins-cyb (1.0-303) unstable; urgency=low
 
   * plugins/check_varnish: now support secret_file, host and port as
