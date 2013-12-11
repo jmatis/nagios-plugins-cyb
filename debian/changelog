@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-301) unstable; urgency=low
+
+  * plugins/check_varnish: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 17:25:50 +0100
+
 nagios-plugins-cyb (1.0-300) unstable; urgency=low
 
   * plugins/check_exim_mailq: more accurate description.
