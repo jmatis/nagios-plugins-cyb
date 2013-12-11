@@ -15,17 +15,27 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+secret_file="$1"
+host="$2"
+port="$3"
+
 set -e -o nounset
 
-secret_file='/etc/varnish/secret'
+# Check arguments
+if [ -z "$secret_file" -o -z "$host" -o -z "$port" ]
+then
+    echo "Too few argument. Usage: $0 SECRET_FILE HOST PORT"
+    exit 2
+fi
 
+# Check file permissions
 if [ ! -r $secret_file ]
 then
     echo -e "$secret_file is not readable. Fix with 'chgrp nagios $secret_file; chmod g+r $secret_file'"
     exit 2
 fi
 
-
+# Ping Varnish
 if varnishadm ping 2>&1
 then
     exit 0
