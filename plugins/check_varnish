@@ -17,6 +17,15 @@
 
 set -e -o nounset
 
+secret_file='/etc/varnish/secret'
+
+if [ ! -r $secret_file ]
+then
+    echo -e "$secret_file is not readable. Fix with 'chgrp nagios $secret_file; chmod g+r $secret_file'"
+    exit 2
+fi
+
+
 if varnishadm ping 2>&1
 then
     exit 0
