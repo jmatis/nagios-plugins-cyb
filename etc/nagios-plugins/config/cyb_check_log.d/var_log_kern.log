@@ -21,9 +21,6 @@ media error
 # Software RAID
 Disk failure on
 
-# Segmentation faults
-segfault at
-
 # ECC error on Error detection and correction (EDAC) controllers
 New Corrected error
 

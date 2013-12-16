@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-305) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: removed
+    check of 'segmentation faults' because we have 90%+ false-positives.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 16 Dec 2013 18:59:05 +0100
+
 nagios-plugins-cyb (1.0-304) unstable; urgency=low
 
   * plugins/check_varnish: fixed argument handling.
