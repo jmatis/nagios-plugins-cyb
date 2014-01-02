@@ -79,9 +79,13 @@ do
 	fi
     done
 
-    #  Check if disk usage has triggered critical threshold
+    # Check if disk usage has triggered critical threshold. We use awk because
+    # it supports comparing floats. Bash only supports integers.
     percentage=${percentage%\%}
-    if [ "$percentage" -ge "$critical_threshold" ]
+    if awk \
+	-vpercentage="$percentage" \
+	-vcritical_threshold="$critical_threshold" \
+	'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
     then
 	echo -n "$mount_point is ${percentage}% full, "
 	echo -n "$available$units available. "
@@ -89,8 +93,11 @@ do
 	continue
     fi
 
-    #  Check if disk usage has triggered warning threshold
-    if [ "$percentage" -ge "$warning_threshold" ]
+    # Check if disk usage has triggered warning threshold
+    if awk \
+	-vpercentage="$percentage" \
+	-vwarning_threshold="$warning_threshold" \
+	'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
     then
 	echo -n "$mount_point is ${percentage}% full, "
 	echo -n "$available$units available. "

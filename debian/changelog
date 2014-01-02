@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-306) unstable; urgency=low
+
+  * plugins/check_df: allow support for float threshold percentages (i.e.
+    99.95%).
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 11:07:12 +0100
+
 nagios-plugins-cyb (1.0-305) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: removed
