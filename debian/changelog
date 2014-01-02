@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-311) unstable; urgency=low
+
+  * New plugin : check_rabbitmq_queue_length
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 02 Jan 2014 16:47:51 +0100
+
 nagios-plugins-cyb (1.0-310) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_nrpe.cfg: typo
