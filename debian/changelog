@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-307) unstable; urgency=low
+
+  * plugins/check_df: force 'C' locale to avoid issues with weird 'df'
+    output with some locales.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 13:09:55 +0100
+
 nagios-plugins-cyb (1.0-306) unstable; urgency=low
 
   * plugins/check_df: allow support for float threshold percentages (i.e.

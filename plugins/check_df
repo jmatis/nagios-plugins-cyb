@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export LC_ALL=C
+
 warning_threshold=$1
 critical_threshold=$2
 shift 2
