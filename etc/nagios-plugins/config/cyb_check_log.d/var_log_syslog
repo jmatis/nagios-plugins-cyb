@@ -1,6 +1,2 @@
 # Suhosin blacklist (syslog)
 function within eval blacklist called
-
-# haproxy
- haproxy.* is DOWN, reason: 
- haproxy.* has no server available!

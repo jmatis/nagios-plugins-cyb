@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-312) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog: stop
+    checking for haproxy errors because they lead to false-positives most
+    of the time.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Jan 2014 17:12:47 +0100
+
 nagios-plugins-cyb (1.0-311) unstable; urgency=low
 
   * New plugin : check_rabbitmq_queue_length
