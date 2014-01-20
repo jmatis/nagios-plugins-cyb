@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-313) unstable; urgency=low
+
+  * etc/nagios-plugins/config/host_alive_nrpe.cfg: add
+    'cyb_check_host_alive_nrpe_custom_port'.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Jan 2014 18:21:27 +0100
+
 nagios-plugins-cyb (1.0-312) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog: stop
