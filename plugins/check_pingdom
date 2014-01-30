@@ -102,4 +102,4 @@ for check in checks['checks']:
         print "CRITICAL: " + hostname + " (" + name + ")  is down"
         sys.exit(2)
 
-print "OK: All sites seem OK"
+print "All sites seem OK"
