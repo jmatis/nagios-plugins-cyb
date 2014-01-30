@@ -82,7 +82,7 @@ for check in checks['checks']:
         continue
 
     # If this probe is OK, go to next probe
-    if check['status'] == "up":
+    if check['status'] == "up" or check['status'] == "paused":
         continue
 
     # Else we get more infos of this probe

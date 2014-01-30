@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-315) unstable; urgency=medium
+
+  * plugins/check_pingdom: ignore 'paused' checks.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 30 Jan 2014 21:29:25 +0100
+
 nagios-plugins-cyb (1.0-314) unstable; urgency=low
 
   *  etc/sudoers.d/nagios-plugins-cyb : fix typo
