@@ -22,13 +22,18 @@ use utils qw($TIMEOUT %ERRORS &print_revision &support);
 
 my $pcsensor = Device::USB::PCSensor::HidTEMPer->new();
 
-my $threshold=$ARGV[0];
+my $warn=$ARGV[0];
+my $critical=$ARGV[1];
 
-if(!defined($threshold)) {
-    printf "Usage: check_hidtemper TEMP_THRESHOLD\n";
+if(!defined($warn)) {
+    printf "Usage: check_hidtemper <TEMP warn> <TEMP crtitical> \n";
     exit $ERRORS{'CRITICAL'};
 }
     
+if(!defined($critical)) {
+    printf "Usage: check_hidtemper <TEMP warn> <TEMP crtitical> \n";
+    exit $ERRORS{'CRITICAL'};
+}
     
 if(!$pcsensor->list_devices()) {
     printf "Unable to find temper\n";
@@ -38,10 +43,14 @@ if(!$pcsensor->list_devices()) {
 foreach my $device ( $pcsensor->list_devices()) {
     my $temp=$device->internal()->celsius();
 
-    printf "$temp degrees\n";
+    printf "Temperature: $temp C | Temperature=$temp" .  "C;25;30;0;50\n";
 
-    if($temp > $threshold) {
+    if($temp > $critical) {
 	exit $ERRORS{'CRITICAL'};
+    }
+
+    if($temp > $warn) {
+	exit $ERRORS{'WARNING'};
     }
 
     exit $ERRORS{'OK'};
