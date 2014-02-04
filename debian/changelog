@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-318) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/rabbitmq.cfg : add a NRPE check for RabbitMQ file
+    descriptors
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 04 Feb 2014 11:40:16 +0100
+
 nagios-plugins-cyb (1.0-317) unstable; urgency=low
 
   *  plugins/check_rabbitmq_fd : fix permissions
