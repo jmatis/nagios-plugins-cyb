@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-317) unstable; urgency=low
+
+  *  plugins/check_rabbitmq_fd : fix permissions
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 04 Feb 2014 11:32:02 +0100
+
 nagios-plugins-cyb (1.0-316) unstable; urgency=low
 
   *  plugins/check_rabbitmq_fd: new check for RabbitMQ file descriptors
