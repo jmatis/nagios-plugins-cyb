@@ -1,3 +1,15 @@
+nagios-plugins-cyb (1.0-320) unstable; urgency=low
+
+  *  etc/nagios/nrpe.d/celery.cfg: NRPE check for celery ping
+  *  etc/nagios/nrpe.d/rabbitmq.cfg: add a NRPE check for RabbitMQ queue
+     consumers
+  *  plugins/check_rabbit_queue_consumers renamed in 
+     plugins/check_rabbitmq_queue_consumers
+  *  etc/sudoers.d/nagios-plugins-cyb : add a sudo permission for 
+     check_rabbitmq_queue_consumers
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 05 Feb 2014 17:16:30 +0100
+
 nagios-plugins-cyb (1.0-319) unstable; urgency=low
 
   *  plugins/check_celery_ping : new check for celery worker

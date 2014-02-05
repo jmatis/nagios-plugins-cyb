@@ -15,3 +15,4 @@ nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_postfix_mailq
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_iptables_persistent
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rabbitmq_queue_length
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rabbitmq_fd
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rabbitmq_queue_consumers
