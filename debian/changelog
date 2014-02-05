@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-319) unstable; urgency=low
+
+  *  plugins/check_celery_ping : new check for celery worker
+  *  plugins/check_rabbit_queue_consumers : new check for RabbitMQ to see
+     if a queue is linked to a consumer
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 05 Feb 2014 16:34:37 +0100
+
 nagios-plugins-cyb (1.0-318) unstable; urgency=low
 
   *  etc/nagios/nrpe.d/rabbitmq.cfg : add a NRPE check for RabbitMQ file
