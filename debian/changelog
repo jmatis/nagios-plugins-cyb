@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-321) unstable; urgency=low
+
+  *  plugins/check_celery_ping : set an output in case of OK state
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 05 Feb 2014 17:51:05 +0100
+
 nagios-plugins-cyb (1.0-320) unstable; urgency=low
 
   *  etc/nagios/nrpe.d/celery.cfg: NRPE check for celery ping

@@ -44,5 +44,6 @@ result=$?
 
 [ ! $result ] && exit 2
 
+echo "$worker: pong!"
 exit 0
 
