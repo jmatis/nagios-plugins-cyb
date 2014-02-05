@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2009-2012 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2009-2014 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,8 +16,6 @@
 #
 
 DESTDIR=/usr/local
-VERSION=1.2
-PKG=nagios-plugins-cyb
 
 all:;
 
