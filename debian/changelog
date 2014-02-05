@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-322) unstable; urgency=medium
+
+  * Add check_ganeti_failover_gateway_node
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 05 Feb 2014 19:53:21 +0100
+
 nagios-plugins-cyb (1.0-321) unstable; urgency=low
 
   *  plugins/check_celery_ping : set an output in case of OK state
