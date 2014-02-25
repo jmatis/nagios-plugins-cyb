@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-324) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/idle_cpu.cfg: fix thresolds parameters
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 25 Feb 2014 15:26:09 +0100
+
 nagios-plugins-cyb (1.0-323) unstable; urgency=low
 
   * plugins/check_ntp_monlist: new probe to check NTP monlist flaw
