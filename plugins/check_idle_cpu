@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Copyright (C) 2010 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+warn_threshold=${1/.*/}
+crit_threshold=${2/.*/}
+
+if [ -z "$warn_threshold" -o -z "$crit_threshold" ]
+then
+    echo $0 too few arguments >&2
+    echo Usage: $0 WARNING_THRESHOLD CRITICAL_THRESHOLD >&2
+    exit 1
+fi
+
+idle_pct=$(sar -u 1 1|grep Average|awk '{ print $8 }')
+
+echo -n ' '
+
+if [ ${idle_pct/.*/} -lt $crit_threshold ]
+then
+    echo "CRITICAL: $idle_pct% idle"
+    exit 2
+fi
+
+if [ ${idle_pct/.*/} -lt $warn_threshold ]
+then
+    echo "WARNING: $idle_pct% idle"
+    exit 1
+fi
+
+echo "OK: $idle_pct% idle"
+exit 0

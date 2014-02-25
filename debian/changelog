@@ -1,3 +1,13 @@
+nagios-plugins-cyb (1.0-323) unstable; urgency=low
+
+  * plugins/check_ntp_monlist: new probe to check NTP monlist flaw
+  * etc/nagios-plugins/config/ntp_monlist.cfg: config for new NTP probe
+  * plugins/check_idle_cpu: new probe to check idle % on CPU
+  * etc/nagios/nrpe.d/idle_cpu.cfg: NRPE config for new CPU probe
+
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 25 Feb 2014 15:06:47 +0100
+
 nagios-plugins-cyb (1.0-322) unstable; urgency=medium
 
   * Add check_ganeti_failover_gateway_node
