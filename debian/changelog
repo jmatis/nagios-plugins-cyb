@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-327) unstable; urgency=medium
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: check
+    x2apic bug with Dell BIOS
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 27 Feb 2014 15:50:22 +0100
+
 nagios-plugins-cyb (1.0-326) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: more verbose output

@@ -32,3 +32,6 @@ XFS: Internal error
 
 # CPU hang / kvm when elevator!=deadline
 BUG: soft lockup - CPU.* stuck for
+
+# x2apic bug with Dell BIOS
+Your BIOS is broken and requested that x2apic be disabled
