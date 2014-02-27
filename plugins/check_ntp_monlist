@@ -34,4 +34,4 @@ then
     exit 2
 fi
 
-echo "OK"
+echo "NTP is correctly configured to avoid relaying DDOS attacks"
