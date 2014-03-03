@@ -27,7 +27,7 @@ then
     exit 1
 fi
 
-idle_pct=$(sar -u 1 1|grep Average|awk '{ print $8 }')
+idle_pct=$(sar -u 1 1| awk '/Average/ { print $8 }')
 
 echo -n ' '
 
