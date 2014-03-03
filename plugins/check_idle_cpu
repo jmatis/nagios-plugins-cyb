@@ -29,19 +29,17 @@ fi
 
 idle_pct=$(sar -u 1 1| awk '/Average/ { print $8 }')
 
-echo -n ' '
-
 if [ ${idle_pct/.*/} -lt $crit_threshold ]
 then
-    echo "CRITICAL: $idle_pct% idle"
+    echo "$idle_pct% idle"
     exit 2
 fi
 
 if [ ${idle_pct/.*/} -lt $warn_threshold ]
 then
-    echo "WARNING: $idle_pct% idle"
+    echo "$idle_pct% idle"
     exit 1
 fi
 
-echo "OK: $idle_pct% idle"
+echo "$idle_pct% idle"
 exit 0
