@@ -43,7 +43,7 @@ else
     content=$($wget "$url" 2>&1 || true)
 fi
 
-echo "$content" | tr "\n" " "
+echo "$content" | tr "\n" " " | head -c 200
 
 if echo "$content" | grep -qE "$match"
 then
