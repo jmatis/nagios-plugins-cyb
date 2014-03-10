@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-329) unstable; urgency=low
+
+  *  plugins/check_ntp_monlist : add a check to ensure host is up
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 10 Mar 2014 15:58:24 +0100
+
 nagios-plugins-cyb (1.0-328) unstable; urgency=medium
 
   * plugins/check_http_content: limit output to the first 200 bytes to

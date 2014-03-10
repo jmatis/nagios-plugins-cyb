@@ -26,12 +26,20 @@ then
     exit 2
 fi
 
-result_lines=$(ntpdc -n -c monlist $host 2>/dev/null | wc -l)
 
-if [ $result_lines -ne 0 ]
+if ping -q -w 3 $host 2>&1 1>/dev/null
 then
-    echo "NTP monlist is publicly available and could be used to relay DDOS attacks"
-    exit 2
+    result_lines=$(ntpdc -n -c monlist $host 2>/dev/null | wc -l)
+    if [ $result_lines -ne 0 ]
+    then
+        echo "NTP monlist is publicly available and could be used to relay DDOS attacks"
+        exit 2
+    else
+        echo "NTP is correctly configured to avoid relaying DDOS attacks"
+    fi
+else
+   echo "Host seems down"
+   exit 2
 fi
 
-echo "NTP is correctly configured to avoid relaying DDOS attacks"
+exit 0
