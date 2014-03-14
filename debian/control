@@ -17,6 +17,7 @@ Depends: ${shlibs:Depends},
   timeout | coreutils (>= 8.0-1),
   logtail,
   libconfig-simple-perl,
+  sipcalc,
   libdbd-sqlite3-perl
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,

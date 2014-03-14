@@ -46,7 +46,7 @@ then
     exit 1
 fi
 
-ip_list=$(sipcalc -s 32 $block |awk '{ print $3 }'|xargs)
+ip_list=$(sipcalc -s 32 $block | awk '/Network/ { print $3 }')
 
 for ip in $ip_list
 do
