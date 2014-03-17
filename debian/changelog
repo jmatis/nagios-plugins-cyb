@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-331) unstable; urgency=low
+
+  *  added NRPE command for check_rbl_block
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 17 Mar 2014 17:53:30 +0100
+
 nagios-plugins-cyb (1.0-330) unstable; urgency=low
 
   *  plugins/check_rbl_block: new probe to check RBL for a complete CIDR
