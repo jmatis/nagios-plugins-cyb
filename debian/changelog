@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-330) unstable; urgency=low
+
+  *  plugins/check_rbl_block: new probe to check RBL for a complete CIDR
+    block
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 17 Mar 2014 17:29:33 +0100
+
 nagios-plugins-cyb (1.0-329) unstable; urgency=low
 
   *  plugins/check_ntp_monlist : add a check to ensure host is up
