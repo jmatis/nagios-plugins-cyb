@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-332) unstable; urgency=low
+
+  *  etc/nagios-plugins/config/cyb_check_nrpe.cfg : add a NRPE check
+    command with custom timeout
+  *  etc/nagios/nrpe.d/cyb_rbl.cfg ; fix check_rbl_block
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 20 Mar 2014 15:58:52 +0100
+
 nagios-plugins-cyb (1.0-331) unstable; urgency=low
 
   *  added NRPE command for check_rbl_block
