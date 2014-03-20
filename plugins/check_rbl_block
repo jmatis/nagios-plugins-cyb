@@ -54,8 +54,7 @@ do
 
     for dnsbl in $dnsbls
     do
-
-        if host -W 1 $revip.$dnsbl > /dev/null 2>/dev/null
+        if getent hosts $revip.$dnsbl > /dev/null 2>/dev/null
         then
             echo -n "$ip blacklisted by $dnsbl "
             critical=1
