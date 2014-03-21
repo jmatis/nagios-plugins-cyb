@@ -51,7 +51,7 @@ ip_list=$(sipcalc -s 32 $block | awk '/Network/ { print $3 }')
 
 for ip in $ip_list
 do
-    if ! rgrep -q $ip $whitelist
+    if ! rgrep -F -q $ip $whitelist
     then
         revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
         
