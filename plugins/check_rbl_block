@@ -32,6 +32,7 @@ opm.tornevall.org
 
 critical=0
 block=$1
+whitelist='/etc/nagios-plugins/config/cyb_rbl.d'
 
 if [ -z "$block" ]
 then
@@ -50,16 +51,21 @@ ip_list=$(sipcalc -s 32 $block | awk '/Network/ { print $3 }')
 
 for ip in $ip_list
 do
-    revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
+    if ! rgrep -q $ip $whitelist
+    then
+        revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
+        
+        for dnsbl in $dnsbls
+        do
 
-    for dnsbl in $dnsbls
-    do
-        if getent hosts $revip.$dnsbl > /dev/null 2>/dev/null
-        then
-            echo -n "$ip blacklisted by $dnsbl "
-            critical=1
-        fi
-    done
+            if getent hosts $revip.$dnsbl > /dev/null 2>/dev/null
+            then   
+                echo -n "$ip blacklisted by $dnsbl "
+                critical=1
+            fi
+
+        done
+    fi
 done
 
 if [ $critical = 1 ]

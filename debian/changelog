@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-336) unstable; urgency=low
+
+  *  plugins/check_rbl_block: added a whitelist feature
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 21 Mar 2014 17:20:15 +0100
+
 nagios-plugins-cyb (1.0-335) unstable; urgency=medium
 
   * plugins/check_http_content: fetch cookie from home page
