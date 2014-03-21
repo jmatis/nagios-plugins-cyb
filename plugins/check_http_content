@@ -22,6 +22,8 @@ match=$2
 post="$3"
 header="$4"
 
+wget='wget -q -T30 -t1 -O- --no-check-certificate'
+
 if [ -z "$url" -o -z "$match" ]
 then
     echo "$0: Too few argument" >&2
@@ -29,7 +31,6 @@ then
     exit 1
 fi
 
-wget='wget -q -T30 -t1 -O- --no-check-certificate'
 
 if [ ! -z "$post" ]
 then
