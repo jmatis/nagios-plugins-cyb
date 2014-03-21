@@ -21,14 +21,21 @@ url=$1
 match=$2
 post="$3"
 header="$4"
+fetch_cookie_from_home="$5"
 
 wget='wget -q -T30 -t1 -O- --no-check-certificate'
 
 if [ -z "$url" -o -z "$match" ]
 then
     echo "$0: Too few argument" >&2
-    echo "Usage: $0 URL MATCH [POST_DATA [HEADERS]]" >&2
+    echo "Usage: $0 URL MATCH [POST_DATA [HEADERS [FETCH_COOKIE_FROM_HOME]]]" >&2
     exit 1
+fi
+
+if [ ! -z "$fetch_cookie_from_home" ]
+then
+    url_home=$(echo $url | cut -d/ -f1-3)
+    header="Cookie: $($wget -S $url_home 2>&1 | awk '/Set-Cookie: .*SESS/ {print $2, $3; exit}')"
 fi
 
 
