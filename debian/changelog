@@ -1,3 +1,16 @@
+nagios-plugins-cyb (1.0-338) unstable; urgency=low
+
+  * plugins/check_nagios_livestatus : new probe to check nagios
+    activity by livestatus
+  * etc/nagios-plugins/config/nagios_livestatus.cfg : NRPE
+    command config for check_nagios_livestatus
+  * plugins/check_nagios_log : new probe to check nagios
+    activity by its log
+  * etc/nagios/nrpe.d/nagioslog.cfg : nagios command config for
+    check_nagios_log
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 24 Mar 2014 14:54:50 +0100
+
 nagios-plugins-cyb (1.0-337) unstable; urgency=low
 
   *  plugins/check_rbl_block : fix a grep to not user regex
