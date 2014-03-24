@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-340) unstable; urgency=low
+
+  * renamed etc/nagios/nrpe.d/nagioslog.cfg in
+    etc/nagios/nrpe.d/cyb_nagioslog.cfg to avoid a bug (will be fixed
+    next)
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 24 Mar 2014 16:18:01 +0100
+
 nagios-plugins-cyb (1.0-339) unstable; urgency=low
 
   * etc/nagios-plugins/config/nagios_livestatus.cfg: fix command name
