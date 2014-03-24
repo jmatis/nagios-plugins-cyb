@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-338) unstable; urgency=low
+
+  * etc/nagios-plugins/config/nagios_livestatus.cfg : fix command first
+    parameter
+  * etc/nagios/nrpe.d/nagioslog.cfg : fix NRPE command name
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 24 Mar 2014 15:34:10 +0100
+
 nagios-plugins-cyb (1.0-337) unstable; urgency=low
 
   * plugins/check_nagios_livestatus : new probe to check nagios
