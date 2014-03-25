@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-341) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_rbl.cfg: added a command for
+    check_rbl_block
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 25 Mar 2014 15:53:35 +0100
+
 nagios-plugins-cyb (1.0-340) unstable; urgency=low
 
   * renamed etc/nagios/nrpe.d/nagioslog.cfg in
