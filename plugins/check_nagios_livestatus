@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Copyright (C) 2014 ISVTEC <contact@isvtec.com>
 #
@@ -16,8 +16,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-set -e -o pipefail -o nounset
-
+set -e
 critical=0
 host=$1
 delay=$2
