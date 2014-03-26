@@ -1,3 +1,12 @@
+nagios-plugins-cyb (1.0-342) unstable; urgency=low
+
+  * check_nagios_livestatus: changed shell (bash) and put some bash
+    parameters
+  * check_nagios_log: changed shell (bash) and put some bash
+    parameters
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 26 Mar 2014 15:10:50 +0100
+
 nagios-plugins-cyb (1.0-341) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_rbl.cfg: added a command for
