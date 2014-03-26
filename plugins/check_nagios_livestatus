@@ -23,9 +23,9 @@ delay=$2
 
 if [ -z "$host" -o -z "$delay" ]
 then
-    echo $0 too few arguments >&2
-    echo Usage: $0 host delay >&2
-    echo delay is expressed in minutes >&2
+    echo "$0 too few arguments" >&2
+    echo "Usage: $0 HOST DELAY" >&2
+    echo "delay is expressed in minutes" >&2
     exit 1
 fi
 
