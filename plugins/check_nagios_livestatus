@@ -29,7 +29,7 @@ then
     exit 1
 fi
 
-# Check if nagios launched a check recently
+# Check if Nagios recently launched a check
 
 last_check_time=$(echo -e "GET services\n\r\nStats: max last_check\r\n" | nc $host 6557)
 current_time=$(date +%s)
