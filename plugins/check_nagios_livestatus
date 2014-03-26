@@ -35,7 +35,7 @@ last_check_time=$(echo -e "GET services\n\r\nStats: max last_check\r\n" | nc $ho
 current_time=$(date +%s)
 last_check_time_elapsed=$(($current_time - $last_check_time))
 
-echo "The last Nagios check was $last_check_time_elapsed seconds ago"
+echo "The last Nagios check was $last_check_time_elapsed second(s) ago"
 
 if [ "$last_check_time_elapsed" -gt "$delay" ]
 then
