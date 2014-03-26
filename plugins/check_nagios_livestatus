@@ -33,19 +33,13 @@ fi
 
 last_check_time=$(echo -e "GET services\n\r\nStats: max last_check\r\n" | nc $host 6557)
 current_time=$(date +%s)
-delay_seconds=$(($delay*60))
+last_check_time_elapsed=$(($current_time - $last_check_time))
 
-if [ "$(($current_time - $delay_seconds))" -gt $last_check_time ]
-then
-    echo "The last Nagios check seems to be older than 10 minutes"
-    critical=1
-fi
+echo "The last Nagios check was $last_check_time_elapsed seconds ago"
 
-if [ $critical = 1 ]
+if [ "$last_check_time_elapsed" -gt "$delay" ]
 then
-    echo
     exit 2
 fi
 
-echo "OK"
 exit 0
