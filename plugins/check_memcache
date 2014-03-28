@@ -148,7 +148,7 @@ then
     exit 1
 fi
 
-# Check if we use more than 90% of memory
+# Check if we use more than 90% of max_connections
 percent_connections_used=$(($curr_connections * 100 / $max_connections))
 if [ "$percent_connections_used" -ge 90 ]
 then
