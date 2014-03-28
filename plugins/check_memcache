@@ -18,12 +18,19 @@
 set -u -o pipefail
 
 help() {
-    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
+    echo "Usage: $0"
+    echo "  [--hostname=localhost]"
+    echo "  [--port=11211]"
+    echo "  [--timeout=5]"
+    echo "  [--memory-critical-threshold-percent=90]"
+    echo "  [--memory-warning-threshold-percent=80]"
+    echo "  [--connection-used-warning-threshold-percent=80]"
+    echo "  [--connection-used-critical-threshold-percent=90]"
 }
 
 # ":" means required
 # "::" means optional
-TEMP=$(getopt -o h: --long hostname::,port::,timeout:: -n "$0" -- "$@")
+TEMP=$(getopt -o h: --long hostname::,port::,timeout::,memory-critical-threshold-percent::,memory-warning-threshold-percent::,connection-used-warning-threshold-percent::,connection-used-critical-threshold-percent:: -n "$0" -- "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -37,6 +44,10 @@ hostname='localhost'
 port=11211
 timeout=5
 max_connections=1024
+memory_warning_threshold_percent=80
+memory_critical_threshold_percent=90
+connection_used_warning_threshold_percent=80
+connection_used_critical_threshold_percent=90
 
 # Parse configuration file to fetch max_connection. This is ugly but Memcache
 # does not provide any other way to fetch this information.
@@ -63,6 +74,26 @@ do
 
 	--timeout)
 	    timeout="$2"
+	    shift 2
+	    ;;
+
+	--memory-warning-threshold-percent)
+	    memory_warning_threshold_percent="$2"
+	    shift 2
+	    ;;
+
+	--memory-critical-threshold-percent)
+	    memory_critical_threshold_percent="$2"
+	    shift 2
+	    ;;
+
+	--connection-used-warning-threshold-percent)
+	    connection_used_warning_threshold_percent="$2"
+	    shift 2
+	    ;;
+
+	--connection-used-critical-threshold-percent)
+	    connection_used_critical_threshold_percent="$2"
 	    shift 2
 	    ;;
 
@@ -133,33 +164,33 @@ do
     fi
 done < $tempfile
 
-# Check if we use more than 90% of memory
+# Check if we use more than $memory_critical_threshold_percent of memory
 percent_memory_used=$(($bytes * 100 / $limit_maxbytes))
-if [ "$percent_memory_used" -ge 90 ]
+if [ "$percent_memory_used" -ge $memory_critical_threshold_percent ]
 then
-    echo "${percent_memory_used}% memory used, please raise -m option of Memcache"
+    echo "${percent_memory_used}% memory used, please check the -m option of Memcache or the expiration policy in the application"
     exit 2
 fi
 
-# Check if we use more than 80% of memory
-if [ "$percent_memory_used" -ge 80 ]
+# Check if we use more than $memory_warning_threshold_percent of memory
+if [ "$percent_memory_used" -ge $memory_warning_threshold_percent ]
 then
-    echo "${percent_memory_used}% memory used, please raise -m option of Memcache"
+    echo "${percent_memory_used}% memory used, please check the -m option of Memcache or the expiration policy in the application"
     exit 1
 fi
 
-# Check if we use more than 90% of max_connections
+# Check if we use more than $connection_used_critical_threshold_percent of max_connections
 percent_connections_used=$(($curr_connections * 100 / $max_connections))
-if [ "$percent_connections_used" -ge 90 ]
+if [ "$percent_connections_used" -ge $connection_used_critical_threshold_percent ]
 then
-    echo "${percent_connections_used}% connections used, please raise -c option of Memcache"
+    echo "${percent_connections_used}% connections used, please check the -c option of Memcache or connection pooling in the application"
     exit 2
 fi
 
-# Check if we use more than 80% of max_connections
-if [ "$percent_connections_used" -ge 80 ]
+# Check if we use more than $connection_used_warning_threshold_percent of max_connections
+if [ "$percent_connections_used" -ge $connection_used_warning_threshold_percent ]
 then
-    echo "${percent_connections_used}% connections used, please raise -c option of Memcache"
+    echo "${percent_connections_used}% connections used, please check the -c option of Memcache or connection pooling in the application"
     exit 1
 fi
 

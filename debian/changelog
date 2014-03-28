@@ -1,3 +1,13 @@
+nagios-plugins-cyb (1.0-343) unstable; urgency=medium
+
+  * plugins/check_memcache: add the following options:
+      --memory-warning-threshold-percent
+      --memory-critical-threshold-percent
+      --connection-used-warning-threshold-percent
+      --connection-used-critical-threshold-percent
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Mar 2014 17:09:28 +0100
+
 nagios-plugins-cyb (1.0-342) unstable; urgency=low
 
   * check_nagios_livestatus: changed shell (bash) and put some bash
