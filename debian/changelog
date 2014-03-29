@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-345) unstable; urgency=medium
+
+  * plugins/check_http_content: show the first 10k characters when
+    something is wrong and only the first 200 characters when everything
+    is fine.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Mar 2014 12:01:50 +0100
+
 nagios-plugins-cyb (1.0-344) unstable; urgency=medium
 
   * plugins/check_http_content: show the first 200 characters of output
