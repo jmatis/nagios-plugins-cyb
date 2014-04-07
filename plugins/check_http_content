@@ -51,14 +51,14 @@ else
     content=$($wget "$url" 2>&1 || true)
 fi
 
+# HTTP has the expected content: show the first 200 characters when everything
+# is fine
 if echo "$content" | grep -qE "$match"
 then
-    # Show the first 10k characters when something is wrong
-    echo "$content" | tr "\n" " " | head -c 10000
+    echo "$content" | tr "\n" " " | head -c 200
     exit 0
 fi
 
-
-# Show the first 200 characters when everything is fine
-echo "$content" | tr "\n" " " | head -c 200
+# HTTP does not have the expected content: show the first 10k characters
+echo "$content" | tr "\n" " " | head -c 10000
 exit 2
