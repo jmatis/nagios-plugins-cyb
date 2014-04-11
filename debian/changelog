@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-352) unstable; urgency=medium
+
+  * plugins/check_ssl_certs: ignore dotfiles in Nginx configuration
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 15:34:56 +0200
+
 nagios-plugins-cyb (1.0-351) unstable; urgency=medium
 
   * plugins/check_ssl_certs: work-around the fact that the environment

@@ -112,6 +112,9 @@ sub parse_nginx_configuration
 	# Ignore Emacs backup files
 	next if $file =~ /~$/;
 
+	# Ignore dotfiles
+	next if $file =~ /^\./;
+
 	open(FH, $file)
 	    or nagios_die "$!";
 
