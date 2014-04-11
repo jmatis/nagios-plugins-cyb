@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-348) unstable; urgency=medium
+
+  * debian/postinst: create 'ssl-cert' group if needed
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 11:12:18 +0200
+
 nagios-plugins-cyb (1.0-347) unstable; urgency=medium
 
   * plugins/check_ssl_certs: check the certificates expiration dates from
