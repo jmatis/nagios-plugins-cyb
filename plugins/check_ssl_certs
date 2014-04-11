@@ -51,14 +51,14 @@ sub parse_apache_configuration
 
     foreach my $file (@files)
     {
+	# Ignore Emacs backup files
+	next if $file =~ /~$/;
+
 	open(FH, $file)
 	    or die "$!";
 
 	my $servername = `hostname --fqdn`;
 	chomp($servername);
-
-	# Ignore Emacs backup files
-	next if $file =~ /~$/;
 
 	while (<FH>)
 	{
@@ -100,14 +100,14 @@ sub parse_nginx_configuration
 
     foreach my $file (@files)
     {
+	# Ignore Emacs backup files
+	next if $file =~ /~$/;
+
 	open(FH, $file)
 	    or die "$!";
 
 	my $servername = `hostname --fqdn`;
 	chomp($servername);
-
-	# Ignore Emacs backup files
-	next if $file =~ /~$/;
 
 	while (<FH>)
 	{
@@ -148,11 +148,11 @@ sub parse_proftpd_configuration
 
     foreach my $file (@files)
     {
-	open(FH, $file)
-	    or die "$!";
-
 	# Ignore Emacs backup files
 	next if $file =~ /~$/;
+
+	open(FH, $file)
+	    or die "$!";
 
 	while (<FH>)
 	{
