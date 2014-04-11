@@ -32,6 +32,14 @@ my $remaining_days_threshold = 7;
 $remaining_days_threshold = $ARGV[0]
     if defined $ARGV[0];
 
+# Same as die() but send to STDOUT instead of STDERR because "Nagios does not
+# capture stderr". See https://nagios-plugins.org/doc/guidelines.html#PLUGOUTPUT
+sub nagios_die
+{
+    print @_;
+    exit(2);
+}
+
 sub parse_apache_configuration
 {
     # Check if directory exists
@@ -44,9 +52,9 @@ sub parse_apache_configuration
 
     # Parse every files in $apache_enabled_dir
     chdir($apache_enabled_dir)
-	or die "$!";
+	or nagios_die "$!";
     opendir (DIR, '.')
-	or die "$!";
+	or nagios_die "$!";
     my @files = readdir DIR;
     close DIR;
 
@@ -56,7 +64,7 @@ sub parse_apache_configuration
 	next if $file =~ /~$/;
 
 	open(FH, $file)
-	    or die "$!";
+	    or nagios_die "$!";
 
 	my $servername = `hostname --fqdn`;
 	chomp($servername);
@@ -93,9 +101,9 @@ sub parse_nginx_configuration
 
     # Parse every files in $nginx_enabled_dir
     chdir($nginx_enabled_dir)
-	or die "$!";
+	or nagios_die "$!";
     opendir (DIR, '.')
-	or die "$!";
+	or nagios_die "$!";
     my @files = readdir DIR;
     close DIR;
 
@@ -105,7 +113,7 @@ sub parse_nginx_configuration
 	next if $file =~ /~$/;
 
 	open(FH, $file)
-	    or die "$!";
+	    or nagios_die "$!";
 
 	my $servername = `hostname --fqdn`;
 	chomp($servername);
@@ -141,9 +149,9 @@ sub parse_proftpd_configuration
     
     # Parse every files in $proftpd_dir
     chdir($proftpd_dir)
-	or die "$!";
+	or nagios_die "$!";
     opendir (DIR, '.')
-	or die "$!";
+	or nagios_die "$!";
     my @files = readdir DIR;
     close DIR;
 
@@ -156,7 +164,7 @@ sub parse_proftpd_configuration
 	next if $file eq 'ftpd.passwd';
 
 	open(FH, $file)
-	    or die "$!";
+	    or nagios_die "$!";
 
 	while (<FH>)
 	{
@@ -181,7 +189,7 @@ sub parse_exim_configuration
 
     my $file = `exim -bP tls_certificate | awk '{print \$3}'`;
 
-    die("Unable to fetch information from exim -bP tls_certificate\n")
+    nagios_die("Unable to fetch information from exim -bP tls_certificate\n")
 	if ($? != 0);
 
     chomp($file);
@@ -200,7 +208,7 @@ sub parse_postfix_configuration
 
     my $file = `postconf smtpd_tls_cert_file | awk '{print \$3}'`;
 
-    die("Unable to fetch information from postconf smtpd_tls_cert_file\n")
+    nagios_die("Unable to fetch information from postconf smtpd_tls_cert_file\n")
 	if ($? != 0);
 
     chomp($file);
@@ -226,12 +234,12 @@ foreach my $file (keys %certs)
     next
 	if $file eq '';
 
-    die "$file is not readable by the '$ENV{USER}' user. Is it readable by the 'ssl-cert' group?"
+    nagios_die "$file is not readable by the '$ENV{USER}' user. Is it readable by the 'ssl-cert' group?"
 	if ! -r $file;
 
     my $expiration_date = `openssl x509 -noout -enddate -in $file`;
 
-    die("Unable to fetch information for certificate $file\n")
+    nagios_die("Unable to fetch information for certificate $file\n")
 	if ($? != 0);
 
     # Parse date, example: "notAfter=Mar 18 23:59:59 2015 GMT\n"
