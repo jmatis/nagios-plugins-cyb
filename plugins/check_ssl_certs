@@ -151,6 +151,9 @@ sub parse_proftpd_configuration
 	# Ignore Emacs backup files
 	next if $file =~ /~$/;
 
+	# Ignore password file
+	next if $file eq 'ftpd.passwd';
+
 	open(FH, $file)
 	    or die "$!";
 
