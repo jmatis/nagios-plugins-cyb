@@ -257,11 +257,11 @@ foreach my $file (keys %certs)
     if ($remaining_days <= $remaining_days_threshold )
     {
 	$rc = 2;
-	$output = "SSL certificate file $file ($certs{$file}) expires in $remaining_days days. $output";
+	$output = "SSL certificate file $file expires in $remaining_days days ($certs{$file}). $output";
 	next;
     }
 
-    $output .= " SSL certificate file $file ($certs{$file}) expires in $remaining_days days.";
+    $output .= " SSL certificate file $file expires in $remaining_days days ($certs{$file}).";
 }
 
 $output = 'No SSL certificate found'
