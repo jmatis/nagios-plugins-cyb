@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-347) unstable; urgency=medium
+
+  * plugins/check_ssl_certs: check the certificates expiration dates from
+    Apache, Nginx, ProFTPd, Exim and Postfix.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 10:50:43 +0200
+
 nagios-plugins-cyb (1.0-346) unstable; urgency=medium
 
   * plugins/check_http_content: fix previous commit, show 200 bytes when

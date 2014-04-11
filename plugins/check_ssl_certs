@@ -1,0 +1,256 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2011-2014 Cyril Bouthors <cyril@boutho.rs>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+use constant;
+use integer;
+use sigtrap  qw(SEGV BUS);
+use strict   qw(subs vars refs);
+use subs     qw(afunc blurfl);
+use warnings qw(all);
+use sort     qw(stable _quicksort _mergesort);
+use Time::Piece;
+use File::Which;
+
+my %certs = ();
+my $apache_enabled_dir = '/etc/apache2/sites-enabled';
+my $remaining_days_threshold = 7;
+
+$remaining_days_threshold = $ARGV[0]
+    if defined $ARGV[0];
+
+sub parse_apache_configuration
+{
+    # Check if directory exists
+    return
+	if ! -d $apache_enabled_dir;
+
+    return
+	if ! -f '/etc/apache2/mods-enabled/ssl.conf';
+
+    # Parse every files in $apache_enabled_dir
+    chdir($apache_enabled_dir)
+	or die "$!";
+    opendir (DIR, '.')
+	or die "$!";
+    my @files = readdir DIR;
+    close DIR;
+
+    foreach my $file (@files)
+    {
+	open(FH, $file)
+	    or die "$!";
+
+	my $servername = `hostname --fqdn`;
+	chomp($servername);
+
+	# Ignore Emacs backup files
+	next if $file =~ /~$/;
+
+	while (<FH>)
+	{
+	    # Ignore comment lines
+	    next if (/^\s+#/);
+
+	    # Fetch server name
+	    if(/^\s*ServerName[\s"]+([^\s"]*)[\s"]+$/i)
+	    {
+		$servername = $1;
+		next;
+	    }
+
+	    $certs{$1} = "Apache vhost $servername, file $apache_enabled_dir/$file"
+		if(/^\s*SSLCertificateFile\s+(.*)\s*$/i);
+
+	}
+	close(FH);
+    }
+
+    closedir(DIR);
+}
+
+sub parse_nginx_configuration
+{
+    my $nginx_enabled_dir = '/etc/nginx/sites-enabled';
+
+    # Check if directory exists
+    return
+	if ! -d $nginx_enabled_dir;
+
+    # Parse every files in $nginx_enabled_dir
+    chdir($nginx_enabled_dir)
+	or die "$!";
+    opendir (DIR, '.')
+	or die "$!";
+    my @files = readdir DIR;
+    close DIR;
+
+    foreach my $file (@files)
+    {
+	open(FH, $file)
+	    or die "$!";
+
+	my $servername = `hostname --fqdn`;
+	chomp($servername);
+
+	# Ignore Emacs backup files
+	next if $file =~ /~$/;
+
+	while (<FH>)
+	{
+	    # Ignore comment lines
+	    next if (/^\s+#/);
+
+	    # Fetch server name
+	    if(/^\s*server_name\s+([^\s]*)\s*;\s*$/i)
+	    {
+		$servername = $1;
+		next;
+	    }
+
+	    $certs{$1} = "Nginx vhost $servername, file $nginx_enabled_dir/$file"
+		if(/^\s*ssl_certificate\s+(.*)\s*;\s*$/i);
+	}
+	close(FH);
+    }
+
+    closedir(DIR);
+}
+
+sub parse_proftpd_configuration
+{
+    my $proftpd_dir = '/etc/proftpd';
+
+    # Check if directory exists
+    return
+	if ! -d $proftpd_dir;
+    
+    # Parse every files in $proftpd_dir
+    chdir($proftpd_dir)
+	or die "$!";
+    opendir (DIR, '.')
+	or die "$!";
+    my @files = readdir DIR;
+    close DIR;
+
+    foreach my $file (@files)
+    {
+	open(FH, $file)
+	    or die "$!";
+
+	# Ignore Emacs backup files
+	next if $file =~ /~$/;
+
+	while (<FH>)
+	{
+	    # Ignore comment lines
+	    next if (/^\s+#/);
+
+	    # Fetch TLSRSACertificateFile
+	    $certs{$1} = "ProFTPd $proftpd_dir/$file"
+		if(/^\s*TLSRSACertificateFile\s+([^\s]*)\s*$/i);
+	}
+	close(FH);
+    }
+
+    closedir(DIR);
+}
+
+sub parse_exim_configuration
+{
+    # Check if the 'exim' executable is in the path
+    return
+	if ! which('exim');
+
+    my $file = `exim -bP tls_certificate | awk '{print \$3}'`;
+
+    die("Unable to fetch information from exim -bP tls_certificate\n")
+	if ($? != 0);
+
+    chomp($file);
+
+    return
+	if ! defined $file;
+
+    $certs{$file} = 'Exim';
+}
+
+sub parse_postfix_configuration
+{
+    # Check if the 'postconf' executable is in the path
+    return
+	if ! which('postconf');
+
+    my $file = `postconf smtpd_tls_cert_file | awk '{print \$3}'`;
+
+    die("Unable to fetch information from postconf smtpd_tls_cert_file\n")
+	if ($? != 0);
+
+    chomp($file);
+
+    return
+	if ! defined $file;
+
+    $certs{$file} = 'Postfix';
+}
+
+parse_apache_configuration
+parse_nginx_configuration
+parse_proftpd_configuration
+parse_exim_configuration
+parse_postfix_configuration
+
+my $rc      = 0;
+my $output  = '';
+
+# Check every certificate files
+foreach my $file (keys %certs)
+{
+    next
+	if $file eq '';
+
+    die "$file is not readable by the '$ENV{USER}' user. Is it readable by the 'ssl-cert' group?"
+	if ! -r $file;
+
+    my $expiration_date = `openssl x509 -noout -enddate -in $file`;
+
+    die("Unable to fetch information for certificate $file\n")
+	if ($? != 0);
+
+    # Parse date, example: "notAfter=Mar 18 23:59:59 2015 GMT\n"
+    $expiration_date =
+	Time::Piece->strptime($expiration_date, "notAfter=%b %d %T %Y GMT\n");
+
+    # Calculate the remaining days before the expiration date
+    my $remaining_days = ($expiration_date->epoch() - time() ) / 86400;
+
+    # Check if remaining days is below threshold
+    if ($remaining_days <= $remaining_days_threshold )
+    {
+	$rc = 2;
+	$output = "SSL certificate file $file ($certs{$file}) expires in $remaining_days days. $output";
+	next;
+    }
+
+    $output .= " SSL certificate file $file ($certs{$file}) expires in $remaining_days days.";
+}
+
+$output = 'No SSL certificate found'
+    if ($output eq '');
+
+$output =~ s/^ //;
+print "$output\n";
+exit($rc);

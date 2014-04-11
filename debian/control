@@ -18,7 +18,9 @@ Depends: ${shlibs:Depends},
   logtail,
   libconfig-simple-perl,
   sipcalc,
-  libdbd-sqlite3-perl
+  libdbd-sqlite3-perl,
+  openssl,
+  libfile-which-perl
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,

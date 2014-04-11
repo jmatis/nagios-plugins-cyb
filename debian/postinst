@@ -40,3 +40,7 @@ chmod 440 /etc/sudoers.d/nagios-plugins-cyb
 
 # Suppress previous 'nagios' entry from /etc/sudoers
 sed -i -e '/^nagios ALL=NOPASSWD: .*nagios.*$/ d' /etc/sudoers
+
+# Add 'nagios' user to the 'ssl-cert' group in order for it to check the SSL
+# certificates via check_ssl_certs
+adduser nagios ssl-cert >/dev/null
