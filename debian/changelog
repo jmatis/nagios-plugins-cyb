@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-354) unstable; urgency=medium
+
+  * Removed home-made RabbitMQ plugins because we are now using
+    https://github.com/jamesc/nagios-plugins-rabbitmq
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 17 Apr 2014 11:11:51 +0200
+
 nagios-plugins-cyb (1.0-353) unstable; urgency=medium
 
   * plugins/check_ssl_certs: nicer output messages.
