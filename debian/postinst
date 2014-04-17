@@ -17,9 +17,12 @@
 
 set -e
 
-if [ -x /etc/init.d/nagios-nrpe-server ]
+# Reload NRPE if needed
+if which invoke-rc.d >/dev/null 2>&1
 then
-    /etc/init.d/nagios-nrpe-server reload || true
+    invoke-rc.d nagios-nrpe-server reload
+else
+    /etc/init.d/nagios-nrpe-server reload
 fi
 
 if [ "$1" != "configure" ]
