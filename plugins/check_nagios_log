@@ -16,24 +16,26 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+delay=$1
+
 set -e -o pipefail -o nounset
 
 critical=0
-delay=$1
+file='/var/log/nagios3/nagios.log'
 
 if [ -z "$delay" ]
 then
-    echo $0 too few arguments >&2
-    echo Usage: $0 delay >&2
-    echo delay is expressed in minutes >&2
+    echo "$0 too few arguments" >&2
+    echo "Usage: $0 DELAY" >&2
+    echo "DELAY is expressed in minutes" >&2
     exit 1
 fi
 
-# Check if nagios log has been modified recently
+# Check if Nagios log has been recently modified
 
-if [ $(find /var/log/nagios3/nagios.log -mmin -$delay|wc -l) -eq 0 ]
+if [ $(find $file -mmin -$delay | wc -l) -eq 0 ]
 then
-    echo "nagios.log hasn't been modified for too long"
+    echo "$file hasn't been recently modified"
     exit 2
 fi
 
