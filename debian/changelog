@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-356) unstable; urgency=medium
+
+  * plugins/check_nagios_log: report Nagios log file modification time in
+    any case.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 29 Apr 2014 10:42:52 +0200
+
 nagios-plugins-cyb (1.0-355) unstable; urgency=medium
 
   * debian/postinst: only call /etc/init.d/nagios-nrpe-server if it exist.

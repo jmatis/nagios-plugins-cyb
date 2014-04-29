@@ -23,21 +23,31 @@ set -e -o pipefail -o nounset
 critical=0
 file='/var/log/nagios3/nagios.log'
 
+# Check arguments
 if [ -z "$delay" ]
 then
-    echo "$0 too few arguments" >&2
-    echo "Usage: $0 DELAY" >&2
-    echo "DELAY is expressed in minutes" >&2
-    exit 1
-fi
-
-# Check if Nagios log has been recently modified
-
-if [ $(find $file -mmin -$delay | wc -l) -eq 0 ]
-then
-    echo "$file hasn't been recently modified"
+    echo "$0 too few arguments"
+    echo "Usage: $0 DELAY"
+    echo "DELAY is expressed in seconds"
     exit 2
 fi
 
-echo "OK"
+# Check file
+if [ ! -f "$file" ]
+then
+    echo "$0: file $file not found"
+    exit 2
+fi
+
+# Check Nagios log file modification time
+file_modification_time=$(find "$file" -printf "%T@\n" | cut -d. -f1)
+file_modification_delay=$(($(date +%s) - $file_modification_time))
+
+echo "$file was modified $file_modification_delay seconds ago"
+
+if [ $file_modification_delay -gt $delay ]
+then
+    exit 2
+fi
+
 exit 0
