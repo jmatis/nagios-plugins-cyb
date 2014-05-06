@@ -1,3 +1,13 @@
+nagios-plugins-cyb (1.0-357) unstable; urgency=medium
+
+  * plugins/check_celery_ping:
+      - show celery output when something is wrong to ease debugging.
+      - make sure to always return values that Nagios expects (0-3)
+      - use BASH 'pipefail' and 'nounset' options to make sure we trap all
+        kinds of unexpected behavior
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 06 May 2014 12:22:44 +0200
+
 nagios-plugins-cyb (1.0-356) unstable; urgency=medium
 
   * plugins/check_nagios_log: report Nagios log file modification time in
