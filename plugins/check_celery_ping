@@ -23,19 +23,19 @@ app_dir=$2
 
 if [ -z "$worker" -o -z "$app_dir" ]
 then
-    echo Usage: $0 WORKER APP_DIR
+    echo "Usage: $0 WORKER APP_DIR"
     exit 3
 fi
 
 if [ ! -d "$app_dir" ]
 then
-    echo Cannot access to directory in APP_DIR variable
+    echo "Cannot access to directory in APP_DIR variable"
     exit 3
 fi
 
 if [ ! -e "$app_dir/manage.py" ]
 then
-    echo Cannot find any manage.py file in APP_DIR variable directory
+    echo "Cannot find any manage.py file in APP_DIR variable directory"
     exit 3
 fi
 
@@ -46,4 +46,3 @@ result=$?
 
 echo "$worker: pong!"
 exit 0
-
