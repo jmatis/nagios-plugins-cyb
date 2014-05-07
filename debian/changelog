@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-358) unstable; urgency=medium
+
+  * plugins/check_ntp_monlist: avoid DNS resolution during ICMP check.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 07 May 2014 11:43:11 +0200
+
 nagios-plugins-cyb (1.0-357) unstable; urgency=medium
 
   * plugins/check_celery_ping:
