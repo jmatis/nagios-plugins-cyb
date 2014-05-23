@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-359) unstable; urgency=medium
+
+  * etc/nagios/nrpe.d/cyb_http.cfg : added a NRPE check for HTTP with HTTP
+    authentication 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 23 May 2014 15:45:49 +0200
+
 nagios-plugins-cyb (1.0-358) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: avoid DNS resolution during ICMP check.
