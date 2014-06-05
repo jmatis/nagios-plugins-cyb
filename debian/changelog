@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-361) unstable; urgency=medium
+
+  * New release, built on a Debian/wheezy OS. Previous release was built
+    on a Debian/sid.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 15:08:12 +0200
+
 nagios-plugins-cyb (1.0-360) unstable; urgency=medium
 
   * Removed Nagios log plugin and its NRPE command 
