@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-363) unstable; urgency=medium
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_apt_term.log: check
+    for 'W: Possible missing firmware' pattern
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 16:16:05 +0200
+
 nagios-plugins-cyb (1.0-362) unstable; urgency=medium
 
   * plugins/check_log: allow empty rule files
