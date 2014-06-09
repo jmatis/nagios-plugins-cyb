@@ -2,6 +2,8 @@ nagios-plugins-cyb (1.0-363) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_apt_term.log: check
     for 'W: Possible missing firmware' pattern
+  * plugins/check_time: reduced allowed time offset from 5s to 2s because
+    5s is a lot when dealing with important transactions.
 
  -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 16:16:05 +0200
 
