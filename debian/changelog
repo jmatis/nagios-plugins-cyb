@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-364) unstable; urgency=medium
+
+  * plugins/check_route: check if a route to a defined address exists
+  * etc/nagios/nrpe.d/route.cfg: NRPE command for check_route
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 10 Jun 2014 12:15:56 +0200
+
 nagios-plugins-cyb (1.0-363) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_apt_term.log: check
