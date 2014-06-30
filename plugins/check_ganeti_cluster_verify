@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Copyright (C) 2014 Michael Jeanson <michael.jeanson@isvtec.com> 
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+set -o pipefail -o nounset
+
+verify_cmd="gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV"
+
+
+tempfile=$(tempfile)
+trap "rm -f ${tempfile}" EXIT HUP INT TRAP TERM
+
+( $verify_cmd ) > "${tempfile}"
+
+if [ ! -s "${tempfile}" ]
+then
+    echo -n 'ERROR: No output from gnt-cluster verify'
+    exit 2
+fi
+
+errors=""
+
+while read line
+do
+    # Grep for ERROR lines and remove non-critical errors
+    error=`printf %s "${line}" | grep -E '.*ERROR:.*:.*:.*' | grep -vE '(unallocated drbd minor|missing bridges)'`
+    if [ "x$error" != "x" ]
+    then
+        errors+="${error}"
+    fi
+done < "${tempfile}"
+
+if [ "x${errors}" != "x" ]
+then
+    echo "ERROR: ${errors}"
+
+    exit 2
+fi
+
+rm "${tempfile}"
+
+echo "OK"
+exit 0

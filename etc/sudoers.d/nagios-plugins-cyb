@@ -13,3 +13,4 @@ nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_log
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_rootkit
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_postfix_mailq
 nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_iptables_persistent
+nagios ALL=NOPASSWD: /usr/lib/nagios/plugins-cyb/check_ganeti_cluster_verify
