@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-366) unstable; urgency=low
+
+  * check_ganeti_cluster_verify now uses a cronjob
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Thu, 03 Jul 2014 12:09:58 +0200
+
 nagios-plugins-cyb (1.0-365) unstable; urgency=low
 
   * Added new plugin check_ganeti_cluster_verify

@@ -17,18 +17,28 @@
 
 set -o pipefail -o nounset
 
-verify_cmd="gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV"
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+STATE_DEPENDENT=4
 
+checkfile=/tmp/check_ganeti_cluster_verify
 
-tempfile=$(tempfile)
-trap "rm -f ${tempfile}" EXIT HUP INT TRAP TERM
+checkfile_age=$(expr `date +%s` - `stat -c %Y /tmp/check_ganeti_cluster_verify`)
+checkfile_max_age="7200"
 
-( $verify_cmd ) > "${tempfile}"
-
-if [ ! -s "${tempfile}" ]
+# File doesn't exist
+if [ ! -s "${checkfile}" ]
 then
-    echo -n 'ERROR: No output from gnt-cluster verify'
-    exit 2
+    echo -n 'WARNING: No output file from gnt-cluster verify'
+    exit $STATE_WARNING
+fi
+
+# File is too old
+if [ $checkfile_age -gt $checkfile_max_age ]; then
+    echo -n "ERROR: Output file from gnt-cluster verify is too old (${checkfile_age} > ${checkfile_max_age})"
+    exit $STATE_CRITICAL
 fi
 
 errors=""
@@ -41,16 +51,14 @@ do
     then
         errors+="${error}"
     fi
-done < "${tempfile}"
+done < "${checkfile}"
 
 if [ "x${errors}" != "x" ]
 then
     echo "ERROR: ${errors}"
 
-    exit 2
+    exit $STATE_CRITICAL
 fi
 
-rm "${tempfile}"
-
 echo "OK"
-exit 0
+exit $STATE_OK
