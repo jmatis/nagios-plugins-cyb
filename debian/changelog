@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-368) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_http.cfg : added a command to check a vhost with HTTP authentication 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 15 Jul 2014 12:09:42 +0200
+
 nagios-plugins-cyb (1.0-367) unstable; urgency=low
 
   * plugins/check_rbl: dropped opm.tornevall.org from RBLs list
