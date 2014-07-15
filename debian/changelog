@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-369) unstable; urgency=low
+
+  * Added new plugin check_zpool
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 15 Jul 2014 15:14:00 +0200
+
 nagios-plugins-cyb (1.0-368) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_http.cfg : added a command to check a vhost with HTTP authentication 
