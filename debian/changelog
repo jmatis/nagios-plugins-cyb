@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-370) unstable; urgency=low
+
+  * plugins/check_zpool: Fix permissions
+  * etc/nagios/nrpe.d/zpool.cfg: Add missing switches
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 15 Jul 2014 15:25:09 +0200
+
 nagios-plugins-cyb (1.0-369) unstable; urgency=low
 
   * Added new plugin check_zpool
