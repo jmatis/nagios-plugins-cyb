@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-371) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/cyb_http.cfg: added a command to check HTTP with HTTP
+    authentication on an alternative port 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 17 Jul 2014 14:41:56 +0200
+
 nagios-plugins-cyb (1.0-370) unstable; urgency=low
 
   * plugins/check_zpool: Fix permissions
