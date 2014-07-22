@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-372) unstable; urgency=low
+
+  * check_ganeti_cluster_verify does not need sudo now that it uses a cron
+  * Quote all arguments for security
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 22 Jul 2014 17:36:42 +0200
+
 nagios-plugins-cyb (1.0-371) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_http.cfg: added a command to check HTTP with HTTP
