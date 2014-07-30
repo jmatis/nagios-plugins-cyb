@@ -24,18 +24,20 @@ packets=$4
 timeout_ms=$5
 interval_ms=$6
 
-set -e -o pipefail -o nounset
+set -o pipefail -o nounset
 
 if [ -z "$hostaddress" -o -z "$max_loss_percentage" -o -z "$max_rtt_ms" -o \
     -z "$packets" -o -z "$timeout_ms" -o -z "$interval_ms" ]
 then
-    echo "$0: too few argument"
+    echo "$0: too few argument" >&2
+    echo "Example: $0 HOSTADDRESS MAXLOSSPERCENT MAXRTTMS PACKETS TIMEOUTMS INTERVALMS" >&2
     exit 2
 fi
 
 /usr/lib/nagios/plugins/check_nrpe -t 30 -H $hostaddress \
     -c check_nrpe_host_alive -a 'NRPE OK. ' | tr -d "\n"
 
+rc_nrpe=$?
 
 /usr/lib/nagios/plugins/check_fping $hostaddress \
     -w$max_rtt_ms,$max_loss_percentage \
@@ -43,3 +45,13 @@ fi
     -n $packets \
     -i $interval_ms \
     -T $timeout_ms
+
+rc_fping=$?
+
+# Exit with CRITICAL if either of the plugins is not OK
+if [ "$rc_nrpe" != 0 -o "$rc_fping" != 0 ]
+then
+ exit 2
+fi
+
+exit 0
