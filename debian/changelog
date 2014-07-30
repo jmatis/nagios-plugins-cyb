@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-374) unstable; urgency=medium
+
+  * plugins/check_host_alive_nrpe_and_icmp: return CRITICAL whenever one of
+    the checks does not return OK
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Wed, 30 Jul 2014 17:19:03 +0200
+
 nagios-plugins-cyb (1.0-373) unstable; urgency=medium
 
   * plugins/check_df_and: New df plugin that triggers on a combination of
