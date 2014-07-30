@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-373) unstable; urgency=medium
+
+  * plugins/check_df_and: New df plugin that triggers on a combination of
+    usage percentage AND a fixed free space threshold.
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Wed, 30 Jul 2014 14:14:36 +0200
+
 nagios-plugins-cyb (1.0-372) unstable; urgency=low
 
   * check_ganeti_cluster_verify does not need sudo now that it uses a cron

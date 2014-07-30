@@ -1,0 +1,146 @@
+#!/bin/bash
+#
+# Copyright (C) 2012 Cyril Bouthors <cyril@bouthors.org>
+#               2014 Michael Jeanson <michael.jeanson@isvtec.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+export LC_ALL=C
+
+critical_percentage=$1
+critical_blocks=$2
+critical_inodes=$3
+shift 3
+excluded_paths=$*
+
+set -e -o pipefail -u
+
+if [ -z "$critical_percentage" -o -z "$critical_blocks" -o -z "$critical_inodes" ]
+then
+    echo "$0: too few argument" >&2
+    echo "Usage: $0 PERCENTAGE_FULL MEGABYTES_FREE INODES_FREE [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
+    echo "Example: $0 90 1024 50000" >&2
+    echo "Example: $0 90 1024 50000 /var/lib/lxc" >&2
+    exit 1
+fi
+
+# Convert megabytes to bytes
+critical_blocks="$(($critical_blocks * 1024 * 1024))"
+
+bytestohuman() {
+    # converts a byte count to a human readable format in IEC binary notation (base-1024), rounded to two decimal places for anything larger than a byte. switchable to padded format and base-1000 if desired.
+    local L_BYTES="${1:-0}"
+    local L_PAD="${2:-no}"
+    local L_BASE="${3:-1024}"
+    awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" 'function human(x, pad, base) {
+         if(base!=1024)base=1000
+
+         s="BKMGTEPYZ"
+         while (x>=base && length(s)>1)
+               {x/=base; s=substr(s,2)}
+         s=substr(s,1,1)
+
+         xf=(pad=="yes") ? ((s=="B")?"%5d   ":"%8.2f") : ((s=="B")?"%d":"%.2f")
+         s=(s!="B") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="iB")?(s "  "):(s " ")))
+
+         return sprintf( (xf " %s\n"), x, s)
+      }
+      BEGIN{print human(bytes, pad, base)}'
+    return $?
+}
+
+
+# Fetch disk usage data
+tempfile=$(tempfile)
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+
+(
+    # Fetch blocks information
+    df -PlT
+
+    # Fetch inodes information
+    echo 'INODES'
+    df -PlTi
+) > $tempfile
+
+for pipestatus in ${PIPESTATUS[@]}
+do
+    if [ "$pipestatus" -ne 0 ]
+    then
+	echo 'Unable to create a temporary file, the disk is probably full'
+	exit 2
+    fi
+done
+
+rc=0
+units='B'
+critical_free="$critical_blocks"
+block_size="1024"
+base="1024"
+while read fs type size used free percentage mount_point
+do
+    # Skip df header line
+    if [ "$fs" = 'Filesystem' ]
+    then
+	continue
+    fi
+
+    # Switch to inodes unit when we hit the INODE token
+    if [ "$fs" = 'INODES' ]
+    then
+	units=' inodes'
+	critical_free="$critical_inodes"
+	block_size="1"
+	base="1000"
+	continue
+    fi
+
+    # Check if we are in the an excluded path
+    for excluded_path in $excluded_paths
+    do
+	if echo $mount_point | grep -qE "^$excluded_path"
+	then
+	    continue 2
+	fi
+    done
+
+    # For the check to trigger
+    # usage percentage has to be higher than the critical_percentage AND
+    # free count has to be lower than the critical_free value
+    percentage=${percentage%\%}
+    free=$(($free * $block_size))
+    if awk \
+	-vpercentage="$percentage" \
+	-vcritical_percentage="$critical_percentage" \
+	-vfree="$free" \
+	-vcritical_free="$critical_free" \
+	'BEGIN{exit (percentage >= critical_percentage && free <= critical_free) ? 0 : 1 }'
+
+    then
+	echo -n "$mount_point is ${percentage}% full, "
+	echo -n "$(bytestohuman $free "no" $base)$units free. "
+	rc=2
+	continue
+    fi
+
+done < $tempfile
+
+if [ "$rc" -eq 0 ]
+then
+    echo -n 'OK'
+fi
+
+echo
+exit $rc
