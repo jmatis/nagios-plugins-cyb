@@ -26,8 +26,7 @@ then
     exit 2
 fi
 
-
-if ping -n -q -w 3 $host 2>&1 1>/dev/null
+if /usr/lib/nagios/plugins-cyb/check_host_alive_nrpe_and_icmp $host "50%" "500" "5" "500" "20" 2>&1 1>/dev/null
 then
     result_lines=$(ntpdc -n -c monlist $host 2>/dev/null | wc -l)
     if [ $result_lines -ne 0 ]
