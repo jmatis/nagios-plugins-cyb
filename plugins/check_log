@@ -28,19 +28,23 @@ mkdir -p $(dirname $error_file) $offset_dir
 cd $rule_dir
 for rule_file in *
 do
-    logfile=/${rule_file//_/\/}
-    [ ! -f $logfile ] && continue
+    logfiles=/${rule_file//_/\/}
 
-    tempfile=$(tempfile)
-    trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
-    grep -vE '^#|^$' $rule_file > $tempfile || true
+    for logfile in $logfiles
+    do
+	[ ! -f $logfile ] && continue
 
-    timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
-	| grep -E -f $tempfile \
-	| grep -v -E -f $whitelist_file \
-	| sed -e "s,^,$logfile: ," >> $error_file || true
+	tempfile=$(tempfile)
+	trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+	grep -vE '^#|^$' "$rule_file" > $tempfile || true
 
-    rm -f $tempfile
+	timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
+	    | grep -E -f $tempfile \
+	    | grep -v -E -f $whitelist_file \
+	    | sed -e "s,^,$logfile: ," >> $error_file || true
+
+	rm -f $tempfile
+    done
 done
 
 # Show errors if needed

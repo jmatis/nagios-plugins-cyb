@@ -1,0 +1,5 @@
+# Apache FCGID saturation
+skip the spawn request
+
+# PHP disable_functions
+has been disabled for security reasons
