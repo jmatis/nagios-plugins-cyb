@@ -31,8 +31,9 @@ dnsbls='
 
 critical=0
 
+# Get all IPs except RFC1918 and RFC1700
 ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
-    grep -vE '^(127|10|192)\.' || true)
+    grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
 
 for ip in $ip_list
 do
