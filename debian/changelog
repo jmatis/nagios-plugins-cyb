@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-377) unstable; urgency=medium
+
+  * New plugin check_ovh_services_expiration.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 Aug 2014 17:03:27 +0200
+
 nagios-plugins-cyb (1.0-376) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: Use check_host_alive_nrpe_and_icmp instead of

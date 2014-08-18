@@ -1,0 +1,83 @@
+#!/usr/bin/php
+<?php # -*- mode: php -*-
+//
+// Copyright (C) 2014 Cyril Bouthors <cyril@boutho.rs>
+//
+// This program is free software: you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program. If not, see <http://www.gnu.org/licenses/>.
+//
+
+if ($argc != 3)
+  die("Usage: $argv[0] MAXIMUM_DAYS_BEFORE_DEADLINE CONFIG_FILE");
+
+$maximum_days_before_deadline = $argv[1];
+$config_file = $argv[2];
+
+// Ugly code to fetch configuration from file
+if(!file_exists($config_file))
+{
+  echo "Unable to find $config_file\n";
+  exit(1);
+}
+
+foreach(file($config_file) as $line)
+{
+  list($const, $value) = explode(' ', $line);
+  define($const, trim($value));
+}
+
+$rc = 0;
+
+try
+{
+  $soap = new SoapClient('https://www.ovh.com/soapi/soapi-re-1.63.wsdl');
+
+  $session = $soap->login(OVH_LOGIN, OVH_PASSWORD,'fr', FALSE);
+
+  $expiration_dates = array();
+
+  # Fetch the list of service approaching the expiration date
+  # https://www.ovh.com/soapi/fr/?method=billingGetReferencesToExpired
+  $days = 400;
+  foreach($soap->billingGetReferencesToExpired($session, $days) as $service)
+  {
+    # Ignore anything but dedicated servers
+    if($service->type != 'dedicated')
+      continue;
+
+    $expiration_dates[$service->name] = strtotime($service->expired);
+  }
+
+  # Sort services by expiration date
+  asort($expiration_dates);
+  foreach($expiration_dates as $service => $expiration_date)
+  {
+    $days_remaining = (int) (($expiration_date - time()) / (60 * 60 * 24));
+
+    echo "$service expires in $days_remaining days. ";
+
+    if($days_remaining <= $maximum_days_before_deadline)
+      $rc = 2;
+  }
+
+  $soap->logout($session);
+
+}
+catch(SoapFault $fault)
+{
+  echo $fault;
+}
+
+exit($rc);
+
+?>
