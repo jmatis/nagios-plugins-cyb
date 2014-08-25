@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 ISVTEC <contact@isvtec.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+warning=$1
+critical=$2
+
+if [ -z "$warning" -o -z "$critical" ]
+then
+    echo Usage: $0 WARNING CRITICAL
+    exit 3
+fi
+
+spool_dir=/var/spool/mqueue
+
+if [ ! -x $spool_dir ]
+then
+    echo "Unable to access $spool_dir, run 'adduser nagios smmsp' as root and restart NRPE."
+    exit 3
+fi
+
+lockfile=/var/lock/check_sendmail_mailq
+dotlockfile -r 0 -p $lockfile || exit
+
+mailq=$(find $spool_dir -iname 'q*' | wc -l)
+
+[ -z "$mailq" ] && exit 3
+
+echo $mailq mails in queue
+
+[ $mailq -ge $critical ] && exit 2
+
+[ $mailq -ge $warning ] && exit 1
+
+dotlockfile -u $lockfile
+
+exit 0

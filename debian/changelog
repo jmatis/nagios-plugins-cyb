@@ -1,8 +1,8 @@
-nagios-plugins-cyb (1.0-377) unstable; urgency=medium
+nagios-plugins-cyb (1.0-377) unstable; urgency=low
 
-  * New plugin check_ovh_services_expiration.
+  * plugins/check_sendmail_mailq: check number of mails in sendmail spool 
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 Aug 2014 17:03:27 +0200
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 25 Aug 2014 15:55:32 +0200
 
 nagios-plugins-cyb (1.0-376) unstable; urgency=medium
 
