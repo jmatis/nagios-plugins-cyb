@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-378) unstable; urgency=low
+
+  * etc/nagios/nrpe.d/sendmail_mailq.cfg: added a NRPE command for check_sendmail_mailq 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 25 Aug 2014 16:52:09 +0200
+
 nagios-plugins-cyb (1.0-377) unstable; urgency=low
 
   * plugins/check_sendmail_mailq: check number of mails in sendmail spool 
