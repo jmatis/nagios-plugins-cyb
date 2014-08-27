@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#               2014 Michael Jeanson <michael.jeanson@isvtec.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,6 +19,15 @@
 
 set -e
 
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+STATE_DEPENDENT=4
+
+checkfile="/tmp/check_rbl.state"
+checkfile_max_age="7200"
+
 # Set default RBLs, can be overriden in the config file
 dnsbls='
     sbl.spamhaus.org
@@ -31,38 +41,76 @@ dnsbls='
     opm.tornevall.org
     '
 
+lockfile="/var/lock/check_rbl"
+
 conffile="/etc/nagios-plugins/config/rbl.conf"
 if [ -f "$conffile" ]
 then
     . "$conffile"
 fi
 
-critical=0
+export dnsbls
+export checkfile
+export lockfile
 
-# Get all IPs except RFC1918 and RFC1700
-ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
-    grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
-
-for ip in $ip_list
-do
-    revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
-
-    for dnsbl in $dnsbls
-    do
-
-	if host -W 1 $revip.$dnsbl > /dev/null 2>/dev/null
-	then
-	    echo -n "$ip blacklisted by $dnsbl "
-	    critical=1
-	fi
-    done
-done
-
-if [ $critical = 1 ]
+if ! dotlockfile -r 0 "$lockfile"
 then
-   echo
-   exit 2
+    echo "UNKNOWN: Lock file present ($lockfile)"
+    exit $STATE_UNKNOWN
+fi
+
+update_file() {
+    # Get all IPs except RFC1918 and RFC1700
+    ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
+        grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
+
+    # Clear checkfile content
+    >"$checkfile"
+
+    for ip in $ip_list
+    do
+        revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
+    
+        for dnsbl in $dnsbls
+        do
+            if host -t A $revip.$dnsbl > /dev/null 2>/dev/null
+            then
+                echo -n "$ip blacklisted by $dnsbl " > "$checkfile"
+            fi
+        done
+    done
+
+    # Remove lock
+    dotlockfile -u "$lockfile"
+}
+
+exit_and_update () {
+    update_file &
+    exit $1
+}
+
+
+# File doesn't exist
+if [ ! -f "$checkfile" ]
+then
+    echo 'OK: No output file'
+    exit_and_update $STATE_OK
+fi
+
+# File is too old
+checkfile_age=$(expr `date +%s` - `stat -c %Y "$checkfile"`)
+if [ $checkfile_age -gt $checkfile_max_age ]; then
+    echo "ERROR: Output file is too old (${checkfile_age} > ${checkfile_max_age})"
+    exit_and_update $STATE_CRITICAL
+fi
+
+# File is not zero size
+if [ -s "$checkfile" ]
+then
+   echo -n "ERROR: "
+   cat "$checkfile"
+   exit_and_update $STATE_CRITICAL
 fi
 
 echo "OK"
-exit 0
+exit_and_update $STATE_OK
