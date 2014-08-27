@@ -75,7 +75,7 @@ update_file() {
         do
             if host -t A $revip.$dnsbl > /dev/null 2>/dev/null
             then
-                echo -n "$ip blacklisted by $dnsbl " > "$checkfile"
+                echo -n "$ip blacklisted by $dnsbl " >> "$checkfile"
             fi
         done
     done
@@ -85,7 +85,8 @@ update_file() {
 }
 
 exit_and_update () {
-    update_file &
+    # Use double backgrounding to detach from nrpe
+    (update_file &) &
     exit $1
 }
 

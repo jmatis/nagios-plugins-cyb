@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-381) unstable; urgency=medium
+
+  * plugins/check_rbl: Double background to detach from nrpe
+  * plugins/check_rbl_zone: Double background to detach from nrpe
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Wed, 27 Aug 2014 18:20:03 +0200
+
 nagios-plugins-cyb (1.0-380) unstable; urgency=medium
 
   * plugins/check_rbl: Asynchronous check to mitigate timeouts.
