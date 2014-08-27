@@ -18,6 +18,7 @@
 
 set -e
 
+# Set default RBLs, can be overriden in the config file
 dnsbls='
     sbl.spamhaus.org
     xbl.spamhaus.org
@@ -27,7 +28,14 @@ dnsbls='
     cbl.abuseat.org
     b.barracudacentral.org
     ips.backscatterer.org
+    opm.tornevall.org
     '
+
+conffile="/etc/nagios-plugins/config/rbl.conf"
+if [ -f "$conffile" ]
+then
+    . "$conffile"
+fi
 
 critical=0
 
