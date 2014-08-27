@@ -56,7 +56,7 @@ export lockfile
 if ! dotlockfile -r 0 "$lockfile"
 then
     echo "UNKNOWN: Lock file present ($lockfile)"
-    exit $STATE_UNKNOWN
+    exit $STATE_CRITICAL
 fi
 
 update_file() {
