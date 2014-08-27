@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Copyright (C) 2012-2013 Cyril Bouthors <cyril@boutho.rs>
+#               2014 Michael Jeanson <michael.jeanson@isvtec.com>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -21,6 +22,13 @@ offset_dir='/var/lib/nagios-plugins-cyb'
 error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
 whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
+
+lockfile=/var/lock/nagios-check-debsums
+if ! dotlockfile -r 0 -p "$lockfile"
+then
+    echo "UNKNOWN: Lock file present ($lockfile)"
+    exit $STATE_UNKNOWN
+fi
 
 mkdir -p $(dirname $error_file) $offset_dir
 
@@ -46,6 +54,9 @@ do
 	rm -f $tempfile
     done
 done
+
+# Remove lock
+dotlockfile -u $lockfile
 
 # Show errors if needed
 if [ -s $error_file ]
