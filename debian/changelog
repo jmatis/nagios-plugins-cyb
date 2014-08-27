@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-380) unstable; urgency=medium
+
+  * plugins/check_rbl: Asynchronous check to mitigate timeouts.
+  * plugins/check_rbl_block: Asynchronous check to mitigate timeouts.
+  * plugins/check_log: Add a lock file to prevent concurrent execution.
+
+ -- Michael Jeanson <michael.jeanson@isvtec.net>  Wed, 27 Aug 2014 15:30:40 +0200
+
 nagios-plugins-cyb (1.0-379) unstable; urgency=low
 
   * plugins/check_sendmail_mailq: fix permissions 
