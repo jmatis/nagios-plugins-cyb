@@ -27,7 +27,7 @@ lockfile=/var/lock/nagios-check-debsums
 if ! dotlockfile -r 0 -p "$lockfile"
 then
     echo "ERROR: Lock file present ($lockfile)"
-    exit $STATE_CRITIAL
+    exit $STATE_CRITICAL
 fi
 
 mkdir -p $(dirname $error_file) $offset_dir
