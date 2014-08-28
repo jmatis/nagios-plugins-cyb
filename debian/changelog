@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-384) unstable; urgency=medium
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog:
+    Check for mysql errors in both var_log_syslog and var_log_mysql_error.log
+    while we transition the configuration to syslog
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Thu, 28 Aug 2014 15:32:41 +0200
+
 nagios-plugins-cyb (1.0-383) unstable; urgency=medium
 
   * plugins/check_rbl: Use a temporary state file
