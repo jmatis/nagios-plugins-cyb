@@ -26,8 +26,8 @@ whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 lockfile=/var/lock/nagios-check-debsums
 if ! dotlockfile -r 0 -p "$lockfile"
 then
-    echo "UNKNOWN: Lock file present ($lockfile)"
-    exit $STATE_UNKNOWN
+    echo "ERROR: Lock file present ($lockfile)"
+    exit $STATE_CRITIAL
 fi
 
 mkdir -p $(dirname $error_file) $offset_dir
