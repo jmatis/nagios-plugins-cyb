@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-383) unstable; urgency=medium
+
+  * plugins/check_rbl: Use a temporary state file
+  * plugins/check_rbl_block: Use a temporary state file
+  * plugins/check_log: return critical on lock file to avoid flapping
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Thu, 28 Aug 2014 11:32:03 +0200
+
 nagios-plugins-cyb (1.0-382) unstable; urgency=medium
 
   * plugins/check_rbl: return CRITICAL when lock file is present to avoid
