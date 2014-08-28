@@ -53,35 +53,35 @@ export dnsbls
 export checkfile
 export lockfile
 
-if ! dotlockfile -r 0 "$lockfile"
-then
-    echo "UNKNOWN: Lock file present ($lockfile)"
-    exit $STATE_CRITICAL
-fi
 
 update_file() {
-    # Get all IPs except RFC1918 and RFC1700
-    ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
-        grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
+    if dotlockfile -r 0 -p "$lockfile"
+    then
+        # Get all IPs except RFC1918 and RFC1700
+        ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
+            grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
 
-    # Clear checkfile content
-    >"$checkfile"
+        # Clear checkfile content
+        >"${checkfile}.tmp"
 
-    for ip in $ip_list
-    do
-        revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
-    
-        for dnsbl in $dnsbls
+        for ip in $ip_list
         do
-            if host -t A $revip.$dnsbl > /dev/null 2>/dev/null
-            then
-                echo -n "$ip blacklisted by $dnsbl " >> "$checkfile"
-            fi
-        done
-    done
+            revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
 
-    # Remove lock
-    dotlockfile -u "$lockfile"
+            for dnsbl in $dnsbls
+            do
+                if host -W 10 -t A $revip.$dnsbl > /dev/null 2>/dev/null
+                then
+                    echo -n "$ip blacklisted by $dnsbl " >> "${checkfile}.tmp"
+                fi
+            done
+        done
+
+        mv "${checkfile}.tmp" "${checkfile}"
+
+        # Remove lock
+        dotlockfile -u "$lockfile"
+    fi
 }
 
 exit_and_update () {

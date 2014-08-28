@@ -71,36 +71,36 @@ export checkfile
 export lockfile
 export block
 
-if ! dotlockfile -r 0 "$lockfile"
-then
-    echo "UNKNOWN: Lock file present ($lockfile)"
-    exit $STATE_UNKNOWN
-fi
 
 update_file() {
-    ip_list=$(sipcalc -s 32 $block | awk '/Network/ { print $3 }')
+    if dotlockfile -r 0 -p "$lockfile"
+    then
+        ip_list=$(sipcalc -s 32 $block | awk '/Network/ { print $3 }')
 
-    # Clear checkfile content
-    >"$checkfile"
+        # Clear checkfile content
+        >"${checkfile}.tmp"
 
-    for ip in $ip_list
-    do
-        if ! rgrep -F -q $ip $whitelist
-        then
-            revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
-        
-            for dnsbl in $dnsbls
-            do
-                if host -t A $revip.$dnsbl > /dev/null 2>/dev/null
-                then
-                    echo -n "$ip blacklisted by $dnsbl " >> "$checkfile"
-                fi
-            done
-        fi
-    done
+        for ip in $ip_list
+        do
+            if ! rgrep -F -q $ip $whitelist
+            then
+                revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
 
-    # Remove lock
-    dotlockfile -u "$lockfile"
+                for dnsbl in $dnsbls
+                do
+                    if host -W 10 -t A $revip.$dnsbl > /dev/null 2>/dev/null
+                    then
+                        echo -n "$ip blacklisted by $dnsbl " >> "${checkfile}.tmp"
+                    fi
+                done
+            fi
+        done
+
+        mv "${checkfile}.tmp" "${checkfile}"
+
+        # Remove lock
+        dotlockfile -u "$lockfile"
+    fi
 }
 
 exit_and_update () {
