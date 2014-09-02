@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-385) unstable; urgency=medium
+
+  * plugins/check_log: Fix wrong lock file
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 02 Sep 2014 14:17:53 +0200
+
 nagios-plugins-cyb (1.0-384) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog:
