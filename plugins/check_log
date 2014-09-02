@@ -23,7 +23,7 @@ error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
 whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 
-lockfile=/var/lock/nagios-check-debsums
+lockfile=/var/lock/nagios-check-log
 if ! dotlockfile -r 0 -p "$lockfile"
 then
     echo "ERROR: Lock file present ($lockfile)"
