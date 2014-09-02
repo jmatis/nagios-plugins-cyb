@@ -27,20 +27,6 @@ STATE_DEPENDENT=4
 
 checkfile="/tmp/check_rbl.state"
 checkfile_max_age="7200"
-
-# Set default RBLs, can be overriden in the config file
-dnsbls='
-    sbl.spamhaus.org
-    xbl.spamhaus.org
-    pbl.spamhaus.org
-    zen.spamhaus.org
-    bl.spamcop.net
-    cbl.abuseat.org
-    b.barracudacentral.org
-    ips.backscatterer.org
-    opm.tornevall.org
-    '
-
 lockfile="/var/lock/check_rbl"
 
 conffile="/etc/nagios-plugins/config/rbl.conf"
@@ -49,60 +35,18 @@ then
     . "$conffile"
 fi
 
-export dnsbls
-export checkfile
-export lockfile
-
-
-update_file() {
-    if dotlockfile -r 0 -p "$lockfile"
-    then
-        # Get all IPs except RFC1918 and RFC1700
-        ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
-            grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
-
-        # Clear checkfile content
-        >"${checkfile}.tmp"
-
-        for ip in $ip_list
-        do
-            revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
-
-            for dnsbl in $dnsbls
-            do
-                if host -W 10 -t A $revip.$dnsbl > /dev/null 2>/dev/null
-                then
-                    echo -n "$ip blacklisted by $dnsbl " >> "${checkfile}.tmp"
-                fi
-            done
-        done
-
-        mv "${checkfile}.tmp" "${checkfile}"
-
-        # Remove lock
-        dotlockfile -u "$lockfile"
-    fi
-}
-
-exit_and_update () {
-    # Use double backgrounding to detach from nrpe
-    (update_file &) &
-    exit $1
-}
-
-
 # File doesn't exist
 if [ ! -f "$checkfile" ]
 then
     echo 'OK: No output file'
-    exit_and_update $STATE_OK
+    exit $STATE_OK
 fi
 
 # File is too old
 checkfile_age=$(expr `date +%s` - `stat -c %Y "$checkfile"`)
 if [ $checkfile_age -gt $checkfile_max_age ]; then
     echo "ERROR: Output file is too old (${checkfile_age} > ${checkfile_max_age})"
-    exit_and_update $STATE_CRITICAL
+    exit $STATE_CRITICAL
 fi
 
 # File is not zero size
@@ -110,8 +54,8 @@ if [ -s "$checkfile" ]
 then
    echo -n "ERROR: "
    cat "$checkfile"
-   exit_and_update $STATE_CRITICAL
+   exit $STATE_CRITICAL
 fi
 
 echo "OK"
-exit_and_update $STATE_OK
+exit $STATE_OK

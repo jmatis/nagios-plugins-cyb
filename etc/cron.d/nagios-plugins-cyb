@@ -1,3 +1,4 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
 30 * * * * root if [ -x /usr/sbin/gnt-cluster ] && ps -C ganeti-masterd 2>&1 >/dev/null; then gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV 2>&1 > /tmp/check_ganeti_cluster_verify; fi
+*/5 * * * * nagios if [ -x /usr/bin/cron_check_rbl ]; then /usr/bin/cron_check_rbl; fi

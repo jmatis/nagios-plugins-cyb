@@ -1,0 +1,70 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Cyril Bouthors <cyril@bouthors.org>
+#               2014 Michael Jeanson <michael.jeanson@isvtec.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e
+
+# Set default RBLs, can be overriden in the config file
+dnsbls='
+    sbl.spamhaus.org
+    xbl.spamhaus.org
+    pbl.spamhaus.org
+    zen.spamhaus.org
+    bl.spamcop.net
+    cbl.abuseat.org
+    b.barracudacentral.org
+    ips.backscatterer.org
+    opm.tornevall.org
+    '
+
+checkfile="/tmp/check_rbl.state"
+lockfile="/var/lock/check_rbl"
+
+conffile="/etc/nagios-plugins/config/rbl.conf"
+if [ -f "$conffile" ]
+then
+    . "$conffile"
+fi
+
+if dotlockfile -r 0 -p "$lockfile"
+then
+    # Get all IPs except RFC1918 and RFC1700
+    ip_list=$(ip a | awk -F ' *|/' '/inet / {print $3}' |
+        grep -vE '^(127|10|192\.168|172\.1[6789]|172\.2[0-9]|172\.3[01])\.' || true)
+
+    # Clear checkfile content
+    >"${checkfile}.tmp"
+
+    for ip in $ip_list
+    do
+        revip=$(echo $ip | awk -F. '{print $4"."$3"."$2"."$1}')
+
+        for dnsbl in $dnsbls
+        do
+            if host -W 10 -t A $revip.$dnsbl > /dev/null 2>/dev/null
+            then
+                echo -n "$ip blacklisted by $dnsbl " >> "${checkfile}.tmp"
+            fi
+        done
+    done
+
+    mv "${checkfile}.tmp" "${checkfile}"
+
+    # Remove lock
+    dotlockfile -u "$lockfile"
+fi
