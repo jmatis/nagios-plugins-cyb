@@ -18,6 +18,12 @@
 
 set -e -o pipefail -o nounset
 
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+STATE_DEPENDENT=4
+
 offset_dir='/var/lib/nagios-plugins-cyb'
 error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
@@ -26,7 +32,7 @@ whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 lockfile=/var/lock/nagios-check-log
 if ! dotlockfile -r 0 -p "$lockfile"
 then
-    echo "ERROR: Lock file present ($lockfile)"
+    echo "CRITICAL: Lock file present ($lockfile)"
     exit $STATE_CRITICAL
 fi
 
