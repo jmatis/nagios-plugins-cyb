@@ -24,20 +24,20 @@ STATE_UNKNOWN=3
 STATE_DEPENDENT=4
 
 checkfile=/tmp/check_ganeti_cluster_verify
-
-checkfile_age=$(expr `date +%s` - `stat -c %Y /tmp/check_ganeti_cluster_verify`)
 checkfile_max_age="7200"
 
 # File doesn't exist
 if [ ! -s "${checkfile}" ]
 then
-    echo -n 'WARNING: No output file from gnt-cluster verify'
-    exit $STATE_WARNING
+    echo "OK: No output file (${checkfile})"
+    exit $STATE_OK
 fi
 
+
 # File is too old
+checkfile_age=$(expr `date +%s` - `stat -c %Y ${checkfile}`)
 if [ $checkfile_age -gt $checkfile_max_age ]; then
-    echo -n "ERROR: Output file from gnt-cluster verify is too old (${checkfile_age} > ${checkfile_max_age})"
+    echo "CRITICAL: Output file from gnt-cluster verify is too old (${checkfile_age} > ${checkfile_max_age})"
     exit $STATE_CRITICAL
 fi
 
@@ -55,8 +55,7 @@ done < "${checkfile}"
 
 if [ "x${errors}" != "x" ]
 then
-    echo "ERROR: ${errors}"
-
+    echo "CRITICAL: ${errors}"
     exit $STATE_CRITICAL
 fi
 
