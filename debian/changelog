@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-387) unstable; urgency=medium
+
+  * plugins/check_ganeti_cluster_verify: No error on missing state file
+  * plugins/check_log: Add missing state variables
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Wed, 03 Sep 2014 11:29:30 +0200
+
 nagios-plugins-cyb (1.0-386) unstable; urgency=medium
 
   * RBL check is now done via cron
