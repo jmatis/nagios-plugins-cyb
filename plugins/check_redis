@@ -18,12 +18,12 @@
 set -u
 
 help() {
-    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
+    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5] [--password=foobar]" >&2
 }
 
 # ":" means required
 # "::" means optional
-TEMP=$(getopt -o h: --long hostname::,port::,timeout:: -n "$0" -- "$@")
+TEMP=$(getopt -o h: --long hostname::,port::,timeout::,password: -n "$0" -- "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -36,6 +36,8 @@ fi
 hostname='localhost'
 port=6379
 timeout=5
+password=''
+pass_opt=''
 
 # Parse options with getopt
 eval set -- "$TEMP"
@@ -57,6 +59,11 @@ do
 	    shift 2
 	    ;;
 
+	--password)
+	    password="$2"
+	    shift 2
+	    ;;
+
 	--)
 	    shift
 	    break
@@ -69,7 +76,12 @@ do
     esac
 done
 
-if ! timeout $timeout redis-cli -h $hostname -p $port ping | grep -qE '^PONG$'
+if ! [ -z $password ]
+then
+	pass_opt="-a $password"
+fi
+
+if ! timeout $timeout redis-cli -h $hostname -p $port $pass_opt ping | grep -qE '^PONG$'
 then
     echo 'Failed to connect Redis'
     exit 2
