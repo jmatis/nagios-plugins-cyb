@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-389) unstable; urgency=medium
+
+  * check_log: Check PHP memory errors in apache error log
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 09 Sep 2014 15:04:03 +0200
+
 nagios-plugins-cyb (1.0-388) unstable; urgency=low
 
   * plugins/check_redis: added authentication option
