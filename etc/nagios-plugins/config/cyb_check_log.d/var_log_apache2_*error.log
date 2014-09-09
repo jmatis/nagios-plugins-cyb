@@ -3,3 +3,6 @@ skip the spawn request
 
 # PHP disable_functions
 has been disabled for security reasons
+
+# PHP tried to allocate more than 'memory_limit'
+PHP Fatal error:  Allowed memory size of
