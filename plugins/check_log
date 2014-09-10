@@ -32,7 +32,7 @@ whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 lockfile=/var/lock/nagios-check-log
 if ! dotlockfile -r 0 -p "$lockfile"
 then
-    echo "CRITICAL: Lock file present ($lockfile)"
+    echo "Lock file present ($lockfile)"
     exit $STATE_CRITICAL
 fi
 

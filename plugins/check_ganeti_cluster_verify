@@ -37,7 +37,7 @@ fi
 # File is too old
 checkfile_age=$(expr `date +%s` - `stat -c %Y ${checkfile}`)
 if [ $checkfile_age -gt $checkfile_max_age ]; then
-    echo "CRITICAL: Output file from gnt-cluster verify is too old (${checkfile_age} > ${checkfile_max_age})"
+    echo "Output file from gnt-cluster verify is too old (${checkfile_age} > ${checkfile_max_age})"
     exit $STATE_CRITICAL
 fi
 
@@ -55,7 +55,7 @@ done < "${checkfile}"
 
 if [ "x${errors}" != "x" ]
 then
-    echo "CRITICAL: ${errors}"
+    echo "${errors}"
     exit $STATE_CRITICAL
 fi
 

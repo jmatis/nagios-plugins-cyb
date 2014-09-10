@@ -45,14 +45,13 @@ fi
 # File is too old
 checkfile_age=$(expr `date +%s` - `stat -c %Y "$checkfile"`)
 if [ $checkfile_age -gt $checkfile_max_age ]; then
-    echo "CRITICAL: Output file is too old (${checkfile_age} > ${checkfile_max_age})"
+    echo "Output file is too old (${checkfile_age} > ${checkfile_max_age})"
     exit $STATE_CRITICAL
 fi
 
 # File is not zero size
 if [ -s "$checkfile" ]
 then
-   echo -n "CRITICAL: "
    cat "$checkfile"
    exit $STATE_CRITICAL
 fi

@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-390) unstable; urgency=medium
+
+  * Avoid duplicate information by not displaying "CRITICAL" nor "WARNING"
+    in output and return code.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Wed, 10 Sep 2014 15:27:31 +0200
+
 nagios-plugins-cyb (1.0-389) unstable; urgency=medium
 
   * check_log: Check PHP memory errors in apache error log
