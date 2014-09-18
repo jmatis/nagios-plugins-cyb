@@ -40,7 +40,7 @@ do
 	fi
     done
 
-    # Check if filesystem is writeable
+    # Check if filesystem is writable
     checkdir="$mountpoint"
     if [ -d ${mountpoint%/}/tmp ]
     then
