@@ -2,8 +2,9 @@ nagios-plugins-cyb (1.0-393) unstable; urgency=medium
 
   * plugins/check_nfs_rw: check the return code of 'rm' because it can
     fail!
+  * plugins/check_nfs_rw: avoid detecting NFS servers in /proc/mounts
 
- --
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 18 Sep 2014 16:44:41 +0200
 
 nagios-plugins-cyb (1.0-392) unstable; urgency=medium
 

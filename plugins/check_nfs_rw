@@ -31,7 +31,7 @@ then
 fi
 
 # Check every NFS mounts
-mountpoints=$(awk '$3~/^nfs/ {print $2}' /proc/mounts)
+mountpoints=$(awk '$3~/^nfs[34]/ {print $2}' /proc/mounts)
 
 for mountpoint in $mountpoints
 do
