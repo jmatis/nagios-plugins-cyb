@@ -57,7 +57,11 @@ do
 	error_msg="Unable to write $size to a file in $checkdir. $error_msg"
     fi
 
-    rm $tmpfile
+    if ! rm $tmpfile 2>/dev/null
+    then
+	rc=2
+	error_msg="Unable to remove temporary file in $checkdir. $error_msg"
+    fi
 done
 
 if [ $rc != 0 ]

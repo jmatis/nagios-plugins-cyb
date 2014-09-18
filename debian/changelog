@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-393) unstable; urgency=medium
+
+  * plugins/check_nfs_rw: check the return code of 'rm' because it can
+    fail!
+
+ --
+
 nagios-plugins-cyb (1.0-392) unstable; urgency=medium
 
   * Add new plugin check_nfs_rw to check NFS speed and quality by writing
