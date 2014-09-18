@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# Copyright (C) 2010-2012 Cyril Bouthors <cyril@bouthors.org>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# Checks that a NFS mount is read and writable: no timeout, no delay, etc.
+
+size="$1"
+
+set -e -o pipefail -o nounset
+
+rc=0
+error_msg=''
+ok_msg=''
+
+if [ -z "$size" ]
+then
+    size='5M'
+fi
+
+# Check every NFS mounts
+mountpoints=$(awk '$3~/^nfs/ {print $2}' /proc/mounts)
+
+for mountpoint in $mountpoints
+do
+    # Check if filesystem is writable
+    checkdir="$mountpoint/tmp"
+    if [ ! -d "$checkdir" ]
+    then
+	echo "$checkdir not found"
+	exit 2
+    fi
+
+    if ! tmpfile=$(tempfile -d $checkdir 2>/dev/null)
+    then
+	rc=2
+	error_msg="Unable to create temporary file in $checkdir. $error_msg"
+    else
+	ok_msg="$mountpoint OK. $ok_msg"
+    fi
+
+    if ! dd if=/dev/urandom of=$tmpfile bs=$size count=1 2>/dev/null
+    then
+	rc=2
+	error_msg="Unable to write $size to a file in $checkdir. $error_msg"
+    fi
+
+    rm $tmpfile
+done
+
+if [ $rc != 0 ]
+then
+    echo $error_msg
+    exit $rc
+fi
+
+echo $ok_msg
