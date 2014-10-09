@@ -29,40 +29,38 @@ error_file='/var/log/nagios-plugins-cyb/check_log-error.log'
 rule_dir='/etc/nagios-plugins/config/cyb_check_log.d'
 whitelist_file='/etc/nagios-plugins/config/cyb_check_log.d/whitelist'
 
+# If lockfile can be acquired, check log files
 lockfile=/var/lock/nagios-check-log
-if ! dotlockfile -r 0 -p "$lockfile"
+if dotlockfile -r 0 -p "$lockfile"
 then
-    echo "Lock file present ($lockfile)"
-    exit $STATE_CRITICAL
-fi
+    mkdir -p $(dirname $error_file) $offset_dir
 
-mkdir -p $(dirname $error_file) $offset_dir
-
-# Check new errors from logs
-cd $rule_dir
-for rule_file in *
-do
-    logfiles=/${rule_file//_/\/}
-
-    for logfile in $logfiles
+    # Check new errors from logs
+    cd $rule_dir
+    for rule_file in *
     do
-	[ ! -f $logfile ] && continue
+        logfiles=/${rule_file//_/\/}
 
-	tempfile=$(tempfile)
-	trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
-	grep -vE '^#|^$' "$rule_file" > $tempfile || true
+        for logfile in $logfiles
+        do
+        [ ! -f $logfile ] && continue
 
-	timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
-	    | grep -E -f $tempfile \
-	    | grep -v -E -f $whitelist_file \
-	    | sed -e "s,^,$logfile: ," >> $error_file || true
+        tempfile=$(tempfile)
+        trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+        grep -vE '^#|^$' "$rule_file" > $tempfile || true
 
-	rm -f $tempfile
+        timeout 30 logtail2 -f $logfile -o $offset_dir/${logfile//\//-}.offset \
+            | grep -E -f $tempfile \
+            | grep -v -E -f $whitelist_file \
+            | sed -e "s,^,$logfile: ," >> $error_file || true
+
+        rm -f $tempfile
+        done
     done
-done
 
-# Remove lock
-dotlockfile -u $lockfile
+    # Remove lock
+    dotlockfile -u $lockfile
+fi
 
 # Show errors if needed
 if [ -s $error_file ]
