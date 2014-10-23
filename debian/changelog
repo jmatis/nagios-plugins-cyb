@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-396) unstable; urgency=medium
+
+  * plugins/check_sphinxsearch: Add sphinxsearch plugin
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Thu, 23 Oct 2014 14:35:45 +0200
+
 nagios-plugins-cyb (1.0-395) unstable; urgency=medium
 
   * plugins/check_log: Closes #36263
