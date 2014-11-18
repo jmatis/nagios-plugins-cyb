@@ -27,12 +27,11 @@ checkfile=/tmp/check_ganeti_cluster_verify
 checkfile_max_age="7200"
 
 # File doesn't exist
-if [ ! -s "${checkfile}" ]
+if [ ! -e "${checkfile}" ]
 then
     echo "OK: No output file (${checkfile})"
     exit $STATE_OK
 fi
-
 
 # File is too old
 checkfile_age=$(expr `date +%s` - `stat -c %Y ${checkfile}`)
@@ -41,21 +40,10 @@ if [ $checkfile_age -gt $checkfile_max_age ]; then
     exit $STATE_CRITICAL
 fi
 
-errors=""
-
-while read line
-do
-    # Grep for ERROR lines and remove non-critical errors
-    error=`printf %s "${line}" | grep -E '.*ERROR:.*:.*:.*' | grep -vE '(unallocated drbd minor|missing bridges)'`
-    if [ "x$error" != "x" ]
-    then
-        errors+="${error}"
-    fi
-done < "${checkfile}"
-
-if [ "x${errors}" != "x" ]
+# File contains errors
+if [ -s "${checkfile}" ]
 then
-    echo "${errors}"
+    head -c 1K "${checkfile}" | tr "\n" .
     exit $STATE_CRITICAL
 fi
 

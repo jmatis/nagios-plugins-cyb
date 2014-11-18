@@ -1,0 +1,61 @@
+#!/bin/bash
+#
+# Copyright (C) 2014 Michael Jeanson <michael.jeanson@isvtec.com> 
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+set -o pipefail -o nounset
+
+checkfile="/tmp/check_ganeti_cluster_verify"
+lockfile="/var/lock/check_ganeti_cluster_verify"
+checkfile_max_age="3600"
+
+refresh_checkfile () {
+    if dotlockfile -r 0 -p "$lockfile"
+    then
+        gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV 2>&1 | grep -E '.*ERROR:.*:.*:.*' | grep -vE '(unallocated drbd minor|missing bridges)' > "${checkfile}"
+        # Remove lock
+        dotlockfile -u "$lockfile"
+    fi
+}
+
+## Refresh file if :
+##  * it doesn't exist
+##  * it contains errors
+##  * it is older than max age
+
+
+# File doesn't exist, refresh it
+if [ ! -e "${checkfile}" ]
+then
+    refresh_checkfile
+else
+   ## Checkfile exists ##
+
+    # Compute checkfile age in seconds
+    checkfile_age=$(expr `date +%s` - `stat -c %Y ${checkfile}`)
+
+    # File is not zero size, so it contains errors, refresh it
+    if [ -s "${checkfile}" ]
+    then
+        refresh_checkfile
+
+    # File is older than the max age, refresh it
+    elif [ $checkfile_age -gt $checkfile_max_age ]
+    then
+        refresh_checkfile
+    fi
+
+    # File exists, is empty and not older than max age, do nothing
+fi

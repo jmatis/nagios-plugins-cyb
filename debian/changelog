@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-397) unstable; urgency=medium
+
+  * Improve recovery times for check_ganeti_cluster_verify. Closes #37059
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Tue, 18 Nov 2014 16:35:17 +0100
+
 nagios-plugins-cyb (1.0-396) unstable; urgency=medium
 
   * plugins/check_sphinxsearch: Add sphinxsearch plugin
