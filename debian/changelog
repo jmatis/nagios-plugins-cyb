@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-398) unstable; urgency=low
+
+  * Increase slightly the validity of security APT cache in check_apt_simple #38219 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 05 Jan 2015 10:59:29 +0100
+
 nagios-plugins-cyb (1.0-397) unstable; urgency=medium
 
   * Improve recovery times for check_ganeti_cluster_verify. Closes #37059
