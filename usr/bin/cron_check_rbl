@@ -21,9 +21,6 @@ set -e
 
 # Set default RBLs, can be overriden in the config file
 dnsbls='
-    sbl.spamhaus.org
-    xbl.spamhaus.org
-    pbl.spamhaus.org
     zen.spamhaus.org
     bl.spamcop.net
     cbl.abuseat.org
