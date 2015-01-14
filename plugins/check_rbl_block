@@ -53,7 +53,6 @@ dnsbls='
     cbl.abuseat.org
     b.barracudacentral.org
     ips.backscatterer.org
-    opm.tornevall.org
     '
 
 whitelist='/etc/nagios-plugins/config/cyb_rbl.d'
