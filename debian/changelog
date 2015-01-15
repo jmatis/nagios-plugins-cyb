@@ -4,7 +4,7 @@ nagios-plugins-cyb (1.0-399) unstable; urgency=medium
     - Removed tornevall.org, it's been down for a month
     - Removed spamhaus lists that where duplicates of zen.spamhaus.org
 
- -- Michael Jeanson <michael.jeanson@isvtec.net>  Thu, 15 Jan 2015 15:35:41 +0100
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Thu, 15 Jan 2015 15:35:41 +0100
 
 nagios-plugins-cyb (1.0-398) unstable; urgency=low
 
