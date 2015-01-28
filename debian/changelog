@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-401) unstable; urgency=medium
+
+  * check_log: Add nginx all worker connections used check, #38567
+  * check_log: Add contrack table full check, #38567
+  * Added conntrack plugin, #38567
+
+ -- Michael Jeanson <michael.jeanson@isvtec.com>  Wed, 28 Jan 2015 10:21:46 +0100
+
 nagios-plugins-cyb (1.0-400) unstable; urgency=low
 
   * plugins/check_memory_abs: Add absolute memory check plugin 
