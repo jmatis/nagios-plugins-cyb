@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-400) unstable; urgency=low
+
+  * plugins/check_memory_abs: Add absolute memory check plugin 
+    (should be used by host servers) 
+
+ -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 22 Jan 2015 10:10:51 +0100
+
 nagios-plugins-cyb (1.0-399) unstable; urgency=medium
 
   * Updated default dnsbl list:

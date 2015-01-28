@@ -1,0 +1,60 @@
+#!/usr/bin/python
+#
+# Copyright (C) 2015 ISVTEC <contact@isvtec.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+import sys
+
+warning=512
+critical=256
+
+def print_usage():
+    print "This plugin checks if the amount of available memory is lower than your thresholds"
+    print "By default, thresholds are 512Mb for WARNING and 256Mb for CRITICAL"
+    print "Usage: check_memory_abs <warning threshold in Mb> <critical threshold in Mb>"
+    sys.exit(1)
+
+if len(sys.argv) != 3 and len(sys.argv) !=1 :
+    print_usage()
+else:
+    if len(sys.argv) == 3 :
+      if not sys.argv[1].isdigit() or not sys.argv[2].isdigit() :
+        print_usage()
+
+      warning=int(sys.argv[1])
+      critical=int(sys.argv[2])
+
+    with open('/proc/meminfo', 'rt') as f:
+        vals = {}
+        for i in f.read().splitlines():
+            try:
+                name, val = i.split(':')
+                vals[name.strip()] = int(val.split()[0])
+            except:
+                pass
+
+    memfree = (vals['MemFree'] + vals['Buffers'] + vals['Cached'])/1024
+
+    if memfree <= critical:
+      print "CRITICAL - %d Mb available" % memfree
+      sys.exit(2)
+      
+    if memfree <= warning:
+      print "WARNING - %d Mb available" % memfree
+      sys.exit(1)
+
+    print "OK - %d Mb available" % memfree
+    sys.exit(0)
