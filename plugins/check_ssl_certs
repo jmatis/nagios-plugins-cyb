@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 #
 # Copyright (C) 2011-2014 Cyril Bouthors <cyril@boutho.rs>
+#               2015 Michael Jeanson <michael.jeanson@isvtec.com>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -27,6 +28,7 @@ use File::Which;
 
 my %certs = ();
 my $apache_enabled_dir = '/etc/apache2/sites-enabled';
+my $haproxy_conf = '/etc/haproxy/haproxy.cfg';
 my $remaining_days_threshold = 7;
 
 $remaining_days_threshold = $ARGV[0]
@@ -228,11 +230,32 @@ sub parse_postfix_configuration
     $certs{$file} = 'Postfix';
 }
 
+sub parse_haproxy_configuration
+{
+    # Check if config file exists
+    return
+        if ! -f $haproxy_conf;
+
+    open(FH, $haproxy_conf)
+        or nagios_die "$!";
+
+    while (<FH>)
+    {
+        # Ignore comment lines
+        next if (/^\s+#/);
+
+        $certs{$1} = "Haproxy"
+            if(/^\s*bind.*ssl crt\s+(.*)\s*$/i);
+    }
+    close(FH);
+}
+
 parse_apache_configuration
 parse_nginx_configuration
 parse_proftpd_configuration
 parse_exim_configuration
 parse_postfix_configuration
+parse_haproxy_configuration
 
 my $rc      = 0;
 my $output  = '';
