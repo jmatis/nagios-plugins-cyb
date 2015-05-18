@@ -20,7 +20,8 @@ Depends: ${shlibs:Depends},
   sipcalc,
   libdbd-sqlite3-perl,
   openssl,
-  libfile-which-perl
+  libfile-which-perl,
+  conntrack
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,

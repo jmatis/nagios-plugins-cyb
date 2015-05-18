@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-405) unstable; urgency=medium
+
+  * plugins/check_conntrack: check_conntrack reports that the conntrack
+    table is full even when 90% is filled with 'UNREPLIED' connections
+    which can be reused at any time by new connection:
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 May 2015 10:43:55 +0400
+
 nagios-plugins-cyb (1.0-404) unstable; urgency=low
 
   * etc/nagios/nrpe.d/process.cfg: Add check_nrpe_process_str command
