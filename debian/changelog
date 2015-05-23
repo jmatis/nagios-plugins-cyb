@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-406) unstable; urgency=medium
+
+  * plugins/check_rbl: avoid duplicate information in output messages and
+    return code.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Sat, 23 May 2015 16:52:47 +0400
+
 nagios-plugins-cyb (1.0-405) unstable; urgency=medium
 
   * plugins/check_conntrack: check_conntrack reports that the conntrack

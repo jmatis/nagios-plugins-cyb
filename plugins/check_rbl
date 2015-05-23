@@ -38,7 +38,7 @@ fi
 # File doesn't exist
 if [ ! -f "$checkfile" ]
 then
-    echo 'OK: No output file'
+    echo 'No output file'
     exit $STATE_OK
 fi
 
@@ -56,5 +56,5 @@ then
    exit $STATE_CRITICAL
 fi
 
-echo "OK"
+echo "IP addresses are not blacklisted"
 exit $STATE_OK
