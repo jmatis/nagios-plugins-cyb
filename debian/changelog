@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-408) unstable; urgency=medium
+
+  * etc/cron.d/nagios-plugins-cyb: run cron_check_ganeti_cluster_verify
+    every 10 mins instead of 5 because it fills /var/lib/ganeti/queue with
+    GB of logs! https://support.isvtec.com/view.php?id=41305
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 26 Jun 2015 19:54:10 +0400
+
 nagios-plugins-cyb (1.0-407) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_mail.err: add new

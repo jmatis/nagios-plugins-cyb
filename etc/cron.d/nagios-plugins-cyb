@@ -1,4 +1,4 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
-*/5 * * * * root if [ -x /usr/sbin/gnt-cluster ] && ps -C ganeti-masterd 2>&1 >/dev/null; then /usr/sbin/cron_check_ganeti_cluster_verify; fi
+*/10 * * * * root if [ -x /usr/sbin/gnt-cluster ] && ps -C ganeti-masterd 2>&1 >/dev/null; then /usr/sbin/cron_check_ganeti_cluster_verify; fi
 */5 * * * * nagios if [ -x /usr/bin/cron_check_rbl ]; then /usr/bin/cron_check_rbl; fi
