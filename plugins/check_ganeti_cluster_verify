@@ -23,7 +23,8 @@ STATE_CRITICAL=2
 STATE_UNKNOWN=3
 STATE_DEPENDENT=4
 
-checkfile=/tmp/check_ganeti_cluster_verify
+checkfile='/tmp/check_ganeti_cluster_verify'
+# seconds
 checkfile_max_age="7200"
 
 # File doesn't exist
