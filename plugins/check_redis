@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2013 Cyril Bouthors <cyril@bouthors.org>
+# Copyright (C) 2013-2015 Cyril Bouthors <cyril@bouthors.org>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,12 +18,14 @@
 set -u
 
 help() {
-    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5] [--password=foobar]" >&2
+    echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
+    echo "  [--password=foobar]" >&2
 }
 
 # ":" means required
 # "::" means optional
-TEMP=$(getopt -o h: --long hostname::,port::,timeout::,password: -n "$0" -- "$@")
+TEMP=$(getopt -o h: --long hostname::,port::,timeout::,password: -n "$0" -- \
+	      "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -81,7 +83,8 @@ then
 	pass_opt="-a $password"
 fi
 
-if ! timeout $timeout redis-cli -h $hostname -p $port $pass_opt ping | grep -qE '^PONG$'
+if ! timeout $timeout redis-cli -h $hostname -p $port $pass_opt ping \
+	| grep -qE '^PONG$'
 then
     echo 'Failed to connect Redis'
     exit 2
