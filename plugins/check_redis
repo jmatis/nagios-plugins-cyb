@@ -19,13 +19,13 @@ set -u
 
 help() {
     echo "Usage: $0 [--hostname=localhost] [--port=11211] [--timeout=5]" >&2
-    echo "  [--password=foobar]" >&2
+    echo "  [--password=foobar] [--maxmemory-threshold-percent=80]" >&2
 }
 
 # ":" means required
 # "::" means optional
-TEMP=$(getopt -o h: --long hostname::,port::,timeout::,password: -n "$0" -- \
-	      "$@")
+TEMP=$(getopt -o h: --long hostname::,port::,timeout::,password: \
+	      --long maxmemory-threshold-percent:: -n "$0" -- "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -40,6 +40,7 @@ port=6379
 timeout=5
 password=''
 pass_opt=''
+maxmemory_threshold_percent=80
 
 # Parse options with getopt
 eval set -- "$TEMP"
@@ -66,6 +67,11 @@ do
 	    shift 2
 	    ;;
 
+	--maxmemory-threshold-percent)
+	    maxmemory_threshold_percent="$2"
+	    shift 2
+	    ;;
+
 	--)
 	    shift
 	    break
@@ -83,12 +89,29 @@ then
 	pass_opt="-a $password"
 fi
 
-if ! timeout $timeout redis-cli -h $hostname -p $port $pass_opt ping \
+redis_cli="redis-cli -h $hostname -p $port $pass_opt"
+
+# PING Redis
+if ! timeout $timeout $redis_cli ping \
 	| grep -qE '^PONG$'
 then
     echo 'Failed to connect Redis'
     exit 2
 fi
 
-echo "OK"
+# Fetch memory values from Redis
+used_memory_peak=$($redis_cli INFO memory \
+			  | awk -F":|\r" '/^used_memory_peak:/ {print $2}')
+maxmemory=$($redis_cli CONFIG GET maxmemory | tail -1)
+
+# Check if 'used_memory_peak' is does not exceed X% of 'maxmemory' with X=80 by
+# default.
+percent_memory_used=$(($used_memory_peak * 100 / $maxmemory))
+if [ "$percent_memory_used" -ge $maxmemory_threshold_percent ]
+then
+    echo "${percent_memory_used}% memory used, please adjust 'maxmemory'"
+    exit 2
+fi
+
+echo "${percent_memory_used}% memory used"
 exit 0
