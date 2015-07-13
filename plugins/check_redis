@@ -99,6 +99,8 @@ then
     exit 2
 fi
 
+echo -n "Redis correctly replied to PING. "
+
 # Fetch memory values from Redis
 used_memory_peak=$($redis_cli INFO memory \
 			  | awk -F":|\r" '/^used_memory_peak:/ {print $2}')
@@ -117,4 +119,5 @@ then
 
     echo "${percent_memory_used}% memory used"
 fi
+
 exit 0
