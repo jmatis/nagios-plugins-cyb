@@ -104,14 +104,17 @@ used_memory_peak=$($redis_cli INFO memory \
 			  | awk -F":|\r" '/^used_memory_peak:/ {print $2}')
 maxmemory=$($redis_cli CONFIG GET maxmemory | tail -1)
 
-# Check if 'used_memory_peak' is does not exceed X% of 'maxmemory' with X=80 by
-# default.
-percent_memory_used=$(($used_memory_peak * 100 / $maxmemory))
-if [ "$percent_memory_used" -ge $maxmemory_threshold_percent ]
+if [ "$maxmemory" != 0 ]
 then
-    echo "${percent_memory_used}% memory used, please adjust 'maxmemory'"
-    exit 2
-fi
+    # Check if 'used_memory_peak' is does not exceed X% of 'maxmemory' with X=80
+    # by default.
+    percent_memory_used=$(($used_memory_peak * 100 / $maxmemory))
+    if [ "$percent_memory_used" -ge $maxmemory_threshold_percent ]
+    then
+	echo "${percent_memory_used}% memory used, please adjust 'maxmemory'"
+	exit 2
+    fi
 
-echo "${percent_memory_used}% memory used"
+    echo "${percent_memory_used}% memory used"
+fi
 exit 0

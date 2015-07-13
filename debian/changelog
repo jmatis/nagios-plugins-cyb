@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-410) unstable; urgency=medium
+
+  * plugins/check_redis: avoid illegal division by zero when 'maxmemory'
+    is not defined.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Jul 2015 20:00:39 +0400
+
 nagios-plugins-cyb (1.0-409) unstable; urgency=medium
 
   * plugins/check_redis: check Redis memory usage by comparing
