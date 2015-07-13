@@ -113,11 +113,14 @@ then
     percent_memory_used=$(($used_memory_peak * 100 / $maxmemory))
     if [ "$percent_memory_used" -ge $maxmemory_threshold_percent ]
     then
-	echo "${percent_memory_used}% memory used, please adjust 'maxmemory'"
+	echo -n "${percent_memory_used}% memory used, please adjust 'maxmemory'"
 	exit 2
     fi
 
-    echo "${percent_memory_used}% memory used"
+    echo -n "${percent_memory_used}% memory used"
 fi
+
+# Make sure we have a "new line" at the end of the output
+echo
 
 exit 0
