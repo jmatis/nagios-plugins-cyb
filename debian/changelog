@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-413) unstable; urgency=medium
+
+  * plugins/check_df: correctly check the return code of 'tempfile' and
+    return the output and error code to Nagios.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 Jul 2015 17:15:18 +0400
+
 nagios-plugins-cyb (1.0-412) unstable; urgency=medium
 
   * plugins/check_redis: don't mess with new lines

@@ -35,7 +35,13 @@ then
 fi
 
 # Fetch disk usage data
-tempfile=$(tempfile)
+tempfile=$(tempfile 2>&1 || true)
+if [ ! -f "$tempfile" ]
+then
+    echo "Unable to create temporary file: $tempfile"
+    exit 2
+fi
+
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
 (
