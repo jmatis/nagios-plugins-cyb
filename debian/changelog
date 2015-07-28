@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-414) unstable; urgency=medium
+
+  * plugins/check_df: avoid the use of implicit temporary files which do
+    not work when the storage is full.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 28 Jul 2015 16:27:04 +0400
+
 nagios-plugins-cyb (1.0-413) unstable; urgency=medium
 
   * plugins/check_df: correctly check the return code of 'tempfile' and

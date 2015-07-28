@@ -22,6 +22,7 @@ warning_threshold=$1
 critical_threshold=$2
 shift 2
 excluded_paths=$*
+units='B'
 
 set -e -o pipefail -u
 
@@ -34,16 +35,6 @@ then
     exit 1
 fi
 
-# Fetch disk usage data
-tempfile=$(tempfile 2>&1 || true)
-if [ ! -f "$tempfile" ]
-then
-    echo "Unable to create temporary file: $tempfile"
-    exit 2
-fi
-
-trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
-
 (
     # Fetch blocks information
     df -PlTh
@@ -51,20 +42,7 @@ trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
     # Fetch inodes information
     echo 'INODES'
     df -PlThi
-) > $tempfile
-
-for pipestatus in ${PIPESTATUS[@]}
-do
-    if [ "$pipestatus" -ne 0 ]
-    then
-	echo 'Unable to create a temporary file, the disk is probably full'
-	exit 2
-    fi
-done
-
-rc=0
-units='B'
-while read fs type size used available percentage mount_point
+) | while read fs type size used available percentage mount_point
 do
     # Check if mount point exists
     if [ "$fs" = 'Filesystem' ]
@@ -96,9 +74,8 @@ do
 	'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
     then
 	echo -n "$mount_point is ${percentage}% full, "
-	echo -n "$available$units available. "
-	rc=2
-	continue
+	echo "$available$units available. "
+	exit 2
     fi
 
     # Check if disk usage has triggered warning threshold
@@ -108,19 +85,10 @@ do
 	'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
     then
 	echo -n "$mount_point is ${percentage}% full, "
-	echo -n "$available$units available. "
-	if [ "$rc" -eq 0 ]
-	then
-	    rc=1
-	fi
-	continue
+	echo "$available$units available. "
+	exit 1
     fi
-done < $tempfile
+done
 
-if [ "$rc" -eq 0 ]
-then
-    echo -n 'OK'
-fi
-
-echo
-exit $rc
+echo 'OK'
+exit 0
