@@ -21,7 +21,8 @@ Depends: ${shlibs:Depends},
   libdbd-sqlite3-perl,
   openssl,
   libfile-which-perl,
-  conntrack
+  conntrack,
+  bsdutils (>2.26.2-9)
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,
