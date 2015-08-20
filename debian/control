@@ -22,7 +22,7 @@ Depends: ${shlibs:Depends},
   openssl,
   libfile-which-perl,
   conntrack,
-  bsdutils (>2.26.2-9)
+  bsdutils (>1:2.26.2-9)
 Suggests: dellomsa,
   libdevice-usb-pcsensor-hidtemper-perl,
   smartmontools,
