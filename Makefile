@@ -26,8 +26,8 @@ clean:;
 install:
 	mkdir -p $(DESTDIR)/usr/lib/nagios/plugins-cyb
 	cp plugins/* $(DESTDIR)/usr/lib/nagios/plugins-cyb/
-	rsync -a etc $(DESTDIR)
-	rsync -a usr $(DESTDIR)
+	rsync -a --exclude .DS_Store etc $(DESTDIR)
+	rsync -a --exclude .DS_Store usr $(DESTDIR)
 
 test:
 	for plugin in $(wildcard plugins/*); do ./$$plugin; done
