@@ -1,3 +1,13 @@
+nagios-plugins-cyb (1.0-418) unstable; urgency=medium
+
+  * plugins/check_docker: run Nagios plugins inside a container.
+  * etc/sudoers.d/nagios-plugins-cyb: allow the 'nagios' user to run docker via
+    sudo.
+  * etc/nagios/nrpe.d/cyb_docker.cfg: define Docker plugin metadata.
+  * Makefile: ignore .DS_Store OS X files.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Mon, 30 Nov 2015 18:04:02 +0400
+
 nagios-plugins-cyb (1.0-417) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_uwsgi_err.log: add
