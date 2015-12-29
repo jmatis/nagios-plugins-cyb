@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-419) unstable; urgency=low
+
+  * plugins/check_iptables_persistent: ignore fail2ban rules
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 29 Dec 2015 11:32:45 +0000
+
 nagios-plugins-cyb (1.0-418) unstable; urgency=medium
 
   * plugins/check_docker: run Nagios plugins inside a container.
