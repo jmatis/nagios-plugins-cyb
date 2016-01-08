@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-420) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log:
+    removed nf_conntrack check as we have a specific Nagios service
+    check for that.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 08 Jan 2016 11:10:32 +0000
+
 nagios-plugins-cyb (1.0-419) unstable; urgency=low
 
   * plugins/check_iptables_persistent: ignore fail2ban rules

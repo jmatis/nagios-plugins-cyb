@@ -35,6 +35,3 @@ BUG: soft lockup - CPU.* stuck for
 
 # x2apic bug with Dell BIOS
 Your BIOS is broken and requested that x2apic be disabled
-
-# conntrack table is full
-nf_conntrack: table full, dropping packet
