@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-421) unstable; urgency=low
+
+  * plugins/check_zpool: complete rewrite to ease reading the code and
+    fix a bug that prevent the detection of failed HDDs with zpool
+    status.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Tue, 02 Feb 2016 14:39:45 +0000
+
 nagios-plugins-cyb (1.0-420) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log:
