@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-422) unstable; urgency=low
+
+  * debian/control: stop depending on a recent bsdutils version
+    because it's hard to maintain in production at the moment.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 04 Feb 2016 05:56:47 +0000
+
 nagios-plugins-cyb (1.0-421) unstable; urgency=low
 
   * plugins/check_zpool: complete rewrite to ease reading the code and
