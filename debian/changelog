@@ -1,3 +1,13 @@
+nagios-plugins-cyb (1.0-423) unstable; urgency=low
+
+  * plugins/check_nagios_livestatus: Check that no service check is
+    stuck, this sometimes happens and we need to know when to collect
+    more information and fix this bug. Check that the oldest
+    'last_check' variable from /var/lib/nagios3/retention.dat is not
+    older than 7 days.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 12:29:16 +0000
+
 nagios-plugins-cyb (1.0-422) unstable; urgency=low
 
   * debian/control: stop depending on a recent bsdutils version

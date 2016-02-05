@@ -43,4 +43,19 @@ then
     exit 2
 fi
 
+# Check that no service check is stuck, this sometimes happens and we need to
+# know when to collect more information and fix this bug. Check that the oldest
+# 'last_check' variable from /var/lib/nagios3/retention.dat is not older than 7
+# days.
+
+file='/var/lib/nagios3/retention.dat'
+day=7
+oldest=$(grep -E '^last_check=' $file | sort -n | head -1 | cut -d= -f2)
+current_timestamp=$(date +%s)
+if [ "$(($current_timestamp - $oldest / 60 * 60 * 24 * 7))" -gt $day ]
+then
+    echo "The oldest 'last_check' entry from $file is older than $day days, it probably means that one of the Nagios checks is stuck."
+    exit 2
+fi
+
 exit 0
