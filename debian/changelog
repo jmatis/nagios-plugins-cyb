@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-425) unstable; urgency=low
+
+  * plugins/check_nagios_livestatus: fixed Nagios API by writing only
+    one line to the output.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 13:04:39 +0000
+
 nagios-plugins-cyb (1.0-424) unstable; urgency=low
 
   * plugins/check_nagios_livestatus: make sure the code is
