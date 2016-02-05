@@ -16,11 +16,12 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+host=$1
+delay=$2
+
 set -e -o pipefail -o nounset
 
 critical=0
-host=$1
-delay=$2
 
 if [ -z "$host" -o -z "$delay" ]
 then

@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-424) unstable; urgency=low
+
+  * plugins/check_nagios_livestatus: make sure the code is
+   'set -o nounset' proof.
+
+ -- 
+
 nagios-plugins-cyb (1.0-423) unstable; urgency=low
 
   * plugins/check_nagios_livestatus: Check that no service check is
