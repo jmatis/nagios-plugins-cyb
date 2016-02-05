@@ -3,7 +3,10 @@ nagios-plugins-cyb (1.0-424) unstable; urgency=low
   * plugins/check_nagios_livestatus: make sure the code is
    'set -o nounset' proof.
 
- -- 
+  * plugins/check_nagios_livestatus: make sure the code is
+   'set -o pipefail' proof.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 12:45:23 +0000
 
 nagios-plugins-cyb (1.0-423) unstable; urgency=low
 
