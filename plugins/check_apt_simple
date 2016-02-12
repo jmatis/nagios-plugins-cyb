@@ -34,7 +34,7 @@ then
     exit $critical_rc
 fi
 
-packages=$(awk '/^Inst|Conf / {print $2}' tempfile | sort -u | tr "\n" ' ')
+packages=$(awk '/^Inst|Conf / {print $2}' $tempfile | sort -u | tr "\n" ' ')
 
 if [ -n "$packages" ]
 then
