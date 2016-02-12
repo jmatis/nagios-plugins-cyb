@@ -31,10 +31,10 @@ then
     echo -n "apt-get failed: "
     tr "\n" ' ' < $tempfile
     echo
-    exit $critical_rc    
+    exit $critical_rc
 fi
 
-packages=$(awk '/^Inst / {print $2}' $tempfile | tr "\n" ' ')
+packages=$(awk '/^Inst|Conf / {print $2}' tempfile | sort -u | tr "\n" ' ')
 
 if [ -n "$packages" ]
 then
@@ -72,7 +72,7 @@ then
     echo -n "apt-get stuck in -f install: "
     tr "\n" ' ' < $tempfile
     echo
-    exit $critical_rc    
+    exit $critical_rc
 fi
 
 if [ "$rc" != "$ok_rc" ]
