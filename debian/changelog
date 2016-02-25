@@ -1,3 +1,11 @@
+nagios-plugins-cyb (1.0-426) unstable; urgency=low
+
+  * etc/nagios-plugins/config/cyb_https.cfg: make sure the plugins
+    returns CRITICAL or OK, not WARNING because binary results are
+    easier to work with in a production environment.
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 25 Feb 2016 05:47:36 +0000
+
 nagios-plugins-cyb (1.0-425) unstable; urgency=low
 
   * plugins/check_nagios_livestatus: fixed Nagios API by writing only
