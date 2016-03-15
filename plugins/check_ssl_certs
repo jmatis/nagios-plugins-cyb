@@ -267,7 +267,7 @@ foreach my $file (keys %certs)
 	if $file eq '';
 
     nagios_die "$file is not readable by the '". getpwuid($<) .
-	"' user OR does not exists. Is it readable by the 'ssl-cert' group?"
+	"' user or does not exist. Is it readable by the 'ssl-cert' group?"
 	if ! -r $file;
 
     my $expiration_date = `openssl x509 -noout -enddate -in $file`;
