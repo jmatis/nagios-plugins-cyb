@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-426.1) unstable; urgency=low
+
+  * plugins/check_exim_root_delivery: add
+
+ -- Cyril Bouthors <cyril@bouthors.org>  Thu, 17 Mar 2016 08:01:20 +0000
+
 nagios-plugins-cyb (1.0-426) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_https.cfg: make sure the plugins
