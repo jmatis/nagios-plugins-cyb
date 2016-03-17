@@ -1,7 +1,7 @@
 Source: nagios-plugins-cyb
 Section: net
 Priority: optional
-Maintainer: Cyril Bouthors <cyril@bouthors.org>
+Maintainer: Cyril Bouthors <cyril@boutho.rs>
 Uploaders: Cyril Bouthors <cyb@debian.org>
 Build-Depends: debhelper (>= 5), rsync
 Standards-Version: 3.7.3

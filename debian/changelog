@@ -4,14 +4,14 @@ nagios-plugins-cyb (1.0-426) unstable; urgency=low
     returns CRITICAL or OK, not WARNING because binary results are
     easier to work with in a production environment.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 25 Feb 2016 05:47:36 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 25 Feb 2016 05:47:36 +0000
 
 nagios-plugins-cyb (1.0-425) unstable; urgency=low
 
   * plugins/check_nagios_livestatus: fixed Nagios API by writing only
     one line to the output.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 13:04:39 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 05 Feb 2016 13:04:39 +0000
 
 nagios-plugins-cyb (1.0-424) unstable; urgency=low
 
@@ -21,7 +21,7 @@ nagios-plugins-cyb (1.0-424) unstable; urgency=low
   * plugins/check_nagios_livestatus: make sure the code is
    'set -o pipefail' proof.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 12:45:23 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 05 Feb 2016 12:45:23 +0000
 
 nagios-plugins-cyb (1.0-423) unstable; urgency=low
 
@@ -31,14 +31,14 @@ nagios-plugins-cyb (1.0-423) unstable; urgency=low
     'last_check' variable from /var/lib/nagios3/retention.dat is not
     older than 7 days.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 05 Feb 2016 12:29:16 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 05 Feb 2016 12:29:16 +0000
 
 nagios-plugins-cyb (1.0-422) unstable; urgency=low
 
   * debian/control: stop depending on a recent bsdutils version
     because it's hard to maintain in production at the moment.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 04 Feb 2016 05:56:47 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 04 Feb 2016 05:56:47 +0000
 
 nagios-plugins-cyb (1.0-421) unstable; urgency=low
 
@@ -46,7 +46,7 @@ nagios-plugins-cyb (1.0-421) unstable; urgency=low
     fix a bug that prevent the detection of failed HDDs with zpool
     status.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 02 Feb 2016 14:39:45 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 02 Feb 2016 14:39:45 +0000
 
 nagios-plugins-cyb (1.0-420) unstable; urgency=low
 
@@ -54,13 +54,13 @@ nagios-plugins-cyb (1.0-420) unstable; urgency=low
     removed nf_conntrack check as we have a specific Nagios service
     check for that.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 08 Jan 2016 11:10:32 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 08 Jan 2016 11:10:32 +0000
 
 nagios-plugins-cyb (1.0-419) unstable; urgency=low
 
   * plugins/check_iptables_persistent: ignore fail2ban rules
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 29 Dec 2015 11:32:45 +0000
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 29 Dec 2015 11:32:45 +0000
 
 nagios-plugins-cyb (1.0-418) unstable; urgency=medium
 
@@ -70,58 +70,58 @@ nagios-plugins-cyb (1.0-418) unstable; urgency=medium
   * etc/nagios/nrpe.d/cyb_docker.cfg: define Docker plugin metadata.
   * Makefile: ignore .DS_Store OS X files.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 30 Nov 2015 18:04:02 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 30 Nov 2015 18:04:02 +0400
 
 nagios-plugins-cyb (1.0-417) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_uwsgi_err.log: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 20 Aug 2015 19:07:02 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 20 Aug 2015 19:07:02 +0400
 
 nagios-plugins-cyb (1.0-416) unstable; urgency=medium
 
   * debian/control: fixed version dependency on bsdutils
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 20 Aug 2015 13:56:35 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 20 Aug 2015 13:56:35 +0400
 
 nagios-plugins-cyb (1.0-415) unstable; urgency=medium
 
   * plugins/check_syslog: add.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 12 Aug 2015 20:08:06 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 12 Aug 2015 20:08:06 +0400
 
 nagios-plugins-cyb (1.0-414) unstable; urgency=medium
 
   * plugins/check_df: avoid the use of implicit temporary files which do
     not work when the storage is full.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 28 Jul 2015 16:27:04 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 28 Jul 2015 16:27:04 +0400
 
 nagios-plugins-cyb (1.0-413) unstable; urgency=medium
 
   * plugins/check_df: correctly check the return code of 'tempfile' and
     return the output and error code to Nagios.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 Jul 2015 17:15:18 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 Jul 2015 17:15:18 +0400
 
 nagios-plugins-cyb (1.0-412) unstable; urgency=medium
 
   * plugins/check_redis: don't mess with new lines
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Jul 2015 20:06:50 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Jul 2015 20:06:50 +0400
 
 nagios-plugins-cyb (1.0-411) unstable; urgency=medium
 
   * plugins/check_redis: nice message displayed when nothing's wrong.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Jul 2015 20:04:42 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Jul 2015 20:04:42 +0400
 
 nagios-plugins-cyb (1.0-410) unstable; urgency=medium
 
   * plugins/check_redis: avoid illegal division by zero when 'maxmemory'
     is not defined.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Jul 2015 20:00:39 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Jul 2015 20:00:39 +0400
 
 nagios-plugins-cyb (1.0-409) unstable; urgency=medium
 
@@ -129,7 +129,7 @@ nagios-plugins-cyb (1.0-409) unstable; urgency=medium
     used_memory_peak with maxmemory.
     https://support.isvtec.com/view.php?id=41541
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 08 Jul 2015 12:35:18 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 08 Jul 2015 12:35:18 +0400
 
 nagios-plugins-cyb (1.0-408) unstable; urgency=medium
 
@@ -137,21 +137,21 @@ nagios-plugins-cyb (1.0-408) unstable; urgency=medium
     every 10 mins instead of 5 because it fills /var/lib/ganeti/queue with
     GB of logs! https://support.isvtec.com/view.php?id=41305
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 26 Jun 2015 19:54:10 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 26 Jun 2015 19:54:10 +0400
 
 nagios-plugins-cyb (1.0-407) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_mail.err: add new
     Courier error message to match POP/IMAP slot saturation.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 26 May 2015 17:58:51 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 26 May 2015 17:58:51 +0400
 
 nagios-plugins-cyb (1.0-406) unstable; urgency=medium
 
   * plugins/check_rbl: avoid duplicate information in output messages and
     return code.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 23 May 2015 16:52:47 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 23 May 2015 16:52:47 +0400
 
 nagios-plugins-cyb (1.0-405) unstable; urgency=medium
 
@@ -159,7 +159,7 @@ nagios-plugins-cyb (1.0-405) unstable; urgency=medium
     table is full even when 90% is filled with 'UNREPLIED' connections
     which can be reused at any time by new connection:
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 May 2015 10:43:55 +0400
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 18 May 2015 10:43:55 +0400
 
 nagios-plugins-cyb (1.0-404) unstable; urgency=low
 
@@ -240,28 +240,28 @@ nagios-plugins-cyb (1.0-393) unstable; urgency=medium
     fail!
   * plugins/check_nfs_rw: avoid detecting NFS servers in /proc/mounts
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 18 Sep 2014 16:44:41 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 18 Sep 2014 16:44:41 +0200
 
 nagios-plugins-cyb (1.0-392) unstable; urgency=medium
 
   * Add new plugin check_nfs_rw to check NFS speed and quality by writing
     a 5MB file to each NFS share.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 18 Sep 2014 14:57:46 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 18 Sep 2014 14:57:46 +0200
 
 nagios-plugins-cyb (1.0-391) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_syslog: prefix MySQL
     error with the 'mysql' string. Closes #35597.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 12 Sep 2014 19:17:42 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 12 Sep 2014 19:17:42 +0200
 
 nagios-plugins-cyb (1.0-390) unstable; urgency=medium
 
   * Avoid duplicate information by not displaying "CRITICAL" nor "WARNING"
     in output and return code.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 10 Sep 2014 15:27:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 10 Sep 2014 15:27:31 +0200
 
 nagios-plugins-cyb (1.0-389) unstable; urgency=medium
 
@@ -317,7 +317,7 @@ nagios-plugins-cyb (1.0-382) unstable; urgency=medium
   * plugins/check_rbl: return CRITICAL when lock file is present to avoid
     flapping.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 28 Aug 2014 01:08:34 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 28 Aug 2014 01:08:34 +0200
 
 nagios-plugins-cyb (1.0-381) unstable; urgency=medium
 
@@ -356,7 +356,7 @@ nagios-plugins-cyb (1.0-377) unstable; urgency=medium
 
   * New plugin check_ovh_services_expiration.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 Aug 2014 17:03:27 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 18 Aug 2014 17:03:27 +0200
 
 nagios-plugins-cyb (1.0-376) unstable; urgency=medium
 
@@ -370,7 +370,7 @@ nagios-plugins-cyb (1.0-375) unstable; urgency=medium
   * plugins/check_log: allow shell expansion in log file names in order to
     search through /var/log/apache2/*error.log for example.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 01 Aug 2014 16:54:46 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 01 Aug 2014 16:54:46 +0200
 
 nagios-plugins-cyb (1.0-374) unstable; urgency=medium
 
@@ -452,20 +452,20 @@ nagios-plugins-cyb (1.0-363) unstable; urgency=medium
   * plugins/check_time: reduced allowed time offset from 5s to 2s because
     5s is a lot when dealing with important transactions.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 16:16:05 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Jun 2014 16:16:05 +0200
 
 nagios-plugins-cyb (1.0-362) unstable; urgency=medium
 
   * plugins/check_log: allow empty rule files
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 16:08:39 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Jun 2014 16:08:39 +0200
 
 nagios-plugins-cyb (1.0-361) unstable; urgency=medium
 
   * New release, built on a Debian/wheezy OS. Previous release was built
     on a Debian/sid.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Jun 2014 15:08:12 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Jun 2014 15:08:12 +0200
 
 nagios-plugins-cyb (1.0-360) unstable; urgency=medium
 
@@ -484,7 +484,7 @@ nagios-plugins-cyb (1.0-358) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: avoid DNS resolution during ICMP check.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 07 May 2014 11:43:11 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 07 May 2014 11:43:11 +0200
 
 nagios-plugins-cyb (1.0-357) unstable; urgency=medium
 
@@ -494,39 +494,39 @@ nagios-plugins-cyb (1.0-357) unstable; urgency=medium
       - use BASH 'pipefail' and 'nounset' options to make sure we trap all
         kinds of unexpected behavior
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 06 May 2014 12:22:44 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 06 May 2014 12:22:44 +0200
 
 nagios-plugins-cyb (1.0-356) unstable; urgency=medium
 
   * plugins/check_nagios_log: report Nagios log file modification time in
     any case.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 29 Apr 2014 10:42:52 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 29 Apr 2014 10:42:52 +0200
 
 nagios-plugins-cyb (1.0-355) unstable; urgency=medium
 
   * debian/postinst: only call /etc/init.d/nagios-nrpe-server if it exist.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 18 Apr 2014 10:54:01 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 18 Apr 2014 10:54:01 +0200
 
 nagios-plugins-cyb (1.0-354) unstable; urgency=medium
 
   * Removed home-made RabbitMQ plugins because we are now using
     https://github.com/jamesc/nagios-plugins-rabbitmq
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 17 Apr 2014 11:11:51 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 17 Apr 2014 11:11:51 +0200
 
 nagios-plugins-cyb (1.0-353) unstable; urgency=medium
 
   * plugins/check_ssl_certs: nicer output messages.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 15:36:27 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 15:36:27 +0200
 
 nagios-plugins-cyb (1.0-352) unstable; urgency=medium
 
   * plugins/check_ssl_certs: ignore dotfiles in Nginx configuration
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 15:34:56 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 15:34:56 +0200
 
 nagios-plugins-cyb (1.0-351) unstable; urgency=medium
 
@@ -534,33 +534,33 @@ nagios-plugins-cyb (1.0-351) unstable; urgency=medium
     variable 'USER' is always defined to 'root' under NRPE even if the
     server is running as 'nagios'.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 12:54:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 12:54:38 +0200
 
 nagios-plugins-cyb (1.0-350) unstable; urgency=medium
 
   * plugins/check_ssl_certs: use custom die() function because Nagios
     ignores STDERR.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 12:49:11 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 12:49:11 +0200
 
 nagios-plugins-cyb (1.0-349) unstable; urgency=medium
 
   * plugins/check_ssl_certs: ignore FTP password file.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 12:23:53 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 12:23:53 +0200
 
 nagios-plugins-cyb (1.0-348) unstable; urgency=medium
 
   * debian/postinst: create 'ssl-cert' group if needed
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 11:12:18 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 11:12:18 +0200
 
 nagios-plugins-cyb (1.0-347) unstable; urgency=medium
 
   * plugins/check_ssl_certs: check the certificates expiration dates from
     Apache, Nginx, ProFTPd, Exim and Postfix.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 11 Apr 2014 10:50:43 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 11 Apr 2014 10:50:43 +0200
 
 nagios-plugins-cyb (1.0-346) unstable; urgency=medium
 
@@ -568,7 +568,7 @@ nagios-plugins-cyb (1.0-346) unstable; urgency=medium
     everything is fine and 10k when something's wrong instead of the
     opposite.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 07 Apr 2014 09:41:54 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 07 Apr 2014 09:41:54 +0200
 
 nagios-plugins-cyb (1.0-345) unstable; urgency=medium
 
@@ -576,14 +576,14 @@ nagios-plugins-cyb (1.0-345) unstable; urgency=medium
     something is wrong and only the first 200 characters when everything
     is fine.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Mar 2014 12:01:50 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 29 Mar 2014 12:01:50 +0100
 
 nagios-plugins-cyb (1.0-344) unstable; urgency=medium
 
   * plugins/check_http_content: show the first 200 characters of output
     instead of 200.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Mar 2014 11:57:53 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 29 Mar 2014 11:57:53 +0100
 
 nagios-plugins-cyb (1.0-343) unstable; urgency=medium
 
@@ -593,7 +593,7 @@ nagios-plugins-cyb (1.0-343) unstable; urgency=medium
       --connection-used-warning-threshold-percent
       --connection-used-critical-threshold-percent
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Mar 2014 17:09:28 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 28 Mar 2014 17:09:28 +0100
 
 nagios-plugins-cyb (1.0-342) unstable; urgency=low
 
@@ -657,7 +657,7 @@ nagios-plugins-cyb (1.0-335) unstable; urgency=medium
 
   * plugins/check_http_content: fetch cookie from home page
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 21 Mar 2014 16:51:35 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 21 Mar 2014 16:51:35 +0100
 
 nagios-plugins-cyb (1.0-334) unstable; urgency=low
 
@@ -704,26 +704,26 @@ nagios-plugins-cyb (1.0-328) unstable; urgency=medium
   * plugins/check_http_content: limit output to the first 200 bytes to
     avoid flooding Nagios when the HTML page is huge.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 07 Mar 2014 12:49:44 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 07 Mar 2014 12:49:44 +0100
 
 nagios-plugins-cyb (1.0-327) unstable; urgency=medium
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: check
     x2apic bug with Dell BIOS
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 27 Feb 2014 15:50:22 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 27 Feb 2014 15:50:22 +0100
 
 nagios-plugins-cyb (1.0-326) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: more verbose output
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 27 Feb 2014 15:01:09 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 27 Feb 2014 15:01:09 +0100
 
 nagios-plugins-cyb (1.0-325) unstable; urgency=medium
 
   * plugins/check_ntp_monlist: clean
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 27 Feb 2014 14:58:30 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 27 Feb 2014 14:58:30 +0100
 
 nagios-plugins-cyb (1.0-324) unstable; urgency=low
 
@@ -744,7 +744,7 @@ nagios-plugins-cyb (1.0-322) unstable; urgency=medium
 
   * Add check_ganeti_failover_gateway_node
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 05 Feb 2014 19:53:21 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 05 Feb 2014 19:53:21 +0100
 
 nagios-plugins-cyb (1.0-321) unstable; urgency=low
 
@@ -795,7 +795,7 @@ nagios-plugins-cyb (1.0-315) unstable; urgency=medium
 
   * plugins/check_pingdom: ignore 'paused' checks.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 30 Jan 2014 21:29:25 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 30 Jan 2014 21:29:25 +0100
 
 nagios-plugins-cyb (1.0-314) unstable; urgency=low
 
@@ -808,7 +808,7 @@ nagios-plugins-cyb (1.0-313) unstable; urgency=low
   * etc/nagios-plugins/config/host_alive_nrpe.cfg: add
     'cyb_check_host_alive_nrpe_custom_port'.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Jan 2014 18:21:27 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 20 Jan 2014 18:21:27 +0100
 
 nagios-plugins-cyb (1.0-312) unstable; urgency=low
 
@@ -816,7 +816,7 @@ nagios-plugins-cyb (1.0-312) unstable; urgency=low
     checking for haproxy errors because they lead to false-positives most
     of the time.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Jan 2014 17:12:47 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 20 Jan 2014 17:12:47 +0100
 
 nagios-plugins-cyb (1.0-311) unstable; urgency=low
 
@@ -828,87 +828,87 @@ nagios-plugins-cyb (1.0-310) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_nrpe.cfg: typo
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 16:30:59 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jan 2014 16:30:59 +0100
 
 nagios-plugins-cyb (1.0-309) unstable; urgency=low
 
   * Moved etc/nagios/nrpe.d/cyb_check_nrpe.cfg into
     etc/nagios-plugins/config/cyb_check_nrpe.cfg
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 16:24:05 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jan 2014 16:24:05 +0100
 
 nagios-plugins-cyb (1.0-308) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_check_nrpe.cfg: allow access to NRPE on a
     specific port.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 16:02:35 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jan 2014 16:02:35 +0100
 
 nagios-plugins-cyb (1.0-307) unstable; urgency=low
 
   * plugins/check_df: force 'C' locale to avoid issues with weird 'df'
     output with some locales.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 13:09:55 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jan 2014 13:09:55 +0100
 
 nagios-plugins-cyb (1.0-306) unstable; urgency=low
 
   * plugins/check_df: allow support for float threshold percentages (i.e.
     99.95%).
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jan 2014 11:07:12 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jan 2014 11:07:12 +0100
 
 nagios-plugins-cyb (1.0-305) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: removed
     check of 'segmentation faults' because we have 90%+ false-positives.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 16 Dec 2013 18:59:05 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 16 Dec 2013 18:59:05 +0100
 
 nagios-plugins-cyb (1.0-304) unstable; urgency=low
 
   * plugins/check_varnish: fixed argument handling.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 18:13:25 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Dec 2013 18:13:25 +0100
 
 nagios-plugins-cyb (1.0-303) unstable; urgency=low
 
   * plugins/check_varnish: now support secret_file, host and port as
     argument because Varnish ≤ 2 doesn't have defaults values for those.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 18:11:49 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Dec 2013 18:11:49 +0100
 
 nagios-plugins-cyb (1.0-302) unstable; urgency=low
 
   * plugins/check_varnish: add explicit information about permissions
     issues when trying to access /etc/varnish/secret
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 17:43:12 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Dec 2013 17:43:12 +0100
 
 nagios-plugins-cyb (1.0-301) unstable; urgency=low
 
   * plugins/check_varnish: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Dec 2013 17:25:50 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Dec 2013 17:25:50 +0100
 
 nagios-plugins-cyb (1.0-300) unstable; urgency=low
 
   * plugins/check_exim_mailq: more accurate description.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Nov 2013 23:40:45 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 20 Nov 2013 23:40:45 +0100
 
 nagios-plugins-cyb (1.0-299) unstable; urgency=low
 
   * plugins/check_nagios2mantis: check if 'sqlite3' is available before
     using it
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 14 Nov 2013 12:28:18 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 14 Nov 2013 12:28:18 +0100
 
 nagios-plugins-cyb (1.0-298) unstable; urgency=low
 
   * Add check_nagios2mantis plugin and configuration.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 12 Nov 2013 16:05:16 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 12 Nov 2013 16:05:16 +0100
 
 nagios-plugins-cyb (1.0-297) unstable; urgency=low
 
@@ -922,27 +922,27 @@ nagios-plugins-cyb (1.0-296) unstable; urgency=low
     check for the following error message: "Warning: Enabling keys got
     errno".
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 05 Nov 2013 09:06:29 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 05 Nov 2013 09:06:29 +0100
 
 nagios-plugins-cyb (1.0-295) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: check if
     CPU is hung
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 29 Oct 2013 15:53:19 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 29 Oct 2013 15:53:19 +0100
 
 nagios-plugins-cyb (1.0-294) unstable; urgency=low
 
   * Stop checking Varnish log for 503 errors because it makes false
     positives.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 25 Oct 2013 20:16:37 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 25 Oct 2013 20:16:37 +0200
 
 nagios-plugins-cyb (1.0-293) unstable; urgency=low
 
   * Add support for HTTPS check via NRPE.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 24 Oct 2013 12:01:47 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 24 Oct 2013 12:01:47 +0200
 
 nagios-plugins-cyb (1.0-292) unstable; urgency=low
 
@@ -956,52 +956,52 @@ nagios-plugins-cyb (1.0-291) unstable; urgency=low
 
   * Add cyb_check_https_* commands as a mirror of cyb_check_http_*
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 22 Oct 2013 10:59:46 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 22 Oct 2013 10:59:46 +0200
 
 nagios-plugins-cyb (1.0-290) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_http.cfg: add check_nrpe_http_pattern
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 21 Oct 2013 12:32:24 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 21 Oct 2013 12:32:24 +0200
 
 nagios-plugins-cyb (1.0-289) unstable; urgency=low
 
   * check for 'error writing file' string in MySQL error files
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 21 Oct 2013 11:17:45 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 21 Oct 2013 11:17:45 +0200
 
 nagios-plugins-cyb (1.0-288) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_mysql_error.log:
     check if MySQL hit max-connections
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 18 Oct 2013 22:30:40 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 18 Oct 2013 22:30:40 +0200
 
 nagios-plugins-cyb (1.0-287) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_php5-fpm.log: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 18 Oct 2013 22:11:16 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 18 Oct 2013 22:11:16 +0200
 
 nagios-plugins-cyb (1.0-286) unstable; urgency=low
 
   * debian/control: removed dep on libnet-google-safebrowsing2-perl
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 17 Oct 2013 13:42:11 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 17 Oct 2013 13:42:11 +0200
 
 nagios-plugins-cyb (1.0-285) unstable; urgency=low
 
   * plugins/check_rbl: removed sorbs.net from the RBL because their site
     has been down for 3 days (!).
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 10 Oct 2013 09:42:08 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 10 Oct 2013 09:42:08 +0200
 
 nagios-plugins-cyb (1.0-284) unstable; urgency=low
 
   * Disabled Google Safe Browsing because it's not working properly,
     fixing requires time and your need of GSB just disappeared.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 09 Oct 2013 15:21:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 09 Oct 2013 15:21:38 +0200
 
 nagios-plugins-cyb (1.0-283) unstable; urgency=low
 
@@ -1012,14 +1012,14 @@ nagios-plugins-cyb (1.0-283) unstable; urgency=low
     error checking because we have fixed the primary issue and only have
     false positives now
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 30 Sep 2013 17:43:37 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 30 Sep 2013 17:43:37 +0200
 
 nagios-plugins-cyb (1.0-282) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.d/var_log_kern.log: add more
     e1000e ethernet checks
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 27 Sep 2013 15:26:24 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 27 Sep 2013 15:26:24 +0200
 
 nagios-plugins-cyb (1.0-281) unstable; urgency=low
 
@@ -1028,7 +1028,7 @@ nagios-plugins-cyb (1.0-281) unstable; urgency=low
     option only supports a single pattern".
   * plugins/check_log: add whitelist support
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 27 Sep 2013 11:15:18 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 27 Sep 2013 11:15:18 +0200
 
 nagios-plugins-cyb (1.0-280) unstable; urgency=low
 
@@ -1041,19 +1041,19 @@ nagios-plugins-cyb (1.0-279) unstable; urgency=low
 
   * plugins/check_log: use Perl regexp instead of extended regexp.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 22 Sep 2013 15:59:19 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 22 Sep 2013 15:59:19 +0200
 
 nagios-plugins-cyb (1.0-278) unstable; urgency=low
 
   * Add cyb_check_host_alive_nrpe_and_icmp
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 20 Sep 2013 16:09:43 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 20 Sep 2013 16:09:43 +0200
 
 nagios-plugins-cyb (1.0-277) unstable; urgency=low
 
   * plugins/check_log: show log file name on error to ease debugging.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 16:27:29 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 17 Sep 2013 16:27:29 +0200
 
 nagios-plugins-cyb (1.0-276) unstable; urgency=low
 
@@ -1062,46 +1062,46 @@ nagios-plugins-cyb (1.0-276) unstable; urgency=low
   * plugins/check_apt_simple: more accurate description when no security
     repository has been found.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 17 Sep 2013 14:13:50 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 17 Sep 2013 14:13:50 +0200
 
 nagios-plugins-cyb (1.0-275) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check 503 errors from
     haproxy
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Sep 2013 16:50:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Sep 2013 16:50:31 +0200
 
 nagios-plugins-cyb (1.0-274) unstable; urgency=low
 
   * Removed useless and buggy check_packets plugins
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 06 Sep 2013 14:58:19 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 06 Sep 2013 14:58:19 +0200
 
 nagios-plugins-cyb (1.0-273) unstable; urgency=low
 
   * check_iptables_persistent: check iptables rules even if we are not
     using iptables-persistent
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:50:51 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Sep 2013 18:50:51 +0200
 
 nagios-plugins-cyb (1.0-272) unstable; urgency=low
 
   * Run check_iptables_persistent with sudo in any case
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:36:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Sep 2013 18:36:31 +0200
 
 nagios-plugins-cyb (1.0-271) unstable; urgency=low
 
   * Add check_iptables_persistent
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 18:29:52 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Sep 2013 18:29:52 +0200
 
 nagios-plugins-cyb (1.0-270) unstable; urgency=low
 
   * Removed 'Apache MaxClients' check because Apache does NOT respect
     MaxSpareServers and can fork MUCH more than the limit.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 05 Sep 2013 12:52:25 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 05 Sep 2013 12:52:25 +0200
 
 nagios-plugins-cyb (1.0-269) unstable; urgency=low
 
@@ -1113,45 +1113,45 @@ nagios-plugins-cyb (1.0-268) unstable; urgency=low
 
   * cyb_check_log: check haproxy errors log
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 02 Sep 2013 16:18:43 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 02 Sep 2013 16:18:43 +0200
 
 nagios-plugins-cyb (1.0-267) unstable; urgency=low
 
   * plugins/check_memcache: more accurate error messages
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 19 Aug 2013 22:30:45 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 19 Aug 2013 22:30:45 +0200
 
 nagios-plugins-cyb (1.0-266) unstable; urgency=low
 
   * plugins/check_postgresql_replication: add more information to ease
     debugging when replication fails.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 19 Aug 2013 17:37:02 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 19 Aug 2013 17:37:02 +0200
 
 nagios-plugins-cyb (1.0-265) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check for XFS errors.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 02 Aug 2013 00:18:44 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 02 Aug 2013 00:18:44 +0200
 
 nagios-plugins-cyb (1.0-264) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add temperature error
     message checking.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 29 Jul 2013 17:51:20 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 29 Jul 2013 17:51:20 +0200
 
 nagios-plugins-cyb (1.0-263) unstable; urgency=low
 
   * Fixed check_cyb_dummy
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 27 Jul 2013 10:18:33 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 27 Jul 2013 10:18:33 +0200
 
 nagios-plugins-cyb (1.0-262) unstable; urgency=low
 
   * Add check_cyb_dummy
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 27 Jul 2013 10:11:52 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 27 Jul 2013 10:11:52 +0200
 
 nagios-plugins-cyb (1.0-261) unstable; urgency=low
 
@@ -1161,27 +1161,27 @@ nagios-plugins-cyb (1.0-261) unstable; urgency=low
     connect to Memcache
   * check_memcache: clean
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 14 Jul 2013 17:30:47 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 14 Jul 2013 17:30:47 +0200
 
 nagios-plugins-cyb (1.0-260) unstable; urgency=low
 
   * check_df: check the return code of 'df' in case the disk is completely
     full and we are unable to create a temporary file.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 09 Jul 2013 11:15:28 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 09 Jul 2013 11:15:28 +0200
 
 nagios-plugins-cyb (1.0-259) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check Bind error
     'unexpected rcode'.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Jul 2013 15:34:09 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 08 Jul 2013 15:34:09 +0200
 
 nagios-plugins-cyb (1.0-258) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add ECC errors checks
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Jul 2013 10:43:42 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 08 Jul 2013 10:43:42 +0200
 
 nagios-plugins-cyb (1.0-257) unstable; urgency=low
 
@@ -1214,38 +1214,38 @@ nagios-plugins-cyb (1.0-253) unstable; urgency=low
   * plugins/check_log: check /var/log/syslog
   * etc/nagios-plugins/config/cyb_check_log.conf: check suhosin blacklist
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 07 Jun 2013 11:09:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 07 Jun 2013 11:09:38 +0200
 
 nagios-plugins-cyb (1.0-252) unstable; urgency=low
 
   * check_log: fixed offset file
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 17:16:37 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 04 Jun 2013 17:16:37 +0200
 
 nagios-plugins-cyb (1.0-251) unstable; urgency=low
 
   * check_log: check common errors in Apache logs
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 17:05:42 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 04 Jun 2013 17:05:42 +0200
 
 nagios-plugins-cyb (1.0-250) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check segmentation
     faults in kernel logs.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 04 Jun 2013 08:59:26 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 04 Jun 2013 08:59:26 +0200
 
 nagios-plugins-cyb (1.0-249) unstable; urgency=low
 
   * plugins/check_log: fixed logtail2 call
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:29:24 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 25 May 2013 23:29:24 +0200
 
 nagios-plugins-cyb (1.0-248) unstable; urgency=low
 
   * plugins/check_log: typo
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:21:17 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 25 May 2013 23:21:17 +0200
 
 nagios-plugins-cyb (1.0-247) unstable; urgency=low
 
@@ -1253,27 +1253,27 @@ nagios-plugins-cyb (1.0-247) unstable; urgency=low
   * plugins/check_log: kill 'logtail2' after 30 seconds if it didn't
     return because it might be deadlocked
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 25 May 2013 23:12:19 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 25 May 2013 23:12:19 +0200
 
 nagios-plugins-cyb (1.0-246) unstable; urgency=low
 
   * plugins/check_packets: use float instead of integer to accept values >
     32 bits
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 13:50:37 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 May 2013 13:50:37 +0200
 
 nagios-plugins-cyb (1.0-245) unstable; urgency=low
 
   * plugins/check_packets: yet another fix for Linux 2.6. I loooove
     abandonware.
   
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 12:09:34 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 May 2013 12:09:34 +0200
 
 nagios-plugins-cyb (1.0-244) unstable; urgency=low
 
   * plugins/check_packets: fixed 2.6 support, again.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 11:47:14 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 May 2013 11:47:14 +0200
 
 nagios-plugins-cyb (1.0-243) unstable; urgency=low
 
@@ -1281,13 +1281,13 @@ nagios-plugins-cyb (1.0-243) unstable; urgency=low
     network packets
   * plugins/check_packets: add Linux 2.6 support
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 24 May 2013 11:35:27 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 May 2013 11:35:27 +0200
 
 nagios-plugins-cyb (1.0-242) unstable; urgency=low
 
   * Add cyb_check_packets
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 23 May 2013 11:40:52 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 23 May 2013 11:40:52 +0200
 
 nagios-plugins-cyb (1.0-241) unstable; urgency=low
 
@@ -1312,7 +1312,7 @@ nagios-plugins-cyb (1.0-238) unstable; urgency=low
 
   * Add Redis replication checks
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 25 Apr 2013 17:12:12 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 25 Apr 2013 17:12:12 +0200
 
 nagios-plugins-cyb (1.0-237) unstable; urgency=low
 
@@ -1325,7 +1325,7 @@ nagios-plugins-cyb (1.0-236) unstable; urgency=low
 
   * /etc/nagios-plugins/config/cyb_http.cfg: use OPTIONS HTTP method
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 17 Apr 2013 18:23:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 17 Apr 2013 18:23:31 +0200
 
 nagios-plugins-cyb (1.0-235) unstable; urgency=low
 
@@ -1333,107 +1333,107 @@ nagios-plugins-cyb (1.0-235) unstable; urgency=low
     empty
   * plugins/check_google_safe_browsing: check that the database is recent
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 15 Apr 2013 09:54:11 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 15 Apr 2013 09:54:11 +0200
 
 nagios-plugins-cyb (1.0-234) unstable; urgency=low
 
   * bin/nagios-plugins-cyb-update-gsb-db: avoid copying the DB because
     it's getting too big
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 14 Apr 2013 22:40:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 14 Apr 2013 22:40:31 +0200
 
 nagios-plugins-cyb (1.0-233) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: removed checks of
     processes hung in syscall
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 13 Apr 2013 11:08:59 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 13 Apr 2013 11:08:59 +0200
 
 nagios-plugins-cyb (1.0-232) unstable; urgency=low
 
   * Add Google Safe Browsing configuration.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 12 Apr 2013 17:06:22 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 12 Apr 2013 17:06:22 +0200
 
 nagios-plugins-cyb (1.0-231) unstable; urgency=low
 
   * Add Net::Google::SafeBrowsing2 support thanks to our recent Debian
     packages.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Apr 2013 18:45:33 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 08 Apr 2013 18:45:33 +0200
 
 nagios-plugins-cyb (1.0-230) unstable; urgency=low
 
   * bin/check_safe_browsing_bulk: check if cybweb-vhostlist-minimal was
     able to fetch URLs
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 03 Apr 2013 16:08:39 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 03 Apr 2013 16:08:39 +0200
 
 nagios-plugins-cyb (1.0-229) unstable; urgency=low
 
   * bin/check_safe_browsing_bulk: trap wget failures
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 03 Apr 2013 16:01:22 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 03 Apr 2013 16:01:22 +0200
 
 nagios-plugins-cyb (1.0-228) unstable; urgency=low
 
   * debian/postinst: launch check_safe_browsing_bulk if needed.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 03 Apr 2013 15:50:30 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 03 Apr 2013 15:50:30 +0200
 
 nagios-plugins-cyb (1.0-227) unstable; urgency=low
 
   * Add support for bulk checks of Google Safe Browsing
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 03 Apr 2013 14:30:20 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 03 Apr 2013 14:30:20 +0200
 
 nagios-plugins-cyb (1.0-226) unstable; urgency=low
 
   * plugins/check_ncq: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 29 Mar 2013 17:41:00 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 29 Mar 2013 17:41:00 +0100
 
 nagios-plugins-cyb (1.0-225) unstable; urgency=low
 
   * plugins/check_log: check /var/log/daemon.log
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Mar 2013 09:30:42 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 20 Mar 2013 09:30:42 +0100
 
 nagios-plugins-cyb (1.0-224) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: add Bind zone errors
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Mar 2013 09:28:38 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 20 Mar 2013 09:28:38 +0100
 
 nagios-plugins-cyb (1.0-223) unstable; urgency=low
 
   * plugins/check_redis: add.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Mar 2013 09:25:13 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Mar 2013 09:25:13 +0100
 
 nagios-plugins-cyb (1.0-222) unstable; urgency=low
 
   * plugins/check_memcache: display memory percentage in any case.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Mar 2013 02:50:20 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Mar 2013 02:50:20 +0100
 
 nagios-plugins-cyb (1.0-221) unstable; urgency=low
 
   * plugins/check_raid: scan all SCSI IDs on MPT driver.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 10 Mar 2013 20:03:16 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 10 Mar 2013 20:03:16 +0100
 
 nagios-plugins-cyb (1.0-220) unstable; urgency=low
 
   * plugins/check_memcache: stupid typo (© Maredsous)
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 09 Mar 2013 20:10:25 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 09 Mar 2013 20:10:25 +0100
 
 nagios-plugins-cyb (1.0-219) unstable; urgency=low
 
   * plugins/check_memcache: check if we use 80%+ of Memcache memory.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 09 Mar 2013 20:05:22 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 09 Mar 2013 20:05:22 +0100
 
 nagios-plugins-cyb (1.0-218) unstable; urgency=low
 
@@ -1446,7 +1446,7 @@ nagios-plugins-cyb (1.0-217) unstable; urgency=low
 
   * plugins/check_http_content: raise timeout from 5s to 30s
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 05 Mar 2013 15:53:57 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 05 Mar 2013 15:53:57 +0100
 
 nagios-plugins-cyb (1.0-216) unstable; urgency=low
 
@@ -1465,33 +1465,33 @@ nagios-plugins-cyb (1.0-214) unstable; urgency=low
 
   * Add NRPE support for Google Safe Browsing.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 26 Feb 2013 17:23:28 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 26 Feb 2013 17:23:28 +0100
 
 nagios-plugins-cyb (1.0-213) unstable; urgency=low
 
   * plugins/check_safe-browsing: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 26 Feb 2013 16:45:57 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 26 Feb 2013 16:45:57 +0100
 
 nagios-plugins-cyb (1.0-212) unstable; urgency=low
 
   * plugins/check_postgresql_replication: properly check psql output to
     avoid using undefined variables.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 20 Feb 2013 17:03:18 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 20 Feb 2013 17:03:18 +0100
 
 nagios-plugins-cyb (1.0-211) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check messages from
     software RAID
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 10 Feb 2013 16:40:53 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 10 Feb 2013 16:40:53 +0100
 
 nagios-plugins-cyb (1.0-210) unstable; urgency=low
 
   * cyb_check_host_alive_nrpe: raised NRPE timeout from 10s to 30s
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 03 Feb 2013 20:29:56 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 03 Feb 2013 20:29:56 +0100
 
 nagios-plugins-cyb (1.0-209) unstable; urgency=low
 
@@ -1500,45 +1500,45 @@ nagios-plugins-cyb (1.0-209) unstable; urgency=low
     link' is necessary. Real errors are detected by 'media error', 'I/O
     error', etc.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 03 Feb 2013 14:09:15 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 03 Feb 2013 14:09:15 +0100
 
 nagios-plugins-cyb (1.0-208) unstable; urgency=low
 
   * plugins/check_postgresql_replication: rewrote plugin to use a query
     instead of xfer logs
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 27 Jan 2013 01:26:50 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 27 Jan 2013 01:26:50 +0100
 
 nagios-plugins-cyb (1.0-207) unstable; urgency=low
 
   * check_postgres_pgbouncer*: allow to specify port as an argument
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 25 Jan 2013 17:40:33 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 25 Jan 2013 17:40:33 +0100
 
 nagios-plugins-cyb (1.0-206) unstable; urgency=low
 
   * check_postgresql_replication: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 23 Jan 2013 21:48:48 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 23 Jan 2013 21:48:48 +0100
 
 nagios-plugins-cyb (1.0-205) unstable; urgency=low
 
   * etc/nagios/nrpe.d/check_postgres.cfg: take dbname as argument
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 16 Jan 2013 09:50:59 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 16 Jan 2013 09:50:59 +0100
 
 nagios-plugins-cyb (1.0-204) unstable; urgency=low
 
   * etc/nagios/nrpe.d/check_postgres.cfg: add
   * debian/control: add suggest on 'check-postgres' package
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 15 Jan 2013 12:21:41 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 15 Jan 2013 12:21:41 +0100
 
 nagios-plugins-cyb (1.0-203) unstable; urgency=low
 
   * etc/nagios/nrpe.d/pgsql.cfg: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 15 Jan 2013 10:22:33 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 15 Jan 2013 10:22:33 +0100
 
 nagios-plugins-cyb (1.0-202) unstable; urgency=low
 
@@ -1564,25 +1564,25 @@ nagios-plugins-cyb (1.0-199) unstable; urgency=low
 
   * etc/nagios-plugins/config/host_alive_nrpe.cfg: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Dec 2012 09:20:17 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 29 Dec 2012 09:20:17 +0100
 
 nagios-plugins-cyb (1.0-198) unstable; urgency=low
 
   * etc/nagios/nrpe.d/host_alive.cfg: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Dec 2012 09:15:29 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 29 Dec 2012 09:15:29 +0100
 
 nagios-plugins-cyb (1.0-197) unstable; urgency=low
 
   * etc/nagios/nrpe.d/postfix_mailq.cfg: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 29 Dec 2012 00:40:18 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 29 Dec 2012 00:40:18 +0100
 
 nagios-plugins-cyb (1.0-196) unstable; urgency=low
 
   * etc/nagios/nrpe.d/rootkit.cfg: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 23:13:31 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 28 Dec 2012 23:13:31 +0100
 
 nagios-plugins-cyb (1.0-195) unstable; urgency=low
 
@@ -1594,13 +1594,13 @@ nagios-plugins-cyb (1.0-194) unstable; urgency=low
 
   * debian/postinst: don't fail if nrpe daemons fails to reload
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 15:49:26 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 28 Dec 2012 15:49:26 +0100
 
 nagios-plugins-cyb (1.0-193) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_df.cfg: fixed typo error.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 15:29:54 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 28 Dec 2012 15:29:54 +0100
 
 nagios-plugins-cyb (1.0-192) unstable; urgency=low
 
@@ -1612,13 +1612,13 @@ nagios-plugins-cyb (1.0-192) unstable; urgency=low
     - debian/postinst: reload the NRPE daemon to use the new configuration
       when upgrading the package
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 28 Dec 2012 14:26:47 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 28 Dec 2012 14:26:47 +0100
 
 nagios-plugins-cyb (1.0-191) unstable; urgency=low
 
   * check_log: limit output to 1kB instead of 10kB to ease readbility
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 18 Dec 2012 15:43:10 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 18 Dec 2012 15:43:10 +0100
 
 nagios-plugins-cyb (1.0-190) unstable; urgency=low
 
@@ -1626,7 +1626,7 @@ nagios-plugins-cyb (1.0-190) unstable; urgency=low
     100% CPU with a 2.5MB output file. WTF is the purpose of coding in C
     it takes 2 mins to load 2.5MB data?
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 18 Dec 2012 15:08:21 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 18 Dec 2012 15:08:21 +0100
 
 nagios-plugins-cyb (1.0-189) unstable; urgency=low
 
@@ -1650,7 +1650,7 @@ nagios-plugins-cyb (1.0-186) unstable; urgency=low
 
   * cyb_check_log: check for hung tasks reported by the kernel
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 06 Dec 2012 11:57:38 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 06 Dec 2012 11:57:38 +0100
 
 nagios-plugins-cyb (1.0-185) unstable; urgency=low
 
@@ -1668,71 +1668,71 @@ nagios-plugins-cyb (1.0-183) unstable; urgency=low
 
   * Rename check_sockets into check_rootkit
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 28 Nov 2012 11:47:30 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 28 Nov 2012 11:47:30 +0100
 
 nagios-plugins-cyb (1.0-182) unstable; urgency=low
 
   * plugins/check_sockets: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 27 Nov 2012 22:33:52 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 27 Nov 2012 22:33:52 +0100
 
 nagios-plugins-cyb (1.0-181) unstable; urgency=low
 
   * plugins/check_log: fixed rule parsing
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 27 Nov 2012 21:16:20 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 27 Nov 2012 21:16:20 +0100
 
 nagios-plugins-cyb (1.0-180) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check SATA errors
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 27 Nov 2012 14:14:57 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 27 Nov 2012 14:14:57 +0100
 
 nagios-plugins-cyb (1.0-179) unstable; urgency=low
 
   * plugins/check_log: ignore missing files
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 15:42:19 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 26 Nov 2012 15:42:19 +0100
 
 nagios-plugins-cyb (1.0-178) unstable; urgency=low
 
   * plugins/check_log: check multiples log files: Linux kernel and MySQL
   * etc/nagios-plugins/config/cyb_check_log.conf: check crashed MySQL database
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 15:38:00 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 26 Nov 2012 15:38:00 +0100
 
 nagios-plugins-cyb (1.0-177) unstable; urgency=low
 
   * etc/nagios-plugins/config/cyb_check_log.conf: check for EXT3 an EXT4
     errors.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 11:52:04 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 26 Nov 2012 11:52:04 +0100
 
 nagios-plugins-cyb (1.0-176) unstable; urgency=low
 
   * plugins/check_log: create directory /var/lib/nagios-plugins-cyb if
     needed
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 11:35:46 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 26 Nov 2012 11:35:46 +0100
 
 nagios-plugins-cyb (1.0-175) unstable; urgency=low
 
   * plugins/check_log: errors are now persistently logged into a file.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 26 Nov 2012 09:13:29 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 26 Nov 2012 09:13:29 +0100
 
 nagios-plugins-cyb (1.0-174) unstable; urgency=low
 
   * debian/control: add proper version on 'sudo' dependency.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 30 Oct 2012 14:00:12 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 30 Oct 2012 14:00:12 +0100
 
 nagios-plugins-cyb (1.0-173) unstable; urgency=low
 
   * Add check_logs support
   * Clean 'sudo' support'
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 30 Oct 2012 11:31:28 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 30 Oct 2012 11:31:28 +0100
 
 nagios-plugins-cyb (1.0-172) unstable; urgency=low
 
@@ -1740,7 +1740,7 @@ nagios-plugins-cyb (1.0-172) unstable; urgency=low
     messages. Display everything when everything is OK to make sure VPNs
     are tested.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 20 Oct 2012 14:25:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 20 Oct 2012 14:25:38 +0200
 
 nagios-plugins-cyb (1.0-171) unstable; urgency=low
 
@@ -1753,48 +1753,48 @@ nagios-plugins-cyb (1.0-170) unstable; urgency=low
 
   * check_mysql: check that MySQL engine InnoDB is available.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 08 Oct 2012 09:57:57 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 08 Oct 2012 09:57:57 +0200
 
 nagios-plugins-cyb (1.0-169) unstable; urgency=low
 
   * check_raid: check which devices exists when both 'cciss' and 'hpsa'
     modules are loaded.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Aug 2012 14:18:39 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 20 Aug 2012 14:18:39 +0200
 
 nagios-plugins-cyb (1.0-168) unstable; urgency=low
 
   * check_raid: add support for hpsa driver and hpacucli
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 20 Aug 2012 12:04:22 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 20 Aug 2012 12:04:22 +0200
 
 nagios-plugins-cyb (1.0-167) unstable; urgency=low
 
   * check_raid: detect RAID controller ID on 3ware cards and stop
     hardcoding ID "c0".
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 19 Aug 2012 14:59:32 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 19 Aug 2012 14:59:32 +0200
 
 nagios-plugins-cyb (1.0-166) unstable; urgency=low
 
   * check_raid: return critical and display an error message if we were
     unable to detect RAID
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 19 Aug 2012 13:26:46 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 19 Aug 2012 13:26:46 +0200
 
 nagios-plugins-cyb (1.0-165) unstable; urgency=low
 
   * check_apt_simple: warn only if the security repository is 5 days old
     because we trigger errors in lazy August!
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 16 Aug 2012 22:15:45 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 16 Aug 2012 22:15:45 +0200
 
 nagios-plugins-cyb (1.0-164) unstable; urgency=low
 
   * check_apt_simple: make sure that a the security repository is
     reachable and up-to-date, not only configured in sources.list
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 14 Aug 2012 16:46:27 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 14 Aug 2012 16:46:27 +0200
 
 nagios-plugins-cyb (1.0-163) unstable; urgency=low
 
@@ -1805,337 +1805,337 @@ nagios-plugins-cyb (1.0-163) unstable; urgency=low
   * check_fs_rw: report directory checked to ease debugging
   * check_fs_rw: clean
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 14 Aug 2012 10:38:15 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 14 Aug 2012 10:38:15 +0200
 
 nagios-plugins-cyb (1.0-162) unstable; urgency=low
 
   * check_puppet: show lag in any case.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 15:07:00 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Aug 2012 15:07:00 +0200
 
 nagios-plugins-cyb (1.0-161) unstable; urgency=low
 
   * check_puppet: return correct exit codes on errors.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 15:01:57 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Aug 2012 15:01:57 +0200
 
 nagios-plugins-cyb (1.0-160) unstable; urgency=low
 
   * check_puppet: allow argument
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 14:47:36 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Aug 2012 14:47:36 +0200
 
 nagios-plugins-cyb (1.0-159) unstable; urgency=low
 
   * check_puppet: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 13 Aug 2012 14:44:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 13 Aug 2012 14:44:38 +0200
 
 nagios-plugins-cyb (1.0-158) unstable; urgency=low
 
   * check_apt_simple: report the list of packages in one line only to
     comply with the Nagios standard
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 31 Jul 2012 16:26:23 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 31 Jul 2012 16:26:23 +0200
 
 nagios-plugins-cyb (1.0-157) unstable; urgency=low
 
   * config/cyb_df.cfg: fixed argument quoting for funky regex support
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 25 Jul 2012 18:03:20 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 25 Jul 2012 18:03:20 +0200
 
 nagios-plugins-cyb (1.0-156) unstable; urgency=low
 
   * plugins/check_rbl: add zen.spamhaus.org + clean output.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 25 Jul 2012 09:38:31 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 25 Jul 2012 09:38:31 +0200
 
 nagios-plugins-cyb (1.0-155) unstable; urgency=low
 
   * plugins/check_raid: check if /proc/mdstat exists before using it
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 24 Jul 2012 17:18:16 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 24 Jul 2012 17:18:16 +0200
 
 nagios-plugins-cyb (1.0-154) unstable; urgency=low
 
   * check_df: add a new argument to exclude some paths.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 23 Jul 2012 11:16:45 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 23 Jul 2012 11:16:45 +0200
 
 nagios-plugins-cyb (1.0-153) unstable; urgency=low
 
   * check_df: add
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 23 Jul 2012 11:06:34 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 23 Jul 2012 11:06:34 +0200
 
 nagios-plugins-cyb (1.0-152) unstable; urgency=low
 
   * config/fs_rw.cfg: avoid duplicate 'exec' call.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Jul 2012 14:13:26 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Jul 2012 14:13:26 +0200
 
 nagios-plugins-cyb (1.0-151) unstable; urgency=low
 
   * config/cybload.cfg: use 'exec' to avoid running a useless 'sh'
     process.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Jul 2012 14:06:17 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Jul 2012 14:06:17 +0200
 
 nagios-plugins-cyb (1.0-150) unstable; urgency=low
 
   * config/*.cfg: use 'exec' to avoid running a useless 'sh' process.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 11 Jul 2012 13:57:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 11 Jul 2012 13:57:38 +0200
 
 nagios-plugins-cyb (1.0-149) unstable; urgency=low
 
   * check_apt_simple: check if apt-get is stuck in '-f install'
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 27 Jun 2012 17:35:51 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 27 Jun 2012 17:35:51 +0200
 
 nagios-plugins-cyb (1.0-148) unstable; urgency=low
 
   * Renamed check_rbl_by_ssh into check_cyb_rbl_by_ssh.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:32:53 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Jun 2012 13:32:53 +0200
 
 nagios-plugins-cyb (1.0-147) unstable; urgency=low
 
   * Rename check_rbl and check_haproxy by check_cybrbl and
     check_cybhaproxy to avoid conflicts with recent Nagios packages.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:23:00 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Jun 2012 13:23:00 +0200
 
 nagios-plugins-cyb (1.0-146) unstable; urgency=low
 
   * Rename haproxy.cfg into cyb_haproxy.cfg in order to avoid conflicts
     with recent nagios-plugin-contrib packages.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:17:19 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Jun 2012 13:17:19 +0200
 
 nagios-plugins-cyb (1.0-145) unstable; urgency=low
 
   * Rename rbl.cfg into cyb_rbl.cfg in order to avoid conflicts with
     recent nagios-plugin-contrib packages.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 11 Jun 2012 13:15:54 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 11 Jun 2012 13:15:54 +0200
 
 nagios-plugins-cyb (1.0-144) unstable; urgency=low
 
   * plugins/check_mysql_replication: check variable before using it
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 17 May 2012 12:23:39 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 17 May 2012 12:23:39 +0200
 
 nagios-plugins-cyb (1.0-143) unstable; urgency=low
 
   * Fixed Memcache configuration.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 29 Mar 2012 16:51:06 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 29 Mar 2012 16:51:06 +0200
 
 nagios-plugins-cyb (1.0-142) unstable; urgency=low
 
   * check_memcache: fixed timeout issues, special case for Debian/lenny.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 29 Mar 2012 16:25:29 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 29 Mar 2012 16:25:29 +0200
 
 nagios-plugins-cyb (1.0-141) unstable; urgency=low
 
   * check_memcache: fixed timeout issues.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 29 Mar 2012 16:15:41 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 29 Mar 2012 16:15:41 +0200
 
 nagios-plugins-cyb (1.0-140) unstable; urgency=low
 
   * Add Memcache support: config/memcache.cfg, plugins/check_memcache
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 29 Mar 2012 16:01:38 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 29 Mar 2012 16:01:38 +0200
 
 nagios-plugins-cyb (1.0-139) unstable; urgency=low
 
   * check_mysql_replication: allow MySQL replication to lag up to 30s by
     default. Take the threshold as parameter
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sun, 04 Mar 2012 12:19:58 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Sun, 04 Mar 2012 12:19:58 +0100
 
 nagios-plugins-cyb (1.0-138) unstable; urgency=low
 
   * check_openvpn: return "critical" instead of "warning" when VPN fails.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 01 Mar 2012 13:25:16 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 01 Mar 2012 13:25:16 +0100
 
 nagios-plugins-cyb (1.0-137) unstable; urgency=low
 
   * check_raid: fixed status detection on LSI MegaSAS 9260
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 29 Feb 2012 10:32:14 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 29 Feb 2012 10:32:14 +0100
 
 nagios-plugins-cyb (1.0-136) unstable; urgency=low
 
   * cyb_check_http: send header "Accept: text/html" to avoid getting
     blocked by mod_security.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 15 Feb 2012 01:57:00 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 15 Feb 2012 01:57:00 +0100
 
 nagios-plugins-cyb (1.0-135) unstable; urgency=low
 
   * check_fs_rw: ignore read only mounted devices.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 15 Feb 2012 01:18:05 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 15 Feb 2012 01:18:05 +0100
 
 nagios-plugins-cyb (1.0-134) unstable; urgency=low
 
   * check_mysql_replication: display last error when replication fails
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 07 Feb 2012 11:25:27 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 07 Feb 2012 11:25:27 +0100
 
 nagios-plugins-cyb (1.0-133) unstable; urgency=low
 
   * check_mysql_replication: send errors to STDOUT because Nagios does no
     support STDERR (!)
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Feb 2012 13:29:13 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Feb 2012 13:29:13 +0100
 
 nagios-plugins-cyb (1.0-132) unstable; urgency=low
 
   * Add check_mysql_replication
 
- -- Cyril Bouthors <cyril@bouthors.org>  Tue, 10 Jan 2012 14:56:40 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Tue, 10 Jan 2012 14:56:40 +0100
 
 nagios-plugins-cyb (1.0-131) unstable; urgency=low
 
   * check_apt_simple: check return code of apt-get because it can
     sometimes fail when running as 'nagios'.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 14:43:02 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 22 Dec 2011 14:43:02 +0100
 
 nagios-plugins-cyb (1.0-130) unstable; urgency=low
 
   * check_fs_rw: fixed argument parsing, again.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 14:33:55 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 22 Dec 2011 14:33:55 +0100
 
 nagios-plugins-cyb (1.0-129) unstable; urgency=low
 
   * check_fs_rw: fixed argument parsing.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 14:21:22 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 22 Dec 2011 14:21:22 +0100
 
 nagios-plugins-cyb (1.0-128) unstable; urgency=low
 
   * check_fs_rw: exclude mountpoints
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 12:03:24 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 22 Dec 2011 12:03:24 +0100
 
 nagios-plugins-cyb (1.0-127) unstable; urgency=low
 
   * check_apt_simple: add support for /etc/apt/sources.list.d
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 22 Dec 2011 11:51:47 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 22 Dec 2011 11:51:47 +0100
 
 nagios-plugins-cyb (1.0-126) unstable; urgency=low
 
   * Add cyb_check_http_by_ssh
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 16 Dec 2011 12:17:43 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 16 Dec 2011 12:17:43 +0100
 
 nagios-plugins-cyb (1.0-125) unstable; urgency=low
 
   * check_joker_prepaid_account: verbose output
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 09:56:08 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 09 Dec 2011 09:56:08 +0100
 
 nagios-plugins-cyb (1.0-124) unstable; urgency=low
 
   * check_joker_prepaid_account: typo
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 09:10:55 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 09 Dec 2011 09:10:55 +0100
 
 nagios-plugins-cyb (1.0-123) unstable; urgency=low
 
   * Add check_joker_prepaid_account_by_ssh and
     check_ovh_prepaid_account_by_ssh
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 08:59:39 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 09 Dec 2011 08:59:39 +0100
 
 nagios-plugins-cyb (1.0-122) unstable; urgency=low
 
   * Add check_joker_prepaid_account plugin.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Dec 2011 08:49:33 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 09 Dec 2011 08:49:33 +0100
 
 nagios-plugins-cyb (1.0-121) unstable; urgency=low
 
   * check_raid: ignore inexistent soft RAID devices.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 08 Dec 2011 12:01:32 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 08 Dec 2011 12:01:32 +0100
 
 nagios-plugins-cyb (1.0-120) unstable; urgency=low
 
   * Allow check_signup_queue and check_registrar_queue via SSH.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 08 Dec 2011 08:40:11 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 08 Dec 2011 08:40:11 +0100
 
 nagios-plugins-cyb (1.0-119) unstable; urgency=low
 
   * check_http_content: added --no-check-certificate option to wget
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 07 Dec 2011 20:42:24 +0100
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 07 Dec 2011 20:42:24 +0100
 
 nagios-plugins-cyb (1.0-118) unstable; urgency=low
 
   * Add cyb_check_http_pattern_by_ssh
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 21:30:49 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 17 Oct 2011 21:30:49 +0200
 
 nagios-plugins-cyb (1.0-117) unstable; urgency=low
 
   * Fixed argument quoting, again.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 21:14:05 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 17 Oct 2011 21:14:05 +0200
 
 nagios-plugins-cyb (1.0-116) unstable; urgency=low
 
   * Fixed check_http_content argument quoting
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 21:07:18 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 17 Oct 2011 21:07:18 +0200
 
 nagios-plugins-cyb (1.0-115) unstable; urgency=low
 
   * check_http_content: add post data support.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 17 Oct 2011 20:37:20 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 17 Oct 2011 20:37:20 +0200
 
 nagios-plugins-cyb (1.0-114) unstable; urgency=low
 
   * Make mdadm only a suggest because it fails sometimes when we don't
     have software RAID.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 09 Sep 2011 14:41:37 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 09 Sep 2011 14:41:37 +0200
 
 nagios-plugins-cyb (1.0-113) unstable; urgency=low
 
   * check_time: take only one NTP sample from each server instead of 4 to
     avoid Nagios timeouts.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Wed, 07 Sep 2011 10:19:47 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 07 Sep 2011 10:19:47 +0200
 
 nagios-plugins-cyb (1.0-112) unstable; urgency=low
 
   * check_debsums: added lock support.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Fri, 19 Aug 2011 22:05:28 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 19 Aug 2011 22:05:28 +0200
 
 nagios-plugins-cyb (1.0-111) unstable; urgency=low
 
   * Added check_ospf.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Thu, 02 Jun 2011 08:39:24 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 02 Jun 2011 08:39:24 +0200
 
 nagios-plugins-cyb (1.0-110) unstable; urgency=low
 
   * Added cyb_check_host_alive_ssh.
 
- -- Cyril Bouthors <cyril@bouthors.org>  Sat, 23 Apr 2011 10:48:07 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 23 Apr 2011 10:48:07 +0200
 
 nagios-plugins-cyb (1.0-109) unstable; urgency=low
 
@@ -2812,4 +2812,4 @@ nagios-plugins-cyb (1.0-1) unstable; urgency=low
 
   * Initial release
 
- -- Cyril Bouthors <cyril@bouthors.org>  Mon, 18 Aug 2008 17:50:09 +0200
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 18 Aug 2008 17:50:09 +0200
