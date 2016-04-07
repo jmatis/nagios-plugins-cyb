@@ -38,7 +38,7 @@ fi
 (
     # Fetch blocks information
     df -PlTh
-
+    
     # Fetch inodes information
     echo 'INODES'
     df -PlThi
@@ -47,46 +47,46 @@ do
     # Check if mount point exists
     if [ "$fs" = 'Filesystem' ]
     then
-	continue
+        continue
     fi
-
+    
     if [ "$fs" = 'INODES' ]
     then
-	units=' inodes'
-	continue
+        units=' inodes'
+        continue
     fi
-
+    
     # Check if we are in the an excluded path
     for excluded_path in $excluded_paths
     do
-	if echo $mount_point | grep -qE "^$excluded_path"
-	then
-	    continue 2
-	fi
+        if echo $mount_point | grep -qE "^$excluded_path"
+        then
+            continue 2
+        fi
     done
-
+    
     # Check if disk usage has triggered critical threshold. We use awk because
     # it supports comparing floats. Bash only supports integers.
     percentage=${percentage%\%}
     if awk \
-	-vpercentage="$percentage" \
-	-vcritical_threshold="$critical_threshold" \
-	'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
+    -vpercentage="$percentage" \
+    -vcritical_threshold="$critical_threshold" \
+    'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
     then
-	echo -n "$mount_point is ${percentage}% full, "
-	echo "$available$units available. "
-	exit 2
+        echo -n "$mount_point is ${percentage}% full, "
+        echo "$available$units available. "
+        exit 2
     fi
-
+    
     # Check if disk usage has triggered warning threshold
     if awk \
-	-vpercentage="$percentage" \
-	-vwarning_threshold="$warning_threshold" \
-	'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
+    -vpercentage="$percentage" \
+    -vwarning_threshold="$warning_threshold" \
+    'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
     then
-	echo -n "$mount_point is ${percentage}% full, "
-	echo "$available$units available. "
-	exit 1
+        echo -n "$mount_point is ${percentage}% full, "
+        echo "$available$units available. "
+        exit 1
     fi
 done
 
