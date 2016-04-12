@@ -20,75 +20,102 @@ export LC_ALL=C
 
 warning_threshold=$1
 critical_threshold=$2
-shift 2
+warning_inodes_threshold=${3:-20000000}
+shift 3
 excluded_paths=$*
 units='B'
 
 set -e -o pipefail -u
 
-if [ -z "$warning_threshold" -o -z "$critical_threshold" ]
-then
-    echo "$0: too few argument" >&2
-    echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
-    echo "Example: $0 80 90" >&2
-    echo "Example: $0 80 90 /var/lib/lxc" >&2
-    exit 1
-fi
-
-(
-    # Fetch blocks information
-    df -PlTh
-
-    # Fetch inodes information
-    echo 'INODES'
-    df -PlThi
-) | while read fs type size used available percentage mount_point
-do
-    # Check if mount point exists
-    if [ "$fs" = 'Filesystem' ]
+function check_params {
+    if [ -z "$warning_threshold" -o -z "$critical_threshold" ]
     then
-	continue
+        echo "$0: too few argument" >&2
+        echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [WARN_INODES_THRESHOLD] [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
+        echo "Example: $0 80 90" >&2
+        echo "Example: $0 80 90 20000000 /var/lib/lxc" >&2
+        exit 1
     fi
+}
 
-    if [ "$fs" = 'INODES' ]
+function check_inodes {
+    if awk \
+    -vused="$used" \
+    -vwarning_inodes_threshold="$warning_inodes_threshold" \
+    'BEGIN{exit (used >= warning_inodes_threshold) ? 0 : 1 }'
     then
-	units=' inodes'
-	continue
+        echo "$mount_point has more than ${warning_inodes_threshold} inodes"
+        exit 2
     fi
+}
 
-    # Check if we are in the an excluded path
-    for excluded_path in $excluded_paths
+function check_warning_threshold {
+    if awk \
+    -vpercentage="$percentage" \
+    -vwarning_threshold="$warning_threshold" \
+    'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
+    then
+        echo -n "$mount_point is ${percentage}% full, "
+        echo "$available$units available. "
+        exit 1
+    fi
+}
+
+function check_critical_threshold {
+    if awk \
+    -vpercentage="$percentage" \
+    -vcritical_threshold="$critical_threshold" \
+    'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
+    then
+        echo -n "$mount_point is ${percentage}% full, "
+        echo "$available$units available. "
+        exit 2
+    fi
+}
+
+function filesystem_loop {
+    (
+        $1
+    ) | while read fs type size used available percentage mount_point
     do
-	if echo $mount_point | grep -qE "^$excluded_path"
-	then
-	    continue 2
-	fi
+        # Check if mount point exists
+        if [ "$fs" = 'Filesystem' ]
+        then
+            continue
+        fi
+
+        # Check if we are in the an excluded path
+        for excluded_path in $excluded_paths
+        do
+            if echo $mount_point | grep -qE "^$excluded_path"
+            then
+                continue 2
+            fi
+        done
+
+        percentage=${percentage%\%}
+
+        check_critical_threshold
+        check_warning_threshold
+
+        if [ ! -z ${2+x} ]
+        then
+            check_inodes
+        fi
     done
+}
 
-    # Check if disk usage has triggered critical threshold. We use awk because
-    # it supports comparing floats. Bash only supports integers.
-    percentage=${percentage%\%}
-    if awk \
-	-vpercentage="$percentage" \
-	-vcritical_threshold="$critical_threshold" \
-	'BEGIN{exit (percentage >= critical_threshold) ? 0 : 1 }'
-    then
-	echo -n "$mount_point is ${percentage}% full, "
-	echo "$available$units available. "
-	exit 2
-    fi
+function main {
+    check_params
 
-    # Check if disk usage has triggered warning threshold
-    if awk \
-	-vpercentage="$percentage" \
-	-vwarning_threshold="$warning_threshold" \
-	'BEGIN{exit (percentage >= warning_threshold) ? 0 : 1 }'
-    then
-	echo -n "$mount_point is ${percentage}% full, "
-	echo "$available$units available. "
-	exit 1
-    fi
-done
+    local display_free_space='df -PlTh'
+    local display_free_inodes='df -PlTi'
 
-echo 'OK'
-exit 0
+    filesystem_loop "$display_free_space"
+    filesystem_loop "$display_free_inodes" inodes
+
+    echo 'OK'
+    exit 0
+}
+
+main
