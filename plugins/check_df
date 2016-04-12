@@ -75,7 +75,7 @@ function check_critical_threshold {
 
 function filesystem_loop {
     (
-        $1 $2
+        $1
     ) | while read fs type size used available percentage mount_point
     do
         # Check if mount point exists
@@ -98,7 +98,7 @@ function filesystem_loop {
         check_critical_threshold
         check_warning_threshold
 
-        if [ ! -z ${3+x} ]
+        if [ ! -z ${2+x} ]
         then
             check_inodes
         fi
@@ -111,8 +111,8 @@ function main {
     local display_free_space='df -PlTh'
     local display_free_inodes='df -PlTi'
 
-    filesystem_loop $display_free_space
-    filesystem_loop $display_free_inodes inodes
+    filesystem_loop "$display_free_space"
+    filesystem_loop "$display_free_inodes" inodes
 
     echo 'OK'
     exit 0
