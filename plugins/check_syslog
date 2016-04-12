@@ -18,7 +18,13 @@
 set -e -o pipefail -o nounset
 msg='Syslog test'
 
-if ! timeout 5 logger -i -t $0 -d -p local0.alert --socket-errors=on $msg 2>&1
+socket_error='--socket-errors=on'
+if dpkg -l bsdutils | grep -qF '2.20'
+then
+    SOCKET_ERROR=''
+fi
+
+if ! timeout 5 logger -i -t $0 -d -p local0.alert "$socket_error" $msg 2>&1
 then
     exit 2
 fi
