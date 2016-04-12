@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+set -e -o pipefail -o nounset
+
+rc=0
+message=''
+
+function check_apache {
+    if which apache2ctl >/dev/null 2>&1
+    then
+        if ! msg=$(apache2ctl configtest 2>&1)
+        then
+            rc=2
+            message="$message$(echo APACHE)\n$msg\n"
+        fi
+    elif which apachectl >/dev/null 2>&1
+    then
+        if ! msg=$(apachectl configtest 2>&1)
+        then
+            rc=2
+            message="$message$(echo APACHE)\n$msg\n"
+        fi
+    fi
+}
+
+function check_nginx {
+    if which nginx >/dev/null 2>&1
+    then
+        if ! msg=$(nginx -t 2>&1)
+        then
+            rc=2
+            message="$message$(echo NGINX)\n$msg\n"
+        fi
+    fi
+}
+
+function check_haproxy {
+    if which haproxy >/dev/null 2>&1
+    then
+        if ! msg=$(haproxy -c -f /etc/haproxy/haproxy.cfg 2>&1)
+        then
+            rc=2
+            message="$message$(echo HAPROXY)\n$msg\n"
+        fi
+    fi
+}
+
+function main {
+    check_apache
+    check_nginx
+    check_haproxy
+
+    if [ "$rc" -eq 0 ]
+    then
+        echo "ok"
+    else
+        echo -e $message
+    fi
+    exit "$rc"
+}
+
+main
