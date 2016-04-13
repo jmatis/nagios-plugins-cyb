@@ -22,6 +22,8 @@ RC=0
 function check {
     for file in /sys/block/sd?/queue/scheduler
     do
+        [ ! -f $file ] && continue
+
         scheduler=$(grep -c "\[deadline\]" "$file")
 
         if [ "$scheduler" -ne 1 ]
