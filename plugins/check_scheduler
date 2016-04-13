@@ -37,7 +37,7 @@ function main {
 
     if [ "$RC" -eq 0 ]
     then
-        echo "All I/O scheduler are set to deadline"
+        echo "All I/O schedulers are set to deadline"
     fi
     exit "$RC"
 }
