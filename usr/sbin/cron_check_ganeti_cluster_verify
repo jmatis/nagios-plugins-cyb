@@ -17,7 +17,7 @@
 
 set -o pipefail -o nounset
 
-checkfile="/tmp/check_ganeti_cluster_verify"
+checkfile="/var/tmp/check_ganeti_cluster_verify"
 lockfile="/var/lock/check_ganeti_cluster_verify"
 checkfile_max_age="3600"
 
