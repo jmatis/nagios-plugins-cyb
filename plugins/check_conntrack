@@ -113,6 +113,13 @@ done
 [ "$CRITICAL" -gt 0 ] || p_unknown "Invalid critical threshold, use a value > 0"
 [ "$CRITICAL" -le 100 ] || p_unknown "Invalid critical threshold, use a value <= 100"
 
+# Check if conntrack module is loaded
+CONNTRACK_LOAD="$(grep -c conntrack /proc/modules)"
+if [ "$CONNTRACK_LOAD" -eq 0 ]
+then
+  p_critical "Module conntrack is not loaded"
+fi
+
 # Get conntrack count
 [ -r "/proc/sys/net/netfilter/nf_conntrack_count" ] || p_unknown "Unable to read the conntrack count"
 CONNTRACK_COUNT="$(conntrack -L 2>/dev/null | grep -vFc UNREPLIED)"
