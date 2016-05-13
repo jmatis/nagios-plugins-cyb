@@ -17,14 +17,14 @@
 
 set -o pipefail -o nounset
 
-checkfile="/tmp/check_ganeti_cluster_verify"
+checkfile="/var/tmp/check_ganeti_cluster_verify"
 lockfile="/var/lock/check_ganeti_cluster_verify"
-checkfile_max_age="3600"
+checkfile_max_age="3000"
 
 refresh_checkfile () {
     if dotlockfile -r 0 -p "$lockfile"
     then
-        gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV 2>&1 | grep -E '.*ERROR:.*:.*:.*' | grep -vE '(unallocated drbd minor|missing bridges)' > "${checkfile}"
+        gnt-cluster verify --error-codes --ignore-errors ENODEORPHANLV 2>&1 | grep -E '(.*ERROR:.*:.*:.*|non-redundant instance)' | grep -vE '(unallocated drbd minor|missing bridges)' > "${checkfile}"
         # Remove lock
         dotlockfile -u "$lockfile"
     fi
