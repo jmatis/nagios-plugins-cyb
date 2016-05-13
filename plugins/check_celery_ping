@@ -16,24 +16,25 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-worker=$1
-app_dir=$2
+readonly worker=$1
+readonly app_dir=$2
+readonly app=$3
 
 set -e -o pipefail -o nounset
 
 rc=0
 
 # Check arguments
-if [ -z "$worker" -o -z "$app_dir" ]
+if [ -z "$worker" -o -z "$app_dir" -o -z "$app" ]
 then
-    echo "Usage: $0 WORKER APP_DIR"
+    echo "Usage: $0 WORKER APP_DIR APP"
     exit 3
 fi
 
-# Check if $app_dir/manage.py exists
-if [ ! -e "$app_dir/manage.py" ]
+# Check if $app_dir/$app/celery.py exists
+if [ ! -e "$app_dir/$app/celery.py" ]
 then
-    echo "Cannot find any manage.py file in APP_DIR variable directory"
+    echo "Cannot find any $app_dir/$app/celery.py"
     exit 3
 fi
 
@@ -42,18 +43,18 @@ tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
 # Ping Celery
-if ! $app_dir/manage.py celery inspect ping -d $worker > $tempfile 2>&1
+if ! celery -A "$app" --workdir="$app_dir" --no-color inspect ping -d "$worker" > "$tempfile" 2>&1
 then
     rc=2
 fi
 
 # Match string 'pong' against Celery output
-if ! grep -qF pong $tempfile
+if ! grep -qF pong "$tempfile"
 then
     rc=2
 fi
 
 # Show Celery output
-tr "\n" ' ' < $tempfile
+tr "\n" ' ' < "$tempfile"
 
-exit $rc
+exit "$rc"
