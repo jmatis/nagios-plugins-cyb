@@ -16,9 +16,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-worker=$1
-app_dir=$2
-app=$3
+readonly worker=$1
+readonly app_dir=$2
+readonly app=$3
 
 set -e -o pipefail -o nounset
 
@@ -43,18 +43,18 @@ tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
 # Ping Celery
-if ! celery -A "$app" --workdir="$app_dir" inspect ping -d $worker > $tempfile 2>&1
+if ! celery -A "$app" --workdir="$app_dir" inspect ping -d "$worker" > "$tempfile" 2>&1
 then
     rc=2
 fi
 
 # Match string 'pong' against Celery output
-if ! grep -qF pong $tempfile
+if ! grep -qF pong "$tempfile"
 then
     rc=2
 fi
 
 # Show Celery output
-tr "\n" ' ' < $tempfile
+tr "\n" ' ' < "$tempfile"
 
-exit $rc
+exit "$rc"
