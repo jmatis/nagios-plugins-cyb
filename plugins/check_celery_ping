@@ -43,7 +43,7 @@ tempfile=$(tempfile)
 trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
 
 # Ping Celery
-if ! celery -A "$app" --workdir="$app_dir" inspect ping -d "$worker" > "$tempfile" 2>&1
+if ! celery -A "$app" --workdir="$app_dir" --no-color inspect ping -d "$worker" > "$tempfile" 2>&1
 then
     rc=2
 fi
