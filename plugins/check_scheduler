@@ -20,7 +20,7 @@ set -e -o pipefail -o nounset
 RC=0
 
 function check {
-    for file in /sys/block/sd?/queue/scheduler
+    for file in /sys/block/{sd?,vd?}/queue/scheduler
     do
         [ ! -f $file ] && continue
 
