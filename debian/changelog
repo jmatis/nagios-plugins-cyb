@@ -201,8 +201,8 @@ nagios-plugins-cyb (1.0-401) unstable; urgency=medium
 
 nagios-plugins-cyb (1.0-400) unstable; urgency=low
 
-  * plugins/check_memory_abs: Add absolute memory check plugin 
-    (should be used by host servers) 
+  * plugins/check_memory_abs: Add absolute memory check plugin
+    (should be used by host servers)
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 22 Jan 2015 10:10:51 +0100
 
@@ -216,7 +216,7 @@ nagios-plugins-cyb (1.0-399) unstable; urgency=medium
 
 nagios-plugins-cyb (1.0-398) unstable; urgency=low
 
-  * Increase slightly the validity of security APT cache in check_apt_simple #38219 
+  * Increase slightly the validity of security APT cache in check_apt_simple #38219
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 05 Jan 2015 10:59:29 +0100
 
@@ -242,7 +242,7 @@ nagios-plugins-cyb (1.0-395) unstable; urgency=medium
 
 nagios-plugins-cyb (1.0-394) unstable; urgency=low
 
-  * plugins/check_ssl_certs: added tests for broken links 
+  * plugins/check_ssl_certs: added tests for broken links
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 03 Oct 2014 15:19:52 +0200
 
@@ -284,7 +284,7 @@ nagios-plugins-cyb (1.0-389) unstable; urgency=medium
 nagios-plugins-cyb (1.0-388) unstable; urgency=low
 
   * plugins/check_redis: added authentication option
-  * etc/nagios/nrpe.d/cyb_redis.cfg: added a NRPE command to use check_redis 
+  * etc/nagios/nrpe.d/cyb_redis.cfg: added a NRPE command to use check_redis
     with authentication
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 03 Sep 2014 15:40:42 +0200
@@ -348,19 +348,19 @@ nagios-plugins-cyb (1.0-380) unstable; urgency=medium
 
 nagios-plugins-cyb (1.0-379) unstable; urgency=low
 
-  * plugins/check_sendmail_mailq: fix permissions 
+  * plugins/check_sendmail_mailq: fix permissions
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 25 Aug 2014 17:19:52 +0200
 
 nagios-plugins-cyb (1.0-378) unstable; urgency=low
 
-  * etc/nagios/nrpe.d/sendmail_mailq.cfg: added a NRPE command for check_sendmail_mailq 
+  * etc/nagios/nrpe.d/sendmail_mailq.cfg: added a NRPE command for check_sendmail_mailq
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 25 Aug 2014 16:52:09 +0200
 
 nagios-plugins-cyb (1.0-377) unstable; urgency=low
 
-  * plugins/check_sendmail_mailq: check number of mails in sendmail spool 
+  * plugins/check_sendmail_mailq: check number of mails in sendmail spool
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Mon, 25 Aug 2014 15:55:32 +0200
 
@@ -408,7 +408,7 @@ nagios-plugins-cyb (1.0-372) unstable; urgency=low
 nagios-plugins-cyb (1.0-371) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_http.cfg: added a command to check HTTP with HTTP
-    authentication on an alternative port 
+    authentication on an alternative port
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Thu, 17 Jul 2014 14:41:56 +0200
 
@@ -427,7 +427,7 @@ nagios-plugins-cyb (1.0-369) unstable; urgency=low
 
 nagios-plugins-cyb (1.0-368) unstable; urgency=low
 
-  * etc/nagios-plugins/config/cyb_http.cfg : added a command to check a vhost with HTTP authentication 
+  * etc/nagios-plugins/config/cyb_http.cfg : added a command to check a vhost with HTTP authentication
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Tue, 15 Jul 2014 12:09:42 +0200
 
@@ -481,14 +481,14 @@ nagios-plugins-cyb (1.0-361) unstable; urgency=medium
 
 nagios-plugins-cyb (1.0-360) unstable; urgency=medium
 
-  * Removed Nagios log plugin and its NRPE command 
+  * Removed Nagios log plugin and its NRPE command
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 04 Jun 2014 17:21:09 +0200
 
 nagios-plugins-cyb (1.0-359) unstable; urgency=medium
 
   * etc/nagios/nrpe.d/cyb_http.cfg : added a NRPE check for HTTP with HTTP
-    authentication 
+    authentication
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 23 May 2014 15:45:49 +0200
 
@@ -769,9 +769,9 @@ nagios-plugins-cyb (1.0-320) unstable; urgency=low
   *  etc/nagios/nrpe.d/celery.cfg: NRPE check for celery ping
   *  etc/nagios/nrpe.d/rabbitmq.cfg: add a NRPE check for RabbitMQ queue
      consumers
-  *  plugins/check_rabbit_queue_consumers renamed in 
+  *  plugins/check_rabbit_queue_consumers renamed in
      plugins/check_rabbitmq_queue_consumers
-  *  etc/sudoers.d/nagios-plugins-cyb : add a sudo permission for 
+  *  etc/sudoers.d/nagios-plugins-cyb : add a sudo permission for
      check_rabbitmq_queue_consumers
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 05 Feb 2014 17:16:30 +0100
@@ -1278,7 +1278,7 @@ nagios-plugins-cyb (1.0-245) unstable; urgency=low
 
   * plugins/check_packets: yet another fix for Linux 2.6. I loooove
     abandonware.
-  
+
  -- Cyril Bouthors <cyril@boutho.rs>  Fri, 24 May 2013 12:09:34 +0200
 
 nagios-plugins-cyb (1.0-244) unstable; urgency=low
@@ -1450,7 +1450,7 @@ nagios-plugins-cyb (1.0-219) unstable; urgency=low
 nagios-plugins-cyb (1.0-218) unstable; urgency=low
 
   *  etc/nagios/nrpe.d/cyb_http.cfg : add a command to check HTTP service on
-     an alternative port 
+     an alternative port
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Fri, 08 Mar 2013 10:36:20 +0100
 
@@ -1469,7 +1469,7 @@ nagios-plugins-cyb (1.0-216) unstable; urgency=low
 nagios-plugins-cyb (1.0-215) unstable; urgency=low
 
   * etc/nagios/nrpe.d/cyb_cert_mail.cfg : add 3 commands to check validity of
-    SSL certificate used by POP/IMAP/SMTP servers 
+    SSL certificate used by POP/IMAP/SMTP servers
 
  -- Jonathan Vercoutre <jonathan.vercoutre@isvtec.com>  Wed, 27 Feb 2013 17:51:52 +0100
 
@@ -2347,7 +2347,7 @@ nagios-plugins-cyb (1.0-78) unstable; urgency=low
   * check_long_lasting_apache_queries: detect when ExtendedStatus is not
     enabled, fixed return code.
   * check_memory: simplified output.
-  
+
  -- Cyril Bouthors <cyb@debian.org>  Sun, 10 Oct 2010 14:25:02 +0200
 
 nagios-plugins-cyb (1.0-77) unstable; urgency=low
