@@ -1,4 +1,4 @@
-nagios-plugins-cyb (1.0-428) unstable; urgency=low
+nagios-plugins-cyb (1.0-430) unstable; urgency=low
 
   * plugins/check_syslog: fixed compat with bsdutils 2.25
 
