@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-429) unstable; urgency=low
+
+  * check_df: new usage
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Sat, 21 May 2016 07:22:53 +0000
+
 nagios-plugins-cyb (1.0-428) unstable; urgency=low
 
   * plugins/check_syslog: fixed typo in variable name

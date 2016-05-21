@@ -20,9 +20,8 @@ export LC_ALL=C
 
 warning_threshold=$1
 critical_threshold=$2
-warning_inodes_threshold=${3:-20000000}
-shift 3
-excluded_paths=$*
+excluded_paths=$3
+warning_inodes_threshold=${4:-20000000}
 units='B'
 
 set -e -o pipefail -u
@@ -31,9 +30,10 @@ function check_params {
     if [ -z "$warning_threshold" -o -z "$critical_threshold" ]
     then
         echo "$0: too few argument" >&2
-        echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [WARN_INODES_THRESHOLD|0] [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
+        echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [EXCLUDED_PATHS [WARN_INODES_THRESHOLD|0]]" >&2
         echo "Example: $0 80 90" >&2
         echo "Example: $0 80 90 20000000 /var/lib/lxc" >&2
+        echo "Example: $0 80 90 20000000 /var/lib/lxc 200000" >&2
         exit 1
     fi
 }
@@ -93,6 +93,12 @@ function filesystem_loop {
         # Check if we are in the an excluded path
         for excluded_path in $excluded_paths
         do
+            # Skip empty path
+            if [ -z "$excluded_path" ]
+            then
+                continue
+            fi
+
             if echo $mount_point | grep -qE "^$excluded_path"
             then
                 continue 2
