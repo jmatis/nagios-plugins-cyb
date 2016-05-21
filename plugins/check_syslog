@@ -19,7 +19,7 @@ set -e -o pipefail -o nounset
 msg='Syslog test'
 
 socket_error='--socket-errors=on'
-if dpkg -l bsdutils | grep -qF '2.20'
+if dpkg -l bsdutils | grep -qE '2\.20|2\.25'
 then
     socket_error=''
 fi
