@@ -21,7 +21,7 @@ msg='Syslog test'
 socket_error='--socket-errors=on'
 if dpkg -l bsdutils | grep -qF '2.20'
 then
-    SOCKET_ERROR=''
+    socket_error=''
 fi
 
 if ! timeout 5 logger -i -t $0 -d -p local0.alert "$socket_error" $msg 2>&1
