@@ -31,7 +31,7 @@ function check_params {
     if [ -z "$warning_threshold" -o -z "$critical_threshold" ]
     then
         echo "$0: too few argument" >&2
-        echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [WARN_INODES_THRESHOLD] [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
+        echo "Usage: $0 WARN_THRESHOLD CRITICAL_THRESHOLD [WARN_INODES_THRESHOLD|0] [EXCLUDED_PATH [EXCLUDED_PATH [...]]]" >&2
         echo "Example: $0 80 90" >&2
         echo "Example: $0 80 90 20000000 /var/lib/lxc" >&2
         exit 1
@@ -39,6 +39,12 @@ function check_params {
 }
 
 function check_inodes {
+    # Skip checking inodes if $warning_inodes_threshold == 0
+    if [ "$warning_inodes_threshold" = 0 ]
+    then
+        return 0
+    fi
+
     if awk \
     -vused="$used" \
     -vwarning_inodes_threshold="$warning_inodes_threshold" \
