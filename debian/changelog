@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-431) unstable; urgency=low
+
+  * Check known errors in /var/log/postgresql/postgresql.log
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 06 Jun 2016 12:03:19 +0000
+
 nagios-plugins-cyb (1.0-430) unstable; urgency=low
 
   * plugins/check_syslog: fixed compat with bsdutils 2.25
