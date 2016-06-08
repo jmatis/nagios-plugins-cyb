@@ -1,1 +1,2 @@
 WARNING:  terminating connection because of crash of another server process
+ERROR:  could not write to hash-join temporary file: No space left on device

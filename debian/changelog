@@ -1,3 +1,10 @@
+nagios-plugins-cyb (1.0-432) unstable; urgency=low
+
+  * Check for this PostgreSQL error: could not write to hash-join temporary
+    file: No space left on device
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Wed, 08 Jun 2016 20:52:41 +0000
+
 nagios-plugins-cyb (1.0-431) unstable; urgency=low
 
   * Check known errors in /var/log/postgresql/postgresql.log
