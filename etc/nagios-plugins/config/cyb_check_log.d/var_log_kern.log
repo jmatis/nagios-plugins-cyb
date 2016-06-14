@@ -35,3 +35,9 @@ BUG: soft lockup - CPU.* stuck for
 
 # x2apic bug with Dell BIOS
 Your BIOS is broken and requested that x2apic be disabled
+
+# Various kernel Panic
+general protection fault
+
+# System hang
+blocked for more than 120 seconds
