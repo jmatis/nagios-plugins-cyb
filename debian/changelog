@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-433) unstable; urgency=low
+
+  * check_syslog: work-around Debian/squeeze bug and bsdutils-2.17
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Thu, 16 Jun 2016 10:28:24 +0000
+
 nagios-plugins-cyb (1.0-432) unstable; urgency=low
 
   * Check for this PostgreSQL error: could not write to hash-join temporary
