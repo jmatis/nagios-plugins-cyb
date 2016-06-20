@@ -69,7 +69,7 @@ then
 fi
 
 # Check mpt2sas RAID
-if [ -f /proc/modules ] && grep -wFq mpt2sas /proc/modules
+if [ -f /proc/modules ] && egrep -wq 'mpt2sas|mpt3sas' /proc/modules
 then
     if ! which sas2ircu >/dev/null
     then
