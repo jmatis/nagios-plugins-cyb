@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-434) unstable; urgency=medium
+
+  * plugins/check_scheduler: one line output to comply with Nagios requirements
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Mon, 27 Jun 2016 17:31:51 +0000
+
 nagios-plugins-cyb (1.0-433) unstable; urgency=low
 
   * check_syslog: work-around Debian/squeeze bug and bsdutils-2.17

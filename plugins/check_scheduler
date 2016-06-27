@@ -28,7 +28,7 @@ function check {
 
         if [ "$scheduler" -ne 1 ]
         then
-            echo "No deadline scheduler on $file"
+            echo -n "No deadline scheduler on $file. "
             RC=2
         fi
     done
