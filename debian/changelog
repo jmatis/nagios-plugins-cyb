@@ -1,6 +1,7 @@
 nagios-plugins-cyb (1.0-434) unstable; urgency=medium
 
   * plugins/check_scheduler: one line output to comply with Nagios requirements
+  * plugins/check_scheduler: fixed grep syntax
 
  -- Cyril Bouthors <cyril@boutho.rs>  Mon, 27 Jun 2016 17:31:51 +0000
 

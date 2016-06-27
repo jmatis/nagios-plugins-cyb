@@ -24,9 +24,7 @@ function check {
     do
         [ ! -f $file ] && continue
 
-        scheduler=$(grep -c "\[deadline\]" "$file")
-
-        if [ "$scheduler" -ne 1 ]
+        if ! grep -qF '[deadline]' "$file"
         then
             echo -n "No deadline scheduler on $file. "
             RC=2
