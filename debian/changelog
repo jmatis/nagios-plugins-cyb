@@ -1,3 +1,9 @@
+nagios-plugins-cyb (1.0-436) unstable; urgency=medium
+
+  * #49376: fixed plugin definition
+
+ -- Cyril Bouthors <cyril@boutho.rs>  Fri, 01 Jul 2016 08:33:43 +0000
+
 nagios-plugins-cyb (1.0-435) unstable; urgency=medium
 
   * #49376 Add plugins/check_scheduler command definition
